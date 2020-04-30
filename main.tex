@@ -1,0 +1,1080 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[italian]{babel}
+\usepackage{animate}
+\usepackage{amsmath,color}
+\usepackage[makeroom]{cancel}
+ \usepackage{sourcecodepro}
+\usepackage{xcolor}
+\usepackage{xparse}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{color}
+\usepackage{multicol}
+
+\newcommand{\quotebox}[1]{\begin{center}\fcolorbox{white}{blue!15!gray!15}{\begin{minipage}{0.9\linewidth}\vspace{10pt}\center\begin{minipage}{0.8\linewidth}{\space\Huge``}{#1}{\hspace{1.5em}\break\null\Huge\hfill''}\end{minipage}\smallbreak\end{minipage}}\end{center}}
+
+\usetheme{Madrid}
+
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+ \lstset{backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    keepspaces=true,                 
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,breaklines=true,
+    showtabs=false,                  
+    tabsize=2,basicstyle=\ttfamily}
+
+\renewcommand{\CancelColor}{\color{red}}
+
+\uselanguage{Italian}
+\languagepath{Italian}
+
+
+
+\title{Alla scoperta di GIT}
+
+\titlegraphic{\includegraphics[width=.5\textwidth]{git.png}}
+
+
+\begin{document}
+
+\AtBeginSection[]
+{
+\begin{frame}
+\begin{multicols}{2}
+\tableofcontents[currentsection,hideothersubsections]
+\end{multicols}
+\end{frame}
+}
+
+
+\begin{frame}
+    \maketitle
+  \end{frame}
+
+\section{Cos'è GIT}
+
+\begin{frame}
+\frametitle{Cos'è GIT}
+GIT è un software di controllo della versione centralizzato. Il controllo di versione (VCS - Version Control System) è un software che registra i cambiamenti di un file nel corso del tempo. Servono per gestire le modifiche del software nel tempo. Vengono registrate tutte le modifiche, si può tornare indietro e si può confrontare il codice.
+
+Quando vengono fatte delle modifiche al progetto le modifiche non vengono direttamente caricare all'interno dell'archivio, ma si aspetta un commit e questo commit contiene una descrizione sintetica delle modifiche, oltre che alle informazioni sull'autore della modifica
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Storia di GIT}
+Git è nato nel  2005,  per gestire il
+codice sorgente del kernel di Linux;
+Scritto da Linus Torvalds, che voleva un sistema distribuito che potesse usare come BitKeeper, ma nessuno dei sistemi disponibili gratuitamente soddisfaceva i suoi bisogni, particolarmente il suo bisogno di velocità. BitKeeper non lo poteva più usare gratuitamente in quanto Andrew Tridgell aveva effettuato il reverse engineering dei protocolli.
+
+È un sistema di version control distribuito, pensato per
+gestire grandi cartelle di codice sorgente ma con la
+possibilità di gestire qualsiasi tipo di file.
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{L'utilità di un VCS}
+Come già detto serve per vedere nel tempo le modifiche del software, ma perché è importante?
+\begin{enumerate}
+    \item Ti permette di ripristinare file alle versione precedenti per rimuovere modifiche errate o non volute
+    \item Ti permette di vedere la cronologia delle modifiche ai file e quindi raccoglie le conoscenze del team sullo sviluppo, magari è stata modificata una funzione perché ha un bug, ma data la memoria corta viene rifatto il codice uguale a prima, dimenticandosi dell'altro bug.
+    \item Il controllo della versione protegge il codice sorgente sia dalla catastrofe sia dal degrado casuale dell'errore umano e delle conseguenze indesiderate.
+    \item Gli sviluppatori di software che lavorano in team scrivono continuamente nuovo codice sorgente e modificano il codice sorgente esistente: magari il codice non è perfettamente aggiornato o dopo una semplice modifica tutti gli sviluppatori non riescono più a compilare
+    \item Ti permette di effettuare operazioni "merge" tra i vari rami del progetto segnalando eventuali conflitti
+\end{enumerate}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{L'utilità di un VCS}
+\begin{enumerate}
+\setcounter{enumi}{5}
+    \item Il codice per un componente di progetto, app o software è in genere organizzato in una struttura di cartelle o "albero dei file", dove uno sviluppatore del team potrebbe lavorare su una nuova funzionalità mentre un altro sviluppatore corregge un bug non correlato modificando il codice, ogni sviluppatore può apportare le proprie modifiche in diverse parti dell'albero dei file.
+\end{enumerate}
+
+Il controllo della versione aiuta i team a risolvere questo tipo di problemi, aumentando le capacità di sviluppo contemporaneo e simultaneo, riducendo i conflitti e avendo uno storico delle modifiche.
+Sebbene sia possibile sviluppare software senza utilizzare alcun controllo di versione, ciò comporta un enorme rischio per il progetto che nessun team di professionisti dovrebbe accettare. Quindi la domanda non è se usare il controllo versione ma quale sistema di controllo versione usare.
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{L'utilità di un VCS}
+
+\begin{minipage}{0.47\textwidth}\begin{figure}
+
+            \includegraphics[width=0.75\textwidth]{def_def_def.png} \end{figure}
+\end{minipage}
+\begin{minipage}{0.47\textwidth}
+             Ecco un motivo per cui è meglio un repository GIT.
+             
+             P.S. ma qual'è l'ultimo file, quello definitivo?
+\end{minipage}
+\end{frame}
+
+\begin{frame}{DVCS}
+    
+\begin{minipage}{0.47\textwidth}\begin{figure}
+
+            \includegraphics[width=0.75\textwidth]{dvcs.png} \end{figure}
+\end{minipage}
+\begin{minipage}{0.47\textwidth}
+             Nei Sistemi di Controllo di Versione Distribuiti (Distributed Version Control Systems) i client non solo controllano la versione più recente dei file, ma fanno una copia completa del repository.
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Come scegliere un VCS}
+Cosa deve avere un VCS perché sia valido?
+\begin{enumerate}
+
+    \item \textbf{Una cronologia completa delle modifiche a lungo termine di ogni file.} Deve poter memorizzare tutti i cambiamenti apportati da molte persone nel corso degli anni. Le modifiche includono la creazione e la cancellazione di file, nonché modifiche al loro contenuto. Questa cronologia dovrebbe includere anche l'autore, la data e le note scritte sullo scopo di ogni modifica. Avere la cronologia completa consente di tornare alle versioni precedenti per aiutare nell'analisi della causa principale dei bug ed è fondamentale quando è necessario risolvere i problemi nelle versioni precedenti del software. Se il software viene lavorato attivamente, quasi tutto può essere considerato una "versione precedente" del software.
+    \item \textbf{Ramificazione e fusione.} La creazione di rami permette di far lavorare i membri del team contemporaneamente senza infastidirsi a vicenda, ed ogni volta che i vari pezzi di codice sono stati completati si "fondono" insieme, e far si che chi fonde sia in grado di gestire solamente i veri conflitti, evitando di dover controllare tutti i file anche per minuscole differenza
+    \end{enumerate}
+
+
+
+\end{frame}\begin{frame}
+\frametitle{Come scegliere un VCS}
+
+\begin{enumerate}\setcounter{enumi}{3}
+
+    \item \textbf{Tracciabilità.} Essere in grado di tracciare ogni modifica apportata al software e essere in grado di annotare ogni modifica con un messaggio che descrive lo scopo e l'intento della modifica può aiutare l'analisi della causa principale del bug. Avere la cronologia annotata del codice a portata di mano quando si legge il codice, cercando di capire cosa sta facendo e perché è così progettato può consentire agli sviluppatori di apportare modifiche corrette e armoniose in accordo con il progetto a lungo termine previsto del sistema. Ciò può essere particolarmente importante per lavorare in modo efficace con il codice legacy ed è cruciale per consentire agli sviluppatori di stimare il lavoro futuro con precisione.
+
+\end{enumerate}
+
+\title{DVCS} Nei Sistemi di Controllo di Versione Distribuiti (Distributed Version Control Systems) i client non solo controllano la versione più recente dei file, ma fanno una copia completa del repository. Il motivo è semplice: dato che i file pesano poco, usare qualche bit in più  a contenere le versioni precedenti evita la connessione continua al server per scariare il progetto aggiornato, inoltre permette di lavorare anche offline e di avere più backup.
+
+
+
+\end{frame}
+
+\begin{frame}
+\quotebox{Un bug non è mai solo un errore. Rappresenta qualcosa di più. Un errore nel modo di pensare. Perché, fuori dallo schermo, la vita è piena di bug e ti rende come sei. Il bug costringe il software ad adattarsi, per causa sua deve evolvere in qualcosa di nuovo. Deve aggirare l’ostacolo o superarlo. Qualsiasi cosa accada si trasforma. Diventa qualcosa di nuovo. La versione successiva. L’inevitabile upgrade. Mr. Robot - Elliot}
+\end{frame}
+
+\begin{frame}
+\frametitle{Best practice}
+\begin{enumerate}\setcounter{enumi}{3}
+
+    \item \textbf{Fare spesso commit.} I commit sono facili e veloci. Dovrebbero essere eseguiti frequentemente per acquisire gli aggiornamenti di una base di codice. Ogni commit è un'istantanea su cui è possibile ripristinare la base di codice se necessario. I commit frequenti offrono molte opportunità di ripristinare o annullare il lavoro. Un gruppo di commit può essere combinato in un singolo commit usando un rebase per chiarire il registro di sviluppo.
+    \item \textbf{Programma sempre sull'ultima versione.} i VCS permettono aggiornamenti rapidi da più sviluppatori. È facile avere una copia locale non sincronizzata, rendendo più difficile il merge!
+    \item \textbf{Dettaglia bene le modifiche.} Ogni commit ha una voce di registro corrispondente. Al momento della creazione del commit, questa voce di registro viene popolata con un messaggio. È importante lasciare messaggi di registro di commit esplicativi descrittivi. 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Best practice}
+\begin{enumerate}\setcounter{enumi}{4}
+
+    \item \textbf{Usa i rami.} Il ramo è un potente meccanismo del VCS che consente agli sviluppatori di creare una linea di sviluppo separata. I rami dovrebbero essere usati frequentemente in quanto sono rapidi ed economici. 
+    \item \textbf{Concorda un metodo unico per la gestione del flusso.} Si decide una linea guida per fare le fusioni, per la creazione di rami e tutto!
+    \end{enumerate}
+\end{frame}
+
+\section{Architettura di GIT}
+
+
+\begin{frame}
+
+\frametitle{Design di GIT}
+Il design di Git è stato basato su 5 punti:
+\begin{itemize}
+
+\item Velocità
+\item  Semplicità di design e uso
+\item  Supporto per sviluppo non lineare (migliaia di versioni
+parallele)
+\item  Completamente distribuito
+\item Abilità di gestire grandi progetti
+\end{itemize}
+
+La differenza principale tra Git e altri VCS sta in come Git pensa e
+vede i propri dati.
+
+\begin{itemize}
+    \item  Molti VCS (come CVS e Subversion) vedono i dati che gestiscono
+come un set di file e di cambiamenti apportati a tali file nel tempo
+(delta-based version control)
+
+    \item  Git vede i dati come una serie di snapshot di un filesystem in
+miniatura.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Gli "oggetti" di Git}
+    Git è basato principalmente su due strutture dati:
+\begin{itemize}
+\item  Un indice mutabile (chiamato stage o cache) nel quale vengono raccolte tutte le informazioni sulla directory di lavoro
+\item Un object database immutabile che può contenere 4 tipi di oggetti (blob, tree, commit, tag)
+\end{itemize}
+
+Un \textbf{blob} (Binary Large Object) rappresenta il contenuto di un
+file. Ciascun blob all'interno dell'object database di Git è
+rappresentato dal proprio hash.
+
+Un "\textbf{albero}" è l'equivalente di una directory; contiene una lista
+di nomi di file e la relativa referenza all'oggetto, sia esso un
+file, link simbolicoo una directory.
+
+
+
+\end{frame}
+
+\begin{frame}{Gli "oggetti" di Git}
+
+Un \textbf{commit object} è un oggetto che collega
+vari tree object formando una storia;
+contiene il nome del tree object, un
+timestamp, un messaggio di log, il nome e
+l'email dell'autore e un puntamento ad un
+eventuale commit precedente
+
+\begin{figure}\includegraphics[width=0.5\textwidth]{architettura_git.PNG}\end{figure}
+
+
+\end{frame}
+
+
+\begin{frame}{Gli "oggetti" di Git}
+
+Un "\textbf{tag}" contiene un puntatore ad un qualsiasi altro oggetto
+presente nel database e i suoi metadati
+
+\begin{figure}\includegraphics[width=0.5\textwidth]{architettura_git_tag.PNG}\end{figure}
+
+\end{frame}
+
+\section{GIT vs SVN}
+
+\begin{frame}{Differenze e Snapshot}
+    \begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Snapshot} Ogni volta che si salva lo stato di un progetto vengono fatte delle istantanee di tutti i file e salvate nel sistema VCS
+
+
+\includegraphics[width=\textwidth]{snapshot.png}
+\end{column}
+\begin{column}{0.5\textwidth}
+
+\textbf{Differenze} Ogni volta che si salva lo stato di un progetto vengono salvati nel sistema VCS le differenze rispetto al file precedente
+
+
+\includegraphics[width=\textwidth]{diff.png}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Git e Svn}
+    \begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{GIT}  è un DVCS creato da Linus Torvalds nel 2005 per semplificare le operazioni di gestione del Reposity del Kernel Linux. 
+
+Utilizza le snapshot per salvare le modifiche.
+
+
+\end{column}
+\begin{column}{0.5\textwidth}
+
+\textbf{S}ub\textbf{V}ersio\textbf{N} è un VCS creato per sostitute il CVN, ritenuto ormai obsoleto.
+
+Utilizza le differenze per salvare le modifiche.
+
+
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Git e Svn}
+    \begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{GIT}
+\begin{itemize}
+    \item Distribuito
+    \item Copie locali del reposity dove lavorare
+    \item Si può limitare l'accesso a determinate direcotry
+    \item Cronologia delle modifiche disponibili anche offline
+    \item Connessione di rete necessaria solo alla sincronizzazione
+\end{itemize}
+
+
+\end{column}
+\begin{column}{0.5\textwidth}
+
+\textbf{S}ub\textbf{V}ersio\textbf{N} 
+\begin{itemize}
+    \item Centrale
+    \item Copia locale dell'ultima versione dove lavorare
+    \item Non si può limitare l'accesso alle directory
+    \item Cronologia delle modifiche non disponibile offline
+    \item Connessione di rete sempre neccessaria
+\end{itemize}
+
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Git e Svn}
+    \begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{GIT}
+\begin{itemize}
+    \item Git non permette di recuperare in maniera facile la cronologia delle modifiche dopo aver rinominato il file
+    \item Supporto a progetti di centinaia di Gigabyte tramite il GVFS
+    \item Git non adora i file binari
+    \item Esistono fornitori di reposity Git gratuiti tra cui GitHub, GitLab e Bitbucket che hanno una elevata fama
+
+\end{itemize}
+
+
+\end{column}
+\begin{column}{0.5\textwidth}
+
+\textbf{S}ub\textbf{V}ersio\textbf{N} 
+\begin{itemize}
+    \item Nonostante non sia un sistema distribuito è facile fare copie di backup 
+    \item Pochi comandi, semplici e intuitivi
+    \item Impossibile fare una copia locale se non puoi accedere al server SVN
+    \item I fornitori di reposity SVN gratuiti non sono famosi come quelli di Git. E non sono affidabili come quelli che forniscono Git
+
+\end{itemize}
+
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Git e Svn: i numeri}
+    \begin{figure}\includegraphics[width=0.75\textwidth]{git-svn.PNG}\end{figure}
+\end{frame}
+
+\begin{frame}{Git e Svn: dove non usarli}
+    \begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{GIT}
+\begin{itemize}
+    \item L'utilizzo di GIT è sconsigliato in progetti di medie/grandi dimensioni in quanto le principali operazioni diventano molto più lente
+
+
+
+\end{itemize}
+
+
+\end{column}
+\begin{column}{0.5\textwidth}
+
+\textbf{S}ub\textbf{V}ersio\textbf{N} 
+\begin{itemize}
+    \item L'utilizzo di SVN è sconsigliato nei progetti dove ci sono molte modifiche in parallelo sugli stessi file in quanto può avere solo una singola cronologia lineare e confonderlo è molto facile
+
+\end{itemize}
+
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{GIT+SVN}
+\begin{itemize}
+    \item GIT+SVN è un approcio utilizzare in maniera "biridezionali" i vantaggi (e gli svantaggi) dei reposity GIT e SVN
+\end{itemize}
+
+\textbf{GVFS}
+\begin{itemize}
+    \item Git Virtual File System (GVFS) consente a Git di operare su scala aziendale. È possibile utilizzare e gestire enormi repository Git.
+\end{itemize}
+
+
+\end{column}
+\begin{column}{0.5\textwidth}
+
+\textbf{Mercurial}
+\begin{itemize}
+    \item Mercurial è un'alternativa a GIT e SVN.
+
+    \item Utilizza un sistema ibrido per il salvataggio degli stati:
+
+    \item Utilizza un'algoritmo di delta quando le differenze sono poche, altrimenti un'istantanea.
+\end{itemize}
+
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Installazione di GIT}
+
+\begin{frame}[fragile]
+\frametitle{Installazione di GIT su Linux}
+
+Per installare GIT su un sistema operativo tipo Ubuntu, Debian
+\begin{lstlisting}[language=bash]
+$ sudo apt update
+$ sudo apt install git
+\end{lstlisting}
+Dopo di che dal termianle verificare che l'installazione è andata a buon fine:
+\begin{lstlisting}[language=bash]
+$ git --version
+\end{lstlisting}
+Impostiamo le nostre credenziali:
+\begin{lstlisting}[language=bash]
+$ git config --global user.name "Emma Paris"
+$ git config --global user.email "eparis@atlassian.com"
+\end{lstlisting}
+
+Ricordo di non usare credenziali che non conducano espressivametente alla persona che ha scritto il codice (furbissimo@gmail.com)
+
+
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Installazione di GIT su Windows}
+Scarica da qui l'ultima versione: https://gitforwindows.org/
+
+
+Dopo di che aprire il terminale e verificare che l'installazione è andata a buon fine:
+\begin{lstlisting}[language=bash]
+$ git --version
+\end{lstlisting}
+Impostiamo le nostre credenziali:
+\begin{lstlisting}[language=bash]
+$ git config --global user.name "Emma Paris"
+$ git config --global user.email "eparis@atlassian.com"
+\end{lstlisting}
+
+Ricordo di non usare credenziali che non conducano espressivametente alla persona che ha scritto il codice (furbissimo@gmail.com)
+\end{frame}
+\begin{frame}[fragile]
+
+\frametitle{Installazione di GIT su macOS}
+Installa XCode
+
+Dopo di che aprire il terminale e verificare che l'installazione è andata a buon fine:
+\begin{lstlisting}[language=bash]
+$ git --version
+\end{lstlisting}
+Impostiamo le nostre credenziali:
+\begin{lstlisting}[language=bash]
+$ git config --global user.name "Emma Paris"
+$ git config --global user.email "eparis@atlassian.com"
+\end{lstlisting}
+
+Ricordo di non usare credenziali che non conducano espressivametente alla persona che ha scritto il codice (furbissimo@gmail.com)
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Salvataggio delle credenziali offline}
+Se usiamo la riga di comando per fare commit, ci chiederà ogni volta le credenziali del server. Per salvarle nel PC:
+\begin{lstlisting}[language=bash]
+$ git config credential.helper store
+$ git push http://example.com/repo.git
+Username: <type your username>
+Password: <type your password>
+\end{lstlisting}
+Attenzione, spesso quando si digita la passowrd su terminali unix-like il terminale non da nessun feed per la digitazione delle password.
+
+\end{frame}
+
+\section{Utilizziamo GIT per la prima volta}
+
+\begin{frame}[fragile]
+\frametitle{Creazione di un nuovo repository}
+crea una nuova directory, entraci ed esegui
+\begin{lstlisting}[language=bash]
+$ git init
+\end{lstlisting}
+per creare un nuovo repository git.
+
+Per eseguire una copia di un repository locale eseguendo il comando
+\begin{lstlisting}[language=bash]
+$ git clone /percorso/del/repository
+\end{lstlisting}
+
+Invece per scaricare un repository git dal web, il comando sarà:
+\begin{lstlisting}[language=bash]
+$ git clone https://github.com/WordPress/WordPress.git
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ambiente di lavoro}
+la tua copia locale del repository è composta da tre "alberi" mantenuti da git. Il primo è la tua Directory di lavoro che contiene i files attuali. Il secondo è l'Index che fa da spazio di transito per i files e per finire l'HEAD che punta all'ultimo commit fatto.
+
+            \begin{figure}\includegraphics[width=0.75\textwidth]{trees.png} \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Stati}
+
+Analizziamo gli stati in cui si può trovare un file controllato da Git:
+\begin{enumerate}
+    \item Modified: il file è stato modificato rispetto al blob presente sul
+database, ma non è stato ancora salvato su quest'ultimo.
+\item Staged: la versione 'modified' del file è stato selezionata
+dall'utente per essere presente nella prossima commit.
+\item Commmited: la versione 'staged' del file è stata correttamente
+salvata nel database.
+\item Untracked: il file non è presente nel database e non è stato aggiunto ai file in stage
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Stati}
+            \begin{figure}\includegraphics[width=0.75\textwidth]{lifecycle.png} \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Workflow di base}
+
+Come per gli stati, il workflow di base di Git prevede tre step,
+ciascuno assiociato ad uno stato dei file della working directory:
+\begin{enumerate}
+    \item  L'utente effettua delle modifiche sui file controllati da Git.
+    \item  L'utente seleziona e inserisce nell'area di "stage" le modifiche
+che vuole facciano parte del prossimo commit.
+    \item  L'utente effettua una commit; vengono presi tutti i file nell'area
+di "stage" e salvati permanentemente nel database
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Salviamo le modifiche}
+Puoi proporre modifiche (aggiungendole all'Index cioè la lista dei file in attesa di commit) usando
+\begin{lstlisting}[language=bash]
+$ git add <nomedelfile>
+$ git add *
+$ git add -i
+\end{lstlisting}
+Il secondo passo è quello di creare un commit, cioè per validare queste modifiche fatte si usa
+\begin{lstlisting}[language=bash]
+$ git commit -m "Messaggio per la commit"
+\end{lstlisting}
+Ora abbiamo salvato le modifiche e queste modifiche saranno salvate in locale, non ci resta che sincronizzarli con il server remoto
+\begin{lstlisting}[language=bash]
+$ git push origin master
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Aggiungere un server remoto}
+Se non hai copiato un repository esistente, e vuoi connettere il tuo repository ad un server remoto, c'e' bisogno che tu lo aggiunga con
+\begin{lstlisting}[language=bash]
+$ git remote add origin <server>
+\end{lstlisting}
+Ora sarai in grado di inviare le tue modifiche al server remoto specificato
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Scarichiamo le modifiche}
+per aggiornare il tuo repository locale alla commit più recente, esegui
+\begin{lstlisting}[language=bash]
+$ git pull
+\end{lstlisting}
+nella tua directory corrente per fare una fetch (recuperare) ed incorporare (merge), se possibile, le modifiche fatte sul server remoto.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Modifiche in corso}
+Per vedere lo stato delle modifiche in corso possiamo usare il comando 
+\begin{lstlisting}[language=bash]
+$ git status
+\end{lstlisting}
+
+\begin{figure}
+    \includegraphics[width=0.55\textwidth]{git-status.png}
+
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Lista delle modifiche}
+Per vedere la lista delle modifiche effettuate nel corso del tempo
+\begin{lstlisting}[language=bash]
+$ git log
+\end{lstlisting}
+L'opzione \lstinline{--graph} mostra anche l'albero cronologico dei commit, molto utile nel caso di un repo con molti branch.
+
+            \begin{figure}\includegraphics[width=0.55\textwidth]{git-log.png} \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Chi ha fatto chi}
+Per sapere chi ha modificato, per l'ultima volta una riga di un file possiamo utilizzare il comando
+\begin{lstlisting}[language=bash]
+$ git blame README.MD
+\end{lstlisting}
+git blame opera solamente su file singoli, è quindi richiesta una path di un file.
+L'opzione \lstinline{-M} rileva le linee spostate o copiate all'interno dello stesso file. In questo modo viene riportato l'autore originale delle righe invece dell'ultimo autore che ha spostato o copiato le righe.
+
+Il nome dal suono negativo deriva dal fatto che questo comando viene spesso usato per incolpare le persone che hanno rotto un programma, anche se il suo utilizzo è molto più ampio
+
+            \begin{figure}\includegraphics[width=0.55\textwidth]{git-blame.png} \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Sembra molto complicato rispetto a caricare i file su Dropbox}
+\begin{minipage}{0.47\textwidth}\begin{figure}
+
+            \includegraphics[width=0.75\textwidth]{rid_of_all_the_sw.png} \end{figure}
+\end{minipage}
+\begin{minipage}{0.47\textwidth}
+             Ecco se usiamo servizi come Dropbox, Google Drive, Onedrive, Box, ... se troviamo un codice con tanti bug ci viene in mente di eliminarlo e non di correggerlo!
+             
+             Inoltre l'utilizzo di GIT (o software similari) è una routine in qualsiasi azienda di programmazione, meglio impararlo prima che dopo!
+\end{minipage}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{IDE \& .gitignore}
+Iniziamo con il fatto che nel repository .git non ci va per nessun motivo, ma per nessun motivo un file compilato, neanche file di configurazione locali degli IDE e qualsiasi altra cosa che è legata al PC e non al progetto software. Git mette a disposizione il file dot gitignore, che è un file dove vengono specificati che file ignorare. Una collezzione di file dot gitignore è presente su questo repository git:
+https://github.com/github/gitignore
+
+In linea generale, consiglio di mettere i appendere i seguenti file gitignore in uno solo: Jetbrains, Visual Studio, Eclipse e quello del linguaggio di programmazione del repository (in questo caso C++)
+
+
+Dopo aver modificato il file dot gitignore possiamo usare questo comando per "pulire" il repository
+\begin{lstlisting}[language=bash]
+$ git rm -r --cached . 
+$ git add .
+$ git commit -am "Remove ignored files"
+\end{lstlisting}
+\end{frame}
+
+\section{Alcuni esempi}
+
+
+
+\begin{frame}
+\frametitle{Procedure di sicurezza}
+\begin{figure}
+
+\includegraphics[width=0.5\textwidth]{in_case_of_fire.pdf}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Scarichiamo un repository vuoto}
+\begin{lstlisting}[language=bash]
+$ git clone https://gitlab.com/test/test.git
+$ cd test
+$ touch README.md
+$ git add README.md
+$ git commit -m "add README"
+$ git push -u origin master
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Caricare una cartella esistenze}
+\begin{lstlisting}[language=bash]
+$ cd existing_folder
+$ git init
+$ git remote add origin https://gitlab.com/test/test.git
+$ git add .
+$ git commit -m "Initial commit"
+$ git push -u origin master
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Caricare un repo git esistente}
+\begin{lstlisting}[language=bash]
+$ cd existing_repo
+$ git remote rename origin old-origin
+$ git remote add origin https://gitlab.com/test/test.git
+$ git push -u origin --all
+$ git push -u origin --tags
+\end{lstlisting}
+\end{frame}
+
+\section{Workflow collaborativo}
+\begin{frame}{Branching}
+    Con operazione di branching, in tutti i VCS  ,  si intende
+l'operazione tramite il quale l'utente "si stacca" dal principale
+ramo di sviluppo e continua a lavorare senza intaccare il ramo
+principale.
+In molti VCS viene vista come operazione dispendiosa di
+risorse e tempo, e raramente fa parte di workflow.
+
+In Git invece il branching è diventata una parte vitale del
+workflow di lavoro di molti utenti grazie alla semplicità nel
+creare nuovi branch e spostarsi tra di essi.
+
+\begin{figure}
+
+\includegraphics[width=0.5\textwidth]{git_branch.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Branching}
+crea un nuovo branch chiamato "feature\_x" e passa al nuovo branch usando
+\begin{lstlisting}[language=bash]
+$ git checkout -b feature_x
+\end{lstlisting}
+ritorna di nuovo su master
+\begin{lstlisting}[language=bash]
+$ git switch master
+\end{lstlisting}
+e cancella il branch creato in precedenza
+\begin{lstlisting}[language=bash]
+$ git branch -d feature_x
+\end{lstlisting}
+
+il branch non sarà disponibile agli altri fino a quando non verrà inviato al repository remoto
+\begin{lstlisting}[language=bash]
+$ git push origin <branch>
+\end{lstlisting}
+
+
+
+\end{frame}
+
+
+\begin{frame}{Merge}
+Con operazione di merge, in tutti i VCS,  si intende
+l'operazione opposta del branching tramite il quale si
+consolidano uno o più branch in un unico ramo di lavoro.
+
+
+\begin{figure}
+
+\includegraphics[width=0.5\textwidth]{git-branch.PNG}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Remote}
+Per consentire agli utenti di lavorare in maniera distribuita e
+di collaborare su un repository Git abbiamo bisogno del
+cosidetto remote, ovvero di una versione del nostro
+repository Git gestita e in hosting su Internet o su un'altra
+rete.
+Le operazioni di sincronizzazione con il remote sono tre:
+fetch, pull e push
+\begin{enumerate}
+
+    \item Una delle operazioni che si usano per sincronizzare la versione locale del repository con quella del remote è l'operazione di fetch, ovvero l'operazione di scaricare commit, file, e gli altri oggeti del database Git dal remote nella copia locale senza però modificare quest'ultima.
+    \item Un'altra operazione usata per sincronizzare la versione locale
+con il remote è quella di pull, ovvero l'operazione che oltre a
+scaricare inuovi dati dal remote come il fetch, li integra
+anche con la copia locale effettuando un merge automatico
+dove necessario e possibile (altrimenti verrà eseguita una merge request)
+\item L'operazione di push invece è quell'operazione tramite il
+quale andiamo ad integrare le modifiche effettuate
+localmente nella versione del remote.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Remote}
+
+È bene notare che ogni operazione di sincronizzazione del
+repository, sia in entrata che in uscita, è legata ad un branch.
+
+L'utente è libero di muoversi tra un branch e un altro nella
+working directory, ma non è possibile effettuare operazioni di
+sincronizzazione senza specificare quale branch del remote
+sincronizzare
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{aggiorna \& incorpora}
+per aggiornare il tuo repository locale alla commit più recente, esegui
+\begin{lstlisting}[language=bash]
+$ git pull
+\end{lstlisting}
+nella tua directory corrente per fare una fetch (recuperare) ed incorporare (merge) le modifiche fatte sul server remoto.
+per incorporare un altro branch nel tuo branch attivo (ad esempio master), utilizza
+\begin{lstlisting}[language=bash]
+$ git merge <branch>
+\end{lstlisting}
+in entrambi i casi git prova ad auto-incorporare le modifiche. Sfortunatamente, a volte questa procedura automatizzata non è possibile, ed in questo caso ci saranno dei conflitti. Sei tu il responsabile che sistemerà questi conflitti manualmente modificando i file che git mostrerà. Dopo aver cambiato questi files, dovrai marcarli come 'correttamente incorporati' tramite
+\begin{lstlisting}[language=bash]
+$ git add <nomedelfile>
+\end{lstlisting}
+prima di immettere le modifiche, potrai anche visualizzarne un'anteprima eseguendo
+\begin{lstlisting}[language=bash]
+$ git diff <branch_sorgente> <branch_target>
+\end{lstlisting}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{tags}
+È raccomandato creare dei tags nel caso in cui il software venga rilasciato. Questo è un concept già conosciuto, che esiste anche in SVN. Puoi creare un tag chiamato 1.0.0 eseguendo
+\begin{lstlisting}[language=bash]
+$ git tag 1.0.0 1b2e1d63ff
+\end{lstlisting}
+la sequenza 1b2e1d63ff sta per i primi 10 caratteri del commit che si vuol referenziare tramite questo tag. Puoi ottenere l'id della commit tramite
+
+\begin{lstlisting}[language=bash]
+$ git log
+\end{lstlisting}
+puoi anche utilizzare meno caratteri per l'id della commit, basta che sia unico.
+
+\end{frame}
+
+
+
+\begin{frame}{Git \& DevOps}
+    Attraverso un potente modello di branching e vari workflow
+di collaborazione, negli annil'uso e l'adozione di Git è
+cresciuta esponenzialmente rispetto ad altri VCS, arrivando
+ad essere il più usato e il più popolare soprattuto per come è
+possibile integrarlo come fondamenta di un processo
+DevOps.
+\end{frame}
+
+\section{Utilizzo di GitHub, GitLab e Bitbucket}
+
+\begin{frame}
+\frametitle{Utilizzo di GitHub, GitLab e Bitbucket}
+Questi sono alcuni servizi di hosting web-based per progetti che usano il sistema di controllo versione GIT. Il primo è comunemente noto per l'hosting di numerosi progetto open source, tra cui:
+\begin{enumerate}
+\item https://github.com/torvalds/linux
+\item https://github.com/microsoft/MS-DOS (ovviamente GIT non c'era ai tempi dello sviluppo di MS-DOS ed usavano i tasti CTRL+C e CTRL+V per fare lo storico delle versioni)
+\end{enumerate}
+GitLab e Bitbucket sono invece orientati al settore business offrendo numerosi servizi extra on cloud ed apprezzati dalle imprese. Inoltre sia GitLab che Bitbucket permettono l'installazione in maniera on premise. Tutti e tre permettono la creazione di repository privati gratuiti.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Scarichiamo un repository da GitHub}
+Su GitHub troviamo il link (HTTPS o SSH) per scaricare il repository. Si noti che questo URL NON è l'URL della pagina web che si visita, ma l'url che si trova con il pulsante "Clone".
+\begin{figure} \includegraphics[width=0.6\textwidth]{github.PNG} \end{figure}
+
+\begin{lstlisting}[language=bash]
+$ git clone https://gitlab.com/test/test.git
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Utilizzo di GitLab}
+Creiamo un nuovo progetto su GitLab, dopo esserci registrati su GitLab (https://gitlab.com/), ricordo di usare una e-mail "decente" che possa identificate il programmatore e non furbissimo@gmail.com. Non stiamo scrivendo un software che hackera i server della NASA!
+
+Premiamo il puslante "New Project" in alto a destra e creiamo il nostro progetto. Diamoli un nome, per esempio "test-GitLab" dopo averlo creato ci appaiono delle semplici "Command line instructions". Le eseguiamo per esercitarci su Git. Una volta finito creiamo un file dot gitgnore e "puliamo" con i comandi il repository da eventuali file non ammessi!
+
+In maniera simile anche da GitLab un repo si scarica con git clone. Si noti che questo URL NON è l'URL della pagina web che si visita, ma l'url che si trova con il pulsante "Clone".
+\begin{lstlisting}[language=bash]
+$ git clone https://github.com/torvalds/linux.git
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Utilizzo di Bitbucket}
+Come GitLab e GitHub anche Bitbucket permette di le stesse azioni degli altri due
+\begin{lstlisting}[language=bash]
+$ git clone https://bitbucket.org/chromiumembedded/cef.git
+\end{lstlisting}
+\end{frame}
+
+\section{GIT e Jetbrains}
+
+\begin{frame}
+\frametitle{GIT e Jetbrains - Apertura di una repo}
+
+Una volta copiato il link al repo git. Se IntelliJ è aperto nella schermata di benvenuto, è sufficiente cliccare sull'opzione "Check out from Version Control".  Altrimenti, se un progetto è già aperto, potete cliccare su "VCS" > "Checkout from Version Control" > "Git".
+
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]{welcome.png}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]{clone-menu.png}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Git e Jetbrains - Apertura di una repo}
+In seguito, si aprirà una finestra in cui si dovrebbe inserire l'URL del repository che abbiamo precedente copiato (per esempio di GitLab, GitHub, ...) e una directory in cui salvare il repo clonato.
+
+\begin{figure} \includegraphics[width=0.3\textwidth]{clone-window.png} \end{figure}
+
+Se hai clonato correttamente uno dei nostri repository dei compiti a casa, IntelliJ dovrebbe apparire con un'altra finestra che ti chiede se vuoi aprire il progetto che hai appena clonato.
+
+\begin{figure} \includegraphics[width=0.3\textwidth]{clone-open.png} \end{figure}
+
+In linea generale bisogna premere Yes, ma ci sono alcuni casi in cui è meglio premere No.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Git e Jetbrains - Scaricare le modifiche}
+Prima di effettuare modifiche ad un repo con del codice è bene scaricare le modifiche effettuare nel frattempo per ridurre al minimo le possibilità di fusione dei conflitti. La funzionalità di pull in IntelliJ è in qualche modo nascosta nei menu e/o nel tasto destro. Clicca "VCS" > "Git" > "Pull..." nella finestra che si apre premere "Pull".
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]{pull-menu.png}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]{pull-window.png}
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Git e Jetbrains - Committare le modifiche}
+Una volta di finito di fare le modifiche aprire il menu per il commit dal VCS o dal tasto destro. Apparirà una finestra. Selezionare quindi i file da committare e aggiungere un messaggio per il commit
+\begin{figure} \includegraphics[width=0.35\textwidth]{commit.png} \end{figure}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Git e Jetbrains - Caricare le modifiche}
+Nella finestra precedente possiamo dire di caricare immediatamente le modifiche dal pulsante accanto a Commit, ma non sempre è la cosa ideale (tipo se siamo offline) o in altre situazioni. Quindi apriamo la finestra "Push" accessibile dal menu VCS o dal tasto destro.
+\begin{figure} \includegraphics[width=0.35\textwidth]{push-window.png} \end{figure}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Altre informazioni utili}
+
+Tutorial completo su come utilizzare Git su IntelliJ:
+
+https://courses.cs.washington.edu/courses/cse373/19wi/resources/intellij/git/
+
+
+Tutorial completo su come utilizzare Git su Visual Studio:
+
+https://docs.microsoft.com/en-us/azure/devops/repos/git/gitquickstart
+
+\end{frame}
+\section{Cosa non fa GIT}
+
+\begin{frame}[fragile]
+\frametitle{Millenium Bug + 20}
+Si narra che negli anni 90 nel centro di calcolo UniPD, in via San Francesco 11, Padova. I tecnici abbiamo fixato il millenium bug shiftando di 20 anni le date (prassi assai comune) affinché il 1999 diventasse il 2019. Abbiano caricato le modifiche in produzione e salvato sul repository GIT con questo commit:
+\begin{lstlisting}
+git commit -m "sort of fixed mbug, we'll be fine for another 20 years"
+git push
+\end{lstlisting}
+\begin{enumerate}
+    \item GIT non ti avvisa se hai fatto bug!
+    \item GIT non ha una AI che salva che fra 20 anni devi correggere un bug!
+    \item GIT è solamente un sistema di archiviazione del codice!
+
+\end{enumerate}
+\end{frame}
+
+\section{Collaborazione attraverso GitHub, GitLab e Bitbucket}
+\begin{frame}{Collaborazione attraverso GitHub, GitLab e Bitbucket}
+    In queste slide inizieremo esaminando come collaborare direttamente sui repository GitHub, GitLab e Bitbucket. Dedicheremo un po' di tempo a approfondire la collaborazione utilizzando richieste pull, problemi e pagine GitHub.
+
+
+\end{frame}
+
+\begin{frame}{Fork}
+    Se volete contribuire direttamente a un progetto, dovete possederlo o esservi aggiunti come collaboratori. Se vuoi contribuire ad un progetto che non possiedi e su cui non sei un collaboratore, dovrai farne una copia su GitHub sotto il tuo account utente. Questo processo si chiama biforcazione. Una volta che hai biforcato un progetto, sarai in grado di fare tutte le modifiche che vuoi al tuo fork (copia) e potrai richiedere che le tue modifiche vengano incorporate nel progetto originale usando una richiesta di pull. 
+    
+    Anche se i fork sono un buon modo per accettare i contributi di persone con cui non si lavora regolarmente, sono un po' troppo ingombranti per l'uso quotidiano in un team che lavora a stretto contatto. Per questo motivo, probabilmente vorrete collaborare direttamente su un unico repository. Tuttavia, è comunque importante utilizzare le filiali e le richieste di pull per mantenere il vostro lavoro separato.
+
+\end{frame}
+
+\begin{frame}{Pull request}
+    Spesso comunque nei repo si cerca di tenere il ramo master protetto, cioè modificabile solamente da chi gestisce il progetto e fare merge request dai rami di sviluppo. Per creare una pull request andrò nella pagina web del repo, farò clic sulla tab "Pull request" sul lato destro della pagina del progetto, quindi fare clic sul pulsante "Create pull request" per creare una Pull request.
+    A sinistra c'è il ramo base e a destra il ramo dove sono state fatte le modifiche.  Dopo aver selezionato un ramo fare clic sul pulsante "Create pull request" per creare una Pull request. Se non ci sono conflitti è possibile accettare la pull request senza problemi, altrimenti è necessario effettuare il merge.
+    
+    \begin{figure} \includegraphics[width=0.5\textwidth]{pull-request.png} \end{figure}
+
+    
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Iusse}
+Un ultima funzionalità degna di nota di GitHub, GitLab ecc è la funzionalità Iusse.
+
+La funzionalità Iusse permette la creazione di una baceca condivisa da tutti gli sviluppatori dove vengono inseriti i Bug e le funzionalità mancanti, con relativa descrizione, titolo e immagini. Permette di assegnare ad ogni sviluppatore dei determinati Iusse da risolvere, e infine, segnali come risolti. 
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]{iusse.png}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]{iusseA.png}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Fonti}
+\begin{itemize}
+\item https://rogerdudler.github.io/git-guide/index.it.html
+\item https://www.atlassian.com/git/tutorials/setting-up-a-repository
+\item https://git-scm.com/book/it/v1/Per-Iniziare-Basi-di-Git
+\item https://git-scm.com/book/it/v1/Per-Iniziare-Il-Controllo-di-Versione
+\item https://git-scm.com/book/it/v1/Per-Iniziare-Una-Breve-Storia-di-Git
+\item https://www.1and1.it/digitalguide/siti-web/programmazione-del-sito-web/git-vs-svn-controllo-di-versione-a-confronto/
+\item https://svnvsgit.com/
+\item https://medium.com/@prasoon2211/mercurial-vs-git-scaling-and-architecture-94f70bb206ef
+\item https://www.mercurial-scm.org/wiki/Revlog
+\item https://gvfs.io/
+\end{itemize}
+
+\end{frame}
+
+
+
+\end{document}
+
+
