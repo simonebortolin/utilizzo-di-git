@@ -6,7 +6,7 @@ before_script:
 
 build:
   script:
-    - arara -lv main.tex
+    - pdflatex -lv main.tex
   artifacts:
     paths:
       - ./*.pdf
