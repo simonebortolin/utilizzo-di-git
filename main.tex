@@ -448,6 +448,10 @@ Utilizza le differenze per salvare le modifiche.
 \end{columns}
 \end{frame}
 
+\begin{frame}{Git e Svn}
+    \begin{figure}\includegraphics[width=0.5\textwidth]{git-svn-copy.jpeg}\end{figure}
+\end{frame}
+
 \section{Installazione di GIT}
 
 \begin{frame}[fragile]
@@ -850,17 +854,49 @@ sincronizzare
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{aggiorna \& incorpora}
-per aggiornare il tuo repository locale alla commit più recente, esegui
+\frametitle{Scaricare ed unire le modifiche}
+Per aggiornare il tuo repository locale alla commit più recente, esegui
 \begin{lstlisting}[language=bash]
 $ git pull
 \end{lstlisting}
-nella tua directory corrente per fare una fetch (recuperare) ed incorporare (merge) le modifiche fatte sul server remoto.
-per incorporare un altro branch nel tuo branch attivo (ad esempio master), utilizza
+Nella tua directory corrente per fare una fetch (recuperare) ed incorporare (merge) le modifiche fatte sul server remoto.
+Il comando pull cerca di auto-incorporare le modifiche locali con la copia nel server, ma questo non sempre è possibile.
+
+Per incorporare un altro branch nel tuo branch attivo (ad esempio master), utilizza
 \begin{lstlisting}[language=bash]
 $ git merge <branch>
 \end{lstlisting}
-in entrambi i casi git prova ad auto-incorporare le modifiche. Sfortunatamente, a volte questa procedura automatizzata non è possibile, ed in questo caso ci saranno dei conflitti. Sei tu il responsabile che sistemerà questi conflitti manualmente modificando i file che git mostrerà. Dopo aver cambiato questi files, dovrai marcarli come 'correttamente incorporati' tramite
+Il comando di git "merge" combina le sequenze multiple di commit in un'unica storia unificata. Normalmente usato per due commit. L'algoritmo di GIT riesce ad effettuare senza problemi il merge di due rami e se solo se in solo uno dei due c'è una modifica alla nella stessa parte del file.
+In entrambi i casi git prova ad auto-incorporare le modifiche. Sfortunatamente, a volte questa procedura automatizzata non è possibile, ed in questo caso ci saranno dei conflitti. 
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Conflitti nel merge}
+
+\begin{columns}
+\begin{column}{0.7\textwidth}
+ Se due file hanno modficato la stessa parte del file il merge di git fallisce e viene modificato il file in questo modo:
+\begin{lstlisting}
+here is some content not affected by the conflict
+<<<<<<< master
+this is conflicted text from master
+=======
+this is conflicted text from feature branch
+\end{lstlisting}
+\end{column}
+\begin{column}{0.3\textwidth}
+\includegraphics[width=\textwidth]{git-merge.jpeg}
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Effettuare al merge}
+Dato che sei tu il responsabile del merge Git mette in automatico i file nello stato "untracked".
+Una volta risolti i conflitti, si pososno mettere i suddetti file nello stato staged con:
 \begin{lstlisting}[language=bash]
 $ git add <nomedelfile>
 \end{lstlisting}
@@ -868,13 +904,14 @@ prima di immettere le modifiche, potrai anche visualizzarne un'anteprima eseguen
 \begin{lstlisting}[language=bash]
 $ git diff <branch_sorgente> <branch_target>
 \end{lstlisting}
-
-
-
+Infine si effettua il commit:
+\begin{lstlisting}[language=bash]
+$ git commit -m "Merge two branch"
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{tags}
+\frametitle{Tags}
 È raccomandato creare dei tags nel caso in cui il software venga rilasciato. Questo è un concept già conosciuto, che esiste anche in SVN. Puoi creare un tag chiamato 1.0.0 eseguendo
 \begin{lstlisting}[language=bash]
 $ git tag 1.0.0 1b2e1d63ff
