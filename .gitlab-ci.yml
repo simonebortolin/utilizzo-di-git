@@ -3,5 +3,6 @@ compile_pdf:
   script:
     - latexmk -pdf main.tex
   artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - main.pdf
