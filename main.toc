@@ -4,10 +4,9 @@
 \beamer@sectionintoc {2}{Architettura di GIT}{15}{0}{2}
 \beamer@sectionintoc {3}{GIT vs SVN}{20}{0}{3}
 \beamer@sectionintoc {4}{Installazione di GIT}{29}{0}{4}
-\beamer@sectionintoc {5}{Utilizziamo GIT per la prima volta}{34}{0}{5}
-\beamer@sectionintoc {6}{Alcuni esempi}{49}{0}{6}
-\beamer@sectionintoc {7}{Workflow collaborativo}{54}{0}{7}
-\beamer@sectionintoc {8}{Utilizzo di GitHub, GitLab e Bitbucket}{65}{0}{8}
-\beamer@sectionintoc {9}{GIT e Jetbrains}{70}{0}{9}
-\beamer@sectionintoc {10}{Cosa non fa GIT}{77}{0}{10}
-\beamer@sectionintoc {11}{Collaborazione attraverso GitHub, GitLab e Bitbucket}{79}{0}{11}
+\beamer@sectionintoc {5}{Alcuni esempi}{49}{0}{5}
+\beamer@sectionintoc {6}{Workflow collaborativo}{54}{0}{6}
+\beamer@sectionintoc {7}{Utilizzo di GitHub, GitLab e Bitbucket}{65}{0}{7}
+\beamer@sectionintoc {8}{GIT e Jetbrains}{70}{0}{8}
+\beamer@sectionintoc {9}{Cosa non fa GIT}{77}{0}{9}
+\beamer@sectionintoc {10}{Collaborazione attraverso GitHub, GitLab e Bitbucket}{79}{0}{10}
