@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.6.17)  11 APR 2021 14:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.6.17)  11 APR 2021 16:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1186,34 +1186,34 @@ Overfull \vbox (0.30798pt too high) detected at line 532
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [35
 
 ]
-<trees.png, id=1116, 903.375pt x 321.2pt>
+\openout4 = `main.vrb'.
+
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [36
+
+]
+\openout4 = `main.vrb'.
+
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [37
+
+]
+<trees.png, id=1178, 903.375pt x 321.2pt>
 File: trees.png Graphic file (type png)
 <use trees.png>
-Package pdftex.def Info: trees.png  used on input line 566.
+Package pdftex.def Info: trees.png  used on input line 592.
 (pdftex.def)             Requested size: 325.11302pt x 115.5976pt.
- [36
-
- <c:/Users/simon/source/repos/utilizzo-di-git/trees.png (PNG copy)>] [37
-
-]
-<lifecycle.png, id=1173, 803.0pt x 331.2375pt>
-File: lifecycle.png Graphic file (type png)
-<use lifecycle.png>
-Package pdftex.def Info: lifecycle.png  used on input line 588.
-(pdftex.def)             Requested size: 325.11302pt x 134.11002pt.
  [38
 
- <c:/Users/simon/source/repos/utilizzo-di-git/lifecycle.png>] [39
+ <c:/Users/simon/source/repos/utilizzo-di-git/trees.png (PNG copy)>] [39
 
 ]
-\openout4 = `main.vrb'.
+<lifecycle.png, id=1234, 803.0pt x 331.2375pt>
+File: lifecycle.png Graphic file (type png)
+<use lifecycle.png>
+Package pdftex.def Info: lifecycle.png  used on input line 614.
+(pdftex.def)             Requested size: 325.11302pt x 134.11002pt.
+ [40
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [40
-
-]
-\openout4 = `main.vrb'.
-
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [41
+ <c:/Users/simon/source/repos/utilizzo-di-git/lifecycle.png>] [41
 
 ]
 \openout4 = `main.vrb'.
@@ -1223,149 +1223,143 @@ Package pdftex.def Info: lifecycle.png  used on input line 588.
 ]
 \openout4 = `main.vrb'.
 
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [43
+
+]
+\openout4 = `main.vrb'.
+
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [44
+
+]
+\openout4 = `main.vrb'.
+
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<git-status.png, id=1311, 621.32124pt x 271.0125pt>
+<git-status.png, id=1373, 621.32124pt x 271.0125pt>
 File: git-status.png Graphic file (type png)
 <use git-status.png>
 Package pdftex.def Info: git-status.png  used on input line 8.
 (pdftex.def)             Requested size: 238.41754pt x 103.99483pt.
-) [43
+) [45
 
  <c:/Users/simon/source/repos/utilizzo-di-git/git-status.png>]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<git-log.png, id=1342, 738.76pt x 672.5125pt>
+<git-log.png, id=1402, 738.76pt x 672.5125pt>
 File: git-log.png Graphic file (type png)
 <use git-log.png>
 Package pdftex.def Info: git-log.png  used on input line 8.
 (pdftex.def)             Requested size: 238.41754pt x 217.03497pt.
 )
-Overfull \vbox (77.87152pt too high) detected at line 668
+Overfull \vbox (77.87152pt too high) detected at line 694
  []
 
-[44
+[46
 
  <c:/Users/simon/source/repos/utilizzo-di-git/git-log.png (PNG copy)>]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<git-blame.png, id=1370, 1027.84pt x 510.90875pt>
+<git-blame.png, id=1430, 1027.84pt x 510.90875pt>
 File: git-blame.png Graphic file (type png)
 <use git-blame.png>
 Package pdftex.def Info: git-blame.png  used on input line 11.
 (pdftex.def)             Requested size: 238.41754pt x 118.5044pt.
 )
-Overfull \vbox (33.74097pt too high) detected at line 683
- []
-
-[45
-
- <c:/Users/simon/source/repos/utilizzo-di-git/git-blame.png>]
-<rid_of_all_the_sw.png, id=1399, 813.0375pt x 1084.05pt>
-File: rid_of_all_the_sw.png Graphic file (type png)
-<use rid_of_all_the_sw.png>
-Package pdftex.def Info: rid_of_all_the_sw.png  used on input line 688.
-(pdftex.def)             Requested size: 173.42259pt x 231.23189pt.
- [46
-
- <c:/Users/simon/source/repos/utilizzo-di-git/rid_of_all_the_sw.png>]
-<meme-git.jpg, id=1427, 642.4pt x 552.0625pt>
-File: meme-git.jpg Graphic file (type jpg)
-<use meme-git.jpg>
-Package pdftex.def Info: meme-git.jpg  used on input line 705.
-(pdftex.def)             Requested size: 203.73802pt x 175.08835pt.
-
-Underfull \hbox (badness 6236) in paragraph at lines 705--705
-[]\T1/cmss/m/n/10.95 E ri-cor-do la sto-ria del-le mo-di-fi-che è
+Overfull \vbox (33.74097pt too high) detected at line 709
  []
 
 [47
 
+ <c:/Users/simon/source/repos/utilizzo-di-git/git-blame.png>]
+<rid_of_all_the_sw.png, id=1460, 813.0375pt x 1084.05pt>
+File: rid_of_all_the_sw.png Graphic file (type png)
+<use rid_of_all_the_sw.png>
+Package pdftex.def Info: rid_of_all_the_sw.png  used on input line 714.
+(pdftex.def)             Requested size: 173.42259pt x 231.23189pt.
+ [48
+
+ <c:/Users/simon/source/repos/utilizzo-di-git/rid_of_all_the_sw.png>]
+<meme-git.jpg, id=1488, 642.4pt x 552.0625pt>
+File: meme-git.jpg Graphic file (type jpg)
+<use meme-git.jpg>
+Package pdftex.def Info: meme-git.jpg  used on input line 731.
+(pdftex.def)             Requested size: 203.73802pt x 175.08835pt.
+
+Underfull \hbox (badness 6236) in paragraph at lines 731--731
+[]\T1/cmss/m/n/10.95 E ri-cor-do la sto-ria del-le mo-di-fi-che è
+ []
+
+[49
+
  <c:/Users/simon/source/repos/utilizzo-di-git/meme-git.jpg>]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [48
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [50
 
-] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [49
+] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [51
 
 ]
-<in_case_of_fire.pdf, id=1523, 794.97pt x 614.295pt>
+<in_case_of_fire.pdf, id=1584, 794.97pt x 614.295pt>
 File: in_case_of_fire.pdf Graphic file (type pdf)
 <use in_case_of_fire.pdf>
-Package pdftex.def Info: in_case_of_fire.pdf  used on input line 736.
+Package pdftex.def Info: in_case_of_fire.pdf  used on input line 762.
 (pdftex.def)             Requested size: 216.74202pt x 167.48346pt.
- [50
+ [52
 
  <c:/Users/simon/source/repos/utilizzo-di-git/in_case_of_fire.pdf>]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [51
-
-]
-\openout4 = `main.vrb'.
-
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [52
-
-]
-\openout4 = `main.vrb'.
-
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [53
 
-] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [54
+]
+\openout4 = `main.vrb'.
 
-] [55
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [54
 
 ]
-<workflow-5.png, id=1708, 424.58624pt x 458.71375pt>
+\openout4 = `main.vrb'.
+
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [55
+
+] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [56
+
+] [57
+
+]
+<workflow-5.png, id=1769, 424.58624pt x 458.71375pt>
 File: workflow-5.png Graphic file (type png)
 <use workflow-5.png>
-Package pdftex.def Info: workflow-5.png  used on input line 791.
+Package pdftex.def Info: workflow-5.png  used on input line 817.
 (pdftex.def)             Requested size: 130.04652pt x 140.49893pt.
- [56
+ [58
 
  <c:/Users/simon/source/repos/utilizzo-di-git/workflow-5.png>]
-<git_branch.png, id=1738, 1606.0pt x 668.4975pt>
+<git_branch.png, id=1799, 1606.0pt x 668.4975pt>
 File: git_branch.png Graphic file (type png)
 <use git_branch.png>
-Package pdftex.def Info: git_branch.png  used on input line 808.
+Package pdftex.def Info: git_branch.png  used on input line 834.
 (pdftex.def)             Requested size: 216.74202pt x 90.21266pt.
- [57
+ [59
 
  <c:/Users/simon/source/repos/utilizzo-di-git/git_branch.png (PNG copy)>]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [58
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [60
 
 ]
-<git-branch.PNG, id=1794, 416.30531pt x 292.84406pt>
+<git-branch.PNG, id=1854, 416.30531pt x 292.84406pt>
 File: git-branch.PNG Graphic file (type png)
 <use git-branch.PNG>
-Package pdftex.def Info: git-branch.PNG  used on input line 845.
+Package pdftex.def Info: git-branch.PNG  used on input line 871.
 (pdftex.def)             Requested size: 216.74202pt x 152.46298pt.
- [59
+ [61
 
- <c:/Users/simon/source/repos/utilizzo-di-git/git-branch.PNG>] [60
+ <c:/Users/simon/source/repos/utilizzo-di-git/git-branch.PNG>] [62
 
-] [61
-
-]
-\openout4 = `main.vrb'.
-
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [62
+] [63
 
 ]
-\openout4 = `main.vrb'.
-
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<git-merge.jpeg, id=1906, 587.94656pt x 455.45157pt>
-File: git-merge.jpeg Graphic file (type jpg)
-<use git-merge.jpeg>
-Package pdftex.def Info: git-merge.jpeg  used on input line 15.
-(pdftex.def)             Requested size: 130.04652pt x 100.73477pt.
-) [63
-
- <c:/Users/simon/source/repos/utilizzo-di-git/git-merge.jpeg>]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [64
@@ -1374,247 +1368,263 @@ Package pdftex.def Info: git-merge.jpeg  used on input line 15.
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<merge-ff.png, id=1961, 853.1875pt x 497.86pt>
+<git-merge.jpeg, id=1966, 587.94656pt x 455.45157pt>
+File: git-merge.jpeg Graphic file (type jpg)
+<use git-merge.jpeg>
+Package pdftex.def Info: git-merge.jpeg  used on input line 15.
+(pdftex.def)             Requested size: 130.04652pt x 100.73477pt.
+) [65
+
+ <c:/Users/simon/source/repos/utilizzo-di-git/git-merge.jpeg>]
+\openout4 = `main.vrb'.
+
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [66
+
+]
+\openout4 = `main.vrb'.
+
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
+<merge-ff.png, id=2022, 853.1875pt x 497.86pt>
 File: merge-ff.png Graphic file (type png)
 <use merge-ff.png>
 Package pdftex.def Info: merge-ff.png  used on input line 4.
 (pdftex.def)             Requested size: 260.09306pt x 151.7749pt.
 )
-Overfull \vbox (4.61145pt too high) detected at line 945
+Overfull \vbox (4.61145pt too high) detected at line 971
  []
 
-[65
+[67
 
  <c:/Users/simon/source/repos/utilizzo-di-git/merge-ff.png>]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<merge.png, id=1991, 853.1875pt x 497.86pt>
+<merge.png, id=2052, 853.1875pt x 497.86pt>
 File: merge.png Graphic file (type png)
 <use merge.png>
 Package pdftex.def Info: merge.png  used on input line 4.
 (pdftex.def)             Requested size: 260.09306pt x 151.7749pt.
 )
-Overfull \vbox (18.81972pt too high) detected at line 951
+Overfull \vbox (18.81972pt too high) detected at line 977
  []
 
-[66
+[68
 
  <c:/Users/simon/source/repos/utilizzo-di-git/merge.png>]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [67
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [69
 
-] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [68
+] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [70
 
 ]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [69
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [71
 
 ]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<cherry-pick.png, id=2114, 853.1875pt x 497.86pt>
+<cherry-pick.png, id=2174, 853.1875pt x 497.86pt>
 File: cherry-pick.png Graphic file (type png)
 <use cherry-pick.png>
 Package pdftex.def Info: cherry-pick.png  used on input line 4.
 (pdftex.def)             Requested size: 260.09306pt x 151.7749pt.
-) [70
+) [72
 
  <c:/Users/simon/source/repos/utilizzo-di-git/cherry-pick.png>]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<git-rebase.jpeg, id=2143, 662.475pt x 524.96124pt>
+<git-rebase.jpeg, id=2204, 662.475pt x 524.96124pt>
 File: git-rebase.jpeg Graphic file (type jpg)
 <use git-rebase.jpeg>
 Package pdftex.def Info: git-rebase.jpeg  used on input line 10.
 (pdftex.def)             Requested size: 173.39096pt x 137.39987pt.
-) [71
+) [73
 
  <c:/Users/simon/source/repos/utilizzo-di-git/git-rebase.jpeg>]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<rebase.png, id=2171, 853.1875pt x 497.86pt>
+<rebase.png, id=2233, 853.1875pt x 497.86pt>
 File: rebase.png Graphic file (type png)
 <use rebase.png>
 Package pdftex.def Info: rebase.png  used on input line 4.
 (pdftex.def)             Requested size: 260.09306pt x 151.7749pt.
 )
-Overfull \vbox (5.21971pt too high) detected at line 1002
+Overfull \vbox (5.21971pt too high) detected at line 1028
  []
 
-[72
+[74
 
  <c:/Users/simon/source/repos/utilizzo-di-git/rebase.png>]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<rebase-onto.png, id=2201, 853.1875pt x 497.86pt>
+<rebase-onto.png, id=2262, 853.1875pt x 497.86pt>
 File: rebase-onto.png Graphic file (type png)
 <use rebase-onto.png>
 Package pdftex.def Info: rebase-onto.png  used on input line 6.
 (pdftex.def)             Requested size: 260.09306pt x 151.7749pt.
 )
-Overfull \vbox (5.21971pt too high) detected at line 1010
+Overfull \vbox (5.21971pt too high) detected at line 1036
  []
 
-[73
+[75
 
  <c:/Users/simon/source/repos/utilizzo-di-git/rebase-onto.png>]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [74
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [76
 
 ]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [75
-
-] [76
-
-] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [77
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [77
 
 ] [78
+
+] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [79
+
+] [80
 
 ]
 \openout4 = `main.vrb'.
 
  (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb
-<github.PNG, id=2380, 1431.84938pt x 728.7225pt>
+<github.PNG, id=2442, 1431.84938pt x 728.7225pt>
 File: github.PNG Graphic file (type png)
 <use github.PNG>
 Package pdftex.def Info: github.PNG  used on input line 3.
 (pdftex.def)             Requested size: 260.09306pt x 132.36528pt.
-) [79
+) [81
 
  <c:/Users/simon/source/repos/utilizzo-di-git/github.PNG>]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [80
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [82
 
 ]
 \openout4 = `main.vrb'.
 
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [81
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [83
 
-] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [82
+] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [84
 
 ]
-<welcome.png, id=2504, 586.44093pt x 366.61969pt>
+<welcome.png, id=2565, 586.44093pt x 366.61969pt>
 File: welcome.png Graphic file (type png)
 <use welcome.png>
-Package pdftex.def Info: welcome.png  used on input line 1100.
+Package pdftex.def Info: welcome.png  used on input line 1126.
 (pdftex.def)             Requested size: 216.74202pt x 135.49611pt.
-<clone-menu.png, id=2505, 1043.39813pt x 747.54282pt>
+<clone-menu.png, id=2566, 1043.39813pt x 747.54282pt>
 File: clone-menu.png Graphic file (type png)
 <use clone-menu.png>
-Package pdftex.def Info: clone-menu.png  used on input line 1100.
+Package pdftex.def Info: clone-menu.png  used on input line 1126.
 (pdftex.def)             Requested size: 216.74202pt x 155.27763pt.
- [83
-
- <c:/Users/simon/source/repos/utilizzo-di-git/welcome.png> <c:/Users/simon/source/repos/utilizzo-di-git/clone-menu.png>]
-<clone-window.png, id=2536, 395.97937pt x 117.43875pt>
-File: clone-window.png Graphic file (type png)
-<use clone-window.png>
-Package pdftex.def Info: clone-window.png  used on input line 1115.
-(pdftex.def)             Requested size: 130.04652pt x 38.56853pt.
-<clone-open.png, id=2537, 298.11375pt x 105.39375pt>
-File: clone-open.png Graphic file (type png)
-<use clone-open.png>
-Package pdftex.def Info: clone-open.png  used on input line 1115.
-(pdftex.def)             Requested size: 130.04652pt x 45.97617pt.
- [84
-
- <c:/Users/simon/source/repos/utilizzo-di-git/clone-window.png> <c:/Users/simon/source/repos/utilizzo-di-git/clone-open.png>]
-<pull-menu.png, id=2567, 1112.65688pt x 758.835pt>
-File: pull-menu.png Graphic file (type png)
-<use pull-menu.png>
-Package pdftex.def Info: pull-menu.png  used on input line 1131.
-(pdftex.def)             Requested size: 216.74202pt x 147.81592pt.
-<pull-window.png, id=2568, 463.7325pt x 310.91156pt>
-File: pull-window.png Graphic file (type png)
-<use pull-window.png>
-Package pdftex.def Info: pull-window.png  used on input line 1131.
-(pdftex.def)             Requested size: 216.74202pt x 145.3172pt.
  [85
 
- <c:/Users/simon/source/repos/utilizzo-di-git/pull-menu.png> <c:/Users/simon/source/repos/utilizzo-di-git/pull-window.png>]
-<commit.png, id=2599, 612.78937pt x 613.54219pt>
-File: commit.png Graphic file (type png)
-<use commit.png>
-Package pdftex.def Info: commit.png  used on input line 1138.
-(pdftex.def)             Requested size: 151.72205pt x 151.90599pt.
+ <c:/Users/simon/source/repos/utilizzo-di-git/welcome.png> <c:/Users/simon/source/repos/utilizzo-di-git/clone-menu.png>]
+<clone-window.png, id=2597, 395.97937pt x 117.43875pt>
+File: clone-window.png Graphic file (type png)
+<use clone-window.png>
+Package pdftex.def Info: clone-window.png  used on input line 1141.
+(pdftex.def)             Requested size: 130.04652pt x 38.56853pt.
+<clone-open.png, id=2598, 298.11375pt x 105.39375pt>
+File: clone-open.png Graphic file (type png)
+<use clone-open.png>
+Package pdftex.def Info: clone-open.png  used on input line 1141.
+(pdftex.def)             Requested size: 130.04652pt x 45.97617pt.
  [86
 
- <c:/Users/simon/source/repos/utilizzo-di-git/commit.png>]
-<push-window.png, id=2628, 476.53032pt x 405.01312pt>
-File: push-window.png Graphic file (type png)
-<use push-window.png>
-Package pdftex.def Info: push-window.png  used on input line 1146.
-(pdftex.def)             Requested size: 151.72205pt x 128.95175pt.
+ <c:/Users/simon/source/repos/utilizzo-di-git/clone-window.png> <c:/Users/simon/source/repos/utilizzo-di-git/clone-open.png>]
+<pull-menu.png, id=2629, 1112.65688pt x 758.835pt>
+File: pull-menu.png Graphic file (type png)
+<use pull-menu.png>
+Package pdftex.def Info: pull-menu.png  used on input line 1157.
+(pdftex.def)             Requested size: 216.74202pt x 147.81592pt.
+<pull-window.png, id=2630, 463.7325pt x 310.91156pt>
+File: pull-window.png Graphic file (type png)
+<use pull-window.png>
+Package pdftex.def Info: pull-window.png  used on input line 1157.
+(pdftex.def)             Requested size: 216.74202pt x 145.3172pt.
  [87
 
- <c:/Users/simon/source/repos/utilizzo-di-git/push-window.png>] [88
+ <c:/Users/simon/source/repos/utilizzo-di-git/pull-menu.png> <c:/Users/simon/source/repos/utilizzo-di-git/pull-window.png>]
+<commit.png, id=2660, 612.78937pt x 613.54219pt>
+File: commit.png Graphic file (type png)
+<use commit.png>
+Package pdftex.def Info: commit.png  used on input line 1164.
+(pdftex.def)             Requested size: 151.72205pt x 151.90599pt.
+ [88
 
-] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [89
+ <c:/Users/simon/source/repos/utilizzo-di-git/commit.png>]
+<push-window.png, id=2689, 476.53032pt x 405.01312pt>
+File: push-window.png Graphic file (type png)
+<use push-window.png>
+Package pdftex.def Info: push-window.png  used on input line 1172.
+(pdftex.def)             Requested size: 151.72205pt x 128.95175pt.
+ [89
 
-]
-\openout4 = `main.vrb'.
-
- (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [90
+ <c:/Users/simon/source/repos/utilizzo-di-git/push-window.png>] [90
 
 ] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [91
 
-] [92
+]
+\openout4 = `main.vrb'.
 
-] [93
+ (c:/Users/simon/source/repos/utilizzo-di-git/main.vrb) [92
+
+] (c:/Users/simon/source/repos/utilizzo-di-git/main.toc) [93
+
+] [94
+
+] [95
 
 ]
-<pull-request.png, id=2848, 346.94034pt x 250.72813pt>
+<pull-request.png, id=2908, 346.94034pt x 250.72813pt>
 File: pull-request.png Graphic file (type png)
 <use pull-request.png>
-Package pdftex.def Info: pull-request.png  used on input line 1197.
+Package pdftex.def Info: pull-request.png  used on input line 1223.
 (pdftex.def)             Requested size: 216.74202pt x 156.63582pt.
 
-Overfull \vbox (63.87239pt too high) detected at line 1197
+Overfull \vbox (63.87239pt too high) detected at line 1223
  []
 
-[94
+[96
 
  <c:/Users/simon/source/repos/utilizzo-di-git/pull-request.png>]
-<Issues.png, id=2876, 1001.24063pt x 684.30656pt>
+<Issues.png, id=2936, 1001.24063pt x 684.30656pt>
 File: Issues.png Graphic file (type png)
 <use Issues.png>
-Package pdftex.def Info: Issues.png  used on input line 1214.
+Package pdftex.def Info: Issues.png  used on input line 1240.
 (pdftex.def)             Requested size: 216.74202pt x 148.12544pt.
-<IssuesA.png, id=2877, 930.47626pt x 619.56468pt>
+<IssuesA.png, id=2937, 930.47626pt x 619.56468pt>
 File: IssuesA.png Graphic file (type png)
 <use IssuesA.png>
-Package pdftex.def Info: IssuesA.png  used on input line 1214.
+Package pdftex.def Info: IssuesA.png  used on input line 1240.
 (pdftex.def)             Requested size: 216.74202pt x 144.312pt.
 
-Overfull \vbox (6.562pt too high) detected at line 1214
- []
-
-[95
-
- <c:/Users/simon/source/repos/utilizzo-di-git/Issues.png> <c:/Users/simon/source/repos/utilizzo-di-git/IssuesA.png>]
-<issues.jpg, id=2905, 1284.8pt x 700.6175pt>
-File: issues.jpg Graphic file (type jpg)
-<use issues.jpg>
-Package pdftex.def Info: issues.jpg  used on input line 1221.
-(pdftex.def)             Requested size: 346.78854pt x 189.1051pt.
- [96
-
- <c:/Users/simon/source/repos/utilizzo-di-git/issues.jpg>]
-Overfull \vbox (8.37172pt too high) detected at line 1238
+Overfull \vbox (6.562pt too high) detected at line 1240
  []
 
 [97
+
+ <c:/Users/simon/source/repos/utilizzo-di-git/Issues.png> <c:/Users/simon/source/repos/utilizzo-di-git/IssuesA.png>]
+<issues.jpg, id=2967, 1284.8pt x 700.6175pt>
+File: issues.jpg Graphic file (type jpg)
+<use issues.jpg>
+Package pdftex.def Info: issues.jpg  used on input line 1247.
+(pdftex.def)             Requested size: 346.78854pt x 189.1051pt.
+ [98
+
+ <c:/Users/simon/source/repos/utilizzo-di-git/issues.jpg>]
+Overfull \vbox (8.37172pt too high) detected at line 1264
+ []
+
+[99
 
 ]
 \tf@nav=\write6
@@ -1626,27 +1636,27 @@ Overfull \vbox (8.37172pt too high) detected at line 1238
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1242.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1242.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1268.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1268.
  (c:/Users/simon/source/repos/utilizzo-di-git/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1242.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1242.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1268.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1268.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 3AEF8D5D0BC55122C0752667C96C3AA0;635.
  ) 
 Here is how much of TeX's memory you used:
- 24239 strings out of 480478
- 449547 string characters out of 5903485
- 948195 words of memory out of 5000000
- 39335 multiletter control sequences out of 15000+600000
+ 24261 strings out of 480478
+ 449959 string characters out of 5903485
+ 968267 words of memory out of 5000000
+ 39349 multiletter control sequences out of 15000+600000
  545258 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  58i,15n,107p,842b,1422s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texlive/2020/texmf-dist/fonts/enc/dvips/sourcecodepro/a_lutrty.enc}<c:/texlive/2020/texmf-dist/fonts/type1/adobe/sourcecodepro/SourceCodePro-Regular.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfss2488.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb>
-Output written on c:/Users/simon/source/repos/utilizzo-di-git/main.pdf (97 pages, 4717562 bytes).
+Output written on c:/Users/simon/source/repos/utilizzo-di-git/main.pdf (99 pages, 4723021 bytes).
 PDF statistics:
- 3056 PDF objects out of 3580 (max. 8388607)
- 2837 compressed objects within 29 object streams
- 206 named destinations out of 1000 (max. 500000)
+ 3116 PDF objects out of 3580 (max. 8388607)
+ 2895 compressed objects within 29 object streams
+ 210 named destinations out of 1000 (max. 500000)
  367 words of extra memory for PDF output out of 10000 (max. 10000000)
 

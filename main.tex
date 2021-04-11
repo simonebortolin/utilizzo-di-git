@@ -510,7 +510,7 @@ $ git config --global user.name "Emma Paris"
 $ git config --global user.email "eparis@atlassian.com"
 \end{lstlisting}
 
-Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia
+Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia, nonostante ciò è possibile rimuovere i commit e modificare la cronologia (con un po' di difficoltà e la rigenerazione di hash, anche con l'uso di BFG Repo-Cleaner)
 \end{frame}
 
 \begin{frame}[fragile]
@@ -531,12 +531,34 @@ Attenzione, spesso quando si digita la password su terminali unix-like il termin
 \end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Salvataggio delle credenziali offline}{chiave SSH}
-    Dopo aver creato la chiave SSH, per esempio su GitHub: si va sui  Settings \(\rightarrow\) SSH and GPG keys \(\rightarrow\) New SSH Key, poi si salva la chiave sul proprio pc. Dopo di che salviamo la nostra chiave \lstinline{id_rsa} nella directory \lstinline{~/.ssh/}. 
-    Ed infine la aggiungiamo per l'autenticazione:
-    \begin{lstlisting}
-ssh-add -K ~/.ssh/id_rsa
+    Per generare una chiave dobbiamo aprire il terminale, digitare \lstinline{ssh-keygen -t} seguito dal tipo di chiave (ed25519, RSA), scegliere il nome del file e la directory. Infine specificare una  passphrase (\url{https://www.ssh.com/ssh/passphrase/}), la passphrase se omessa potrebbe portare a problemi di sicurezza, è possibile rimuoverla o aggiungerla in un secondo momento la passphrase (\url{https://docs.github.com/en/github/authenticating-to-github/working-with-ssh-key-passphrases})
+    \begin{lstlisting}[language=bash]
+$ ssh-keygen -t ed25519 -C "<comment>"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/[username]/.ssh/id_ed25519):
+Created directory '/home/[username]/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
 \end{lstlisting}
-    Su Windows la cartella di default per salvare le credenziali SSH è: \lstinline{C:\Users\[username]\.ssh\}
+    
+    
+\end{frame}
+\begin{frame}[fragile]{Salvataggio delle credenziali offline}{chiave SSH}
+    Adesso a schermo arriva un messaggio di conferma, compresa la randomart.
+
+    Su linux la chiave viene salvata su \lstinline{~/.ssh/}, e su windows invece in  \lstinline{C:\Users\[username]\.ssh\}
+
+    Per maggiori informazioni: \url{https://docs.gitlab.com/ee/ssh/README.html}
+
+    Per condividere la chiave all'interno di Windows e WSL è necessario che la chiave sia presente sia su \lstinline{/mnt/c/Users/[username]/.ssh} che su \lstinline{~/.ssh}, per maggiori informazioni: \url{https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/}
+\end{frame}
+\begin{frame}[fragile]{Salvataggio delle credenziali offline}{chiave SSH}
+
+Dopo aver creato la chiave SSH, per esempio su GitHub: si va sui  Settings \(\rightarrow\) SSH and GPG keys \(\rightarrow\) New SSH Key, poi si salva la chiave generata dal proprio PC. 
+    
+In maniera simile su GitLab: Preferences \(\rightarrow\)   SSH Keys \(\rightarrow\) si incolla la chiave generata dal proprio PC e si inserisce il titolo.
+
+Per migrare dalla coppia username/password a SSH è sufficente rimuovere e riaggiungere il remote url.
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Creazione di un nuovo repository}
@@ -554,6 +576,10 @@ $ git clone /percorso/del/repository
 Invece per scaricare un repository git dal web, il comando sarà:
 \begin{lstlisting}[language=bash]
 $ git clone https://github.com/WordPress/WordPress.git
+\end{lstlisting}
+Per scaricare con SSH:
+\begin{lstlisting}[language=bash]
+$ git clone git@github.com:WordPress/WordPress.git
 \end{lstlisting}
 \end{frame}
 
@@ -967,8 +993,8 @@ puoi anche utilizzare meno caratteri per l'id della commit, basta che sia unico.
 \section{Fare i giocolieri con i commit}
 \begin{frame}[fragile]{Differenze apportate ai commit}
     Per git, calcolare le modifiche apportate ai file da un commit all’altro non è poi difficile. Per esempio, puoi ricavarle con
-    \begin{lstlisting}
-        git diff dev master
+\begin{lstlisting}[language=bash]
+$ git diff dev master
 \end{lstlisting}
     Con \lstinline{git diff from to} chiedi a git «qual è l’elenco delle modifiche ai file che devo applicare a ``from`` perché il progetto diventi identico a quello fotografato in ``to``»?
 
@@ -1017,11 +1043,11 @@ Per limitare quanto andare all'indietro utilizzare l'opzione \lstinline{--onto}.
     Il comando \lstinline{git merge --squash}  raggruppa tutte le commit in una sola. Al termine del merge è possibile cancellare il branch di lavoro senza alcun problema.
 
     Supponiamo di avere un ramo bugfix e desideriamo applicare tutti questi commit al master:
-    \begin{lstlisting}
-        git checkout master
-        git merge --squash bugfix
-        git commit
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+$ git checkout master
+$ git merge --squash bugfix
+$ git commit
+\end{lstlisting}
     Questo vi porterà tutti i commit dal ramo bugfix, inglobandoli in 1 commit, e si fondono con il vostro ramo master.
 
     Questo comando insieme al comando cherry-pick è particolarmente utile quando si hanno più release attualmente supportate (una LTS ed una "liscia") e dobbiamo realizzare bug-fix per entrambe le release.    
@@ -1160,9 +1186,9 @@ Tutorial completo su come utilizzare Git su Visual Studio: \url{https://docs.mic
 \begin{frame}[fragile]
 \frametitle{Millenium Bug + 20}
 Si narra che negli anni 90 nel centro di calcolo UniPD, in via San Francesco 11, Padova. I tecnici abbiamo fixato il millenium bug shiftando di 20 anni le date (prassi assai comune) affinché il 1999 diventasse il 2019. Abbiano caricato le modifiche in produzione e salvato sul repository GIT con questo commit:
-\begin{lstlisting}
-git commit -m "sort of fixed mbug, we'll be fine for another 20 years"
-git push
+\begin{lstlisting}[language=bash]
+$ git commit -m "sort of fixed mbug, we'll be fine for another 20 years"
+$ git push
 \end{lstlisting}
 \begin{enumerate}
     \item GIT non ti avvisa se hai fatto bug!
