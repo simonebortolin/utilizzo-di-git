@@ -472,7 +472,9 @@ $ git config --global user.name "Emma Paris"
 $ git config --global user.email "eparis@atlassian.com"
 \end{lstlisting}
 
-Ricordo di non usare credenziali che non conducano espressivametente alla persona che ha scritto il codice (furbissimo@gmail.com)
+Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia
+
+
 
 
 \end{frame}
@@ -491,7 +493,7 @@ $ git config --global user.name "Emma Paris"
 $ git config --global user.email "eparis@atlassian.com"
 \end{lstlisting}
 
-Ricordo di non usare credenziali che non conducano espressivametente alla persona che ha scritto il codice (furbissimo@gmail.com)
+Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia
 \end{frame}
 \begin{frame}[fragile]
 
@@ -508,24 +510,34 @@ $ git config --global user.name "Emma Paris"
 $ git config --global user.email "eparis@atlassian.com"
 \end{lstlisting}
 
-Ricordo di non usare credenziali che non conducano espressivametente alla persona che ha scritto il codice (furbissimo@gmail.com)
+Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Salvataggio delle credenziali offline}
-Se usiamo la riga di comando per fare commit, ci chiederà ogni volta le credenziali del server. Per salvarle nel PC:
+Se usiamo la riga di comando per fare commit, ci chiederà ogni volta le credenziali del server. Per salvare queste credenziali nel PC:
 \begin{lstlisting}[language=bash]
 $ git config credential.helper store
 $ git push http://example.com/repo.git
 Username: <type your username>
 Password: <type your password>
 \end{lstlisting}
-Attenzione, spesso quando si digita la passowrd su terminali unix-like il terminale non da nessun feed per la digitazione delle password.
+Attenzione, spesso quando si digita la password su terminali unix-like il terminale non da nessun feed per la digitazione delle password.
 
+\textbf{Attenzione} questo metodo salva le credenziali in un file di testo (plaintext) non cripato che è il \lstinline{global .gitconfig file}, accessibile da tutti nel pc, su linux si trova in \lstinline{/home/[username]/.gitconfig}. Se non si desidera questo comportamento è possibile:
+\begin{itemize}
+    \item Impostare un timeout del file \lstinline{git config credential.helper cache <timeout>}, dove il timeout è scritto in secondi ed è opzionale con valore di default a 900 secondi, cioè 15 minuti
+    \item Usare una chiave SSH
+\end{itemize}
 \end{frame}
-
-\section{Utilizziamo GIT per la prima volta}
-
+\begin{frame}[fragile]{Salvataggio delle credenziali offline}{chiave SSH}
+    Dopo aver creato la chiave SSH, per esempio su GitHub: si va sui  Settings \(\rightarrow\) SSH and GPG keys \(\rightarrow\) New SSH Key, poi si salva la chiave sul proprio pc. Dopo di che salviamo la nostra chiave \lstinline{id_rsa} nella directory \lstinline{~/.ssh/}. 
+    Ed infine la aggiungiamo per l'autenticazione:
+    \begin{lstlisting}
+ssh-add -K ~/.ssh/id_rsa
+\end{lstlisting}
+    Su Windows la cartella di default per salvare le credenziali SSH è: \lstinline{C:\Users\[username]\.ssh\}
+\end{frame}
 \begin{frame}[fragile]
 \frametitle{Creazione di un nuovo repository}
 crea una nuova directory, entraci ed esegui
