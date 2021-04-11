@@ -440,7 +440,7 @@ Utilizza le differenze per salvare le modifiche.
 
     \item Utilizza un sistema ibrido per il salvataggio degli stati:
 
-    \item Utilizza un'algoritmo di delta quando le differenze sono poche, altrimenti un'istantanea.
+    \item Utilizza un algoritmo di delta quando le differenze sono poche, altrimenti un'istantanea.
 \end{itemize}
 
 
@@ -472,7 +472,7 @@ $ git config --global user.name "Emma Paris"
 $ git config --global user.email "eparis@atlassian.com"
 \end{lstlisting}
 
-Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia
+Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia, nonostante ciò è possibile rimuovere i commit e modificare la cronologia (con un po' di difficoltà e la rigenerazione di hash, anche con l'uso di BFG Repo-Cleaner)
 
 
 
@@ -480,7 +480,7 @@ Ricordo di non usare credenziali che non conducano espressivamente alla persona 
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Installazione di GIT su Windows}
-Scarica da qui l'ultima versione: https://gitforwindows.org/
+Scarica da qui l'ultima versione: \url{https://gitforwindows.org/}
 
 
 Dopo di che aprire il terminale e verificare che l'installazione è andata a buon fine:
@@ -493,7 +493,7 @@ $ git config --global user.name "Emma Paris"
 $ git config --global user.email "eparis@atlassian.com"
 \end{lstlisting}
 
-Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia
+Ricordo di non usare credenziali che non conducano espressivamente alla persona che ha scritto il codice (furbissimo@gmail.com) in quanto queste credenziali restano salvate per sempre, come se fosse blockchain o la cronologia di Wikipedia, nonostante ciò è possibile rimuovere i commit e modificare la cronologia (con un po' di difficoltà e la rigenerazione di hash, anche con l'uso di BFG Repo-Cleaner)
 \end{frame}
 \begin{frame}[fragile]
 
@@ -518,7 +518,7 @@ Ricordo di non usare credenziali che non conducano espressivamente alla persona 
 Se usiamo la riga di comando per fare commit, ci chiederà ogni volta le credenziali del server. Per salvare queste credenziali nel PC:
 \begin{lstlisting}[language=bash]
 $ git config credential.helper store
-$ git push http://example.com/repo.git
+$ git push https://example.com/repo.git
 Username: <type your username>
 Password: <type your password>
 \end{lstlisting}
@@ -709,7 +709,7 @@ Il nome dal suono negativo deriva dal fatto che questo comando viene spesso usat
 \begin{frame}[fragile]
 \frametitle{IDE \& .gitignore}
 Iniziamo con il fatto che nel repository .git non ci va per nessun motivo, ma per nessun motivo un file compilato, neanche file di configurazione locali degli IDE e qualsiasi altra cosa che è legata al PC e non al progetto software. Git mette a disposizione il file dot gitignore, che è un file dove vengono specificati che file ignorare. Una collezzione di file dot gitignore è presente su questo repository git:
-https://github.com/github/gitignore
+\url{https://github.com/github/gitignore}
 
 In linea generale, consiglio di mettere i appendere i seguenti file gitignore in uno solo: Jetbrains, Visual Studio, Eclipse e quello del linguaggio di programmazione del repository (in questo caso C++)
 
@@ -773,8 +773,24 @@ $ git push -u origin --tags
 \end{frame}
 
 \section{Workflow collaborativo}
+\begin{frame}{Workflow}
+    Quando si sviluppa in più persone si potrebbe pensare di tenere tutti i file su un server NAS e di modificarli lì, nessuna scelta è peggiore di questa: in quanto se uno sta facendo una modifica l'altro non può compilare, inoltre il NAS non è detto che gestisca bene modifiche multiple e tutto, ci sono altre soluzioni intermedie, sempre inadeugate. La soluzione è l'uso di un repository GIT con più branch:
+    \begin{itemize}
+        \item il tuo
+        \item quello del collega
+        \item dev (o integrazione delle modifiche)
+        \item produzione
+    \end{itemize}
+\end{frame} 
+\begin{frame}{Workflow}
+    Esempio di workflow collaborativo:
+    \begin{figure}
+    \includegraphics[width=0.3\textwidth]{workflow-5.png}
+    \end{figure}
+    Altri tip per ottimizzare il workflow: \url{https://get-git.readthedocs.io/it/latest/obiettivo_7.html}
+\end{frame} 
 \begin{frame}{Branching}
-    Con operazione di branching, in tutti i VCS  ,  si intende
+    Con operazione di branching, in tutti i VCS,  si intende
 l'operazione tramite il quale l'utente "si stacca" dal principale
 ramo di sviluppo e continua a lavorare senza intaccare il ramo
 principale.
@@ -906,7 +922,7 @@ this is conflicted text from feature branch
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Effettuare al merge}
+\frametitle{Effettuare il merge}
 Dato che sei tu il responsabile del merge Git mette in automatico i file nello stato "untracked".
 Una volta risolti i conflitti, si pososno mettere i suddetti file nello stato staged con:
 \begin{lstlisting}[language=bash]
@@ -921,7 +937,18 @@ Infine si effettua il commit:
 $ git commit -m "Merge two branch"
 \end{lstlisting}
 \end{frame}
-
+\begin{frame}[fragile]{Effettuare il merge}
+    Il caso banale è quello in cui l'altro commit è un antenato del commit corrente, non serve fare niente. Un altro caso semplice è quello in cui il commit corrente è un antenato dell'altro commit. Avremo quindi un merge fast-forward. La referenza viene semplicemente spostata e viene eseguito il checkout sul nuovo commit.
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth]{merge-ff.png}
+        \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Effettuare il merge}
+    Negli altri casi avremo un merge "reale". Si possono scegliere altre strategie ma quella di default è rappresentata dal merge "ricorsivo" che semplicemente prende il commit corrente (ed489 below), l'altro commit (33104), il loro antenato comune (b325c) ed esegue un merge a tre vie. Il risultato viene memorizzato nella working directory e nello stage, seguirà un commit con un genitore extra (33104).
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth]{merge.png}
+        \end{figure}
+\end{frame}
 \begin{frame}[fragile]
 \frametitle{Tags}
 È raccomandato creare dei tags nel caso in cui il software venga rilasciato. Questo è un concept già conosciuto, che esiste anche in SVN. Puoi creare un tag chiamato 1.0.0 eseguendo
@@ -937,11 +964,72 @@ puoi anche utilizzare meno caratteri per l'id della commit, basta che sia unico.
 
 \end{frame}
 
+\section{Fare i giocolieri con i commit}
+\begin{frame}[fragile]{Differenze apportate ai commit}
+    Per git, calcolare le modifiche apportate ai file da un commit all’altro non è poi difficile. Per esempio, puoi ricavarle con
+    \begin{lstlisting}
+        git diff dev master
+\end{lstlisting}
+    Con \lstinline{git diff from to} chiedi a git «qual è l’elenco delle modifiche ai file che devo applicare a ``from`` perché il progetto diventi identico a quello fotografato in ``to``»?
 
+\end{frame}
+\begin{frame}[fragile]{Cherry Pick}
+    Con il comando cherry-pick puoi chiedere a git di calcolare le modifiche introdotte dal tuo commit e riapplicarle da qualche altra parte, per esempio, proprio su master,  il nuovo commit ha lo stesso messaggio ma le modifiche sono applicate da un parent diverso.
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth]{cherry-pick.png}
+        \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{Rebase}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+    Abbiamo visto come usare il comando git merge per fondere due branch. Git mette a disposizione un altro comando che si comporta in maniera simile, ovvero il comando git rebase che consente di integrare i commit di un branch nell'altro. Le funzionalità offerte da git rebase differiscono da git merge in alcuni aspetti chiave.
+    L'operazione di rebasing (rifondazione) consiste nello spostare una serie di commit in modo tale che il primo di questi sia preceduto da un diverso commit.
+    In sostanza è un modo automatizzato per eseguire diversi cherry-pickin sequenza.
+
+\end{column}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]{git-rebase.jpeg}
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[fragile]{Rebase}
+    N.B. in realtà i commit non vengono "spostati", in quanto  ogni commit è un oggetto unico e immutabile identificato in maniera univoca da un valore di hash generato usando l'algoritmo SHA-1, ma viene creata un nuovo commit  sulla base delle informazioni contenute nei vecchi oggetti (quindi rimangono le stesse informazioni, se non quella dei commit genitori e l'hash).
+    \begin{figure}
+    \includegraphics[width=0.6\textwidth]{rebase.png}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Rebase}
+    Il comando precedente prende tutti i commit esistenti in topic ma non in main (precisamente 169a6 e 2c33a), li riporta sul main e poi sposta l'head del branch sulla nuova estremità.
+
+Per limitare quanto andare all'indietro utilizzare l'opzione \lstinline{--onto}. Il comando seguente riporta sul main i commit più recenti del branch corrente da 169a6 (escluso), precisamente 2c33a.
+    \begin{figure}
+    \includegraphics[width=0.6\textwidth]{rebase-onto.png}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Rebase}
+    Esiste anche \lstinline{git rebase --interactive}, che permette di fare cose più complicate rispetto a riportare semplicemente commit, più precisamente eliminare, riordinare, modificare i commit.
+
+\end{frame}
+
+\begin{frame}[fragile]{Merge con squash}
+    Il comando \lstinline{git merge --squash}  raggruppa tutte le commit in una sola. Al termine del merge è possibile cancellare il branch di lavoro senza alcun problema.
+
+    Supponiamo di avere un ramo bugfix e desideriamo applicare tutti questi commit al master:
+    \begin{lstlisting}
+        git checkout master
+        git merge --squash bugfix
+        git commit
+    \end{lstlisting}
+    Questo vi porterà tutti i commit dal ramo bugfix, inglobandoli in 1 commit, e si fondono con il vostro ramo master.
+
+    Questo comando insieme al comando cherry-pick è particolarmente utile quando si hanno più release attualmente supportate (una LTS ed una "liscia") e dobbiamo realizzare bug-fix per entrambe le release.    
+\end{frame}
 
 \begin{frame}{Git \& DevOps}
     Attraverso un potente modello di branching e vari workflow
-di collaborazione, negli annil'uso e l'adozione di Git è
+di collaborazione, negli anni l'uso e l'adozione di Git è
 cresciuta esponenzialmente rispetto ad altri VCS, arrivando
 ad essere il più usato e il più popolare soprattuto per come è
 possibile integrarlo come fondamenta di un processo
@@ -954,8 +1042,8 @@ DevOps.
 \frametitle{Utilizzo di GitHub, GitLab e Bitbucket}
 Questi sono alcuni servizi di hosting web-based per progetti che usano il sistema di controllo versione GIT. Il primo è comunemente noto per l'hosting di numerosi progetto open source, tra cui:
 \begin{enumerate}
-\item https://github.com/torvalds/linux
-\item https://github.com/microsoft/MS-DOS (ovviamente GIT non c'era ai tempi dello sviluppo di MS-DOS ed usavano i tasti CTRL+C e CTRL+V per fare lo storico delle versioni)
+\item \url{https://github.com/torvalds/linux}
+\item \url{https://github.com/microsoft/MS-DOS} (ovviamente GIT non c'era ai tempi dello sviluppo di MS-DOS e usavano i tasti CTRL+C e CTRL+V per fare lo storico delle versioni)
 \end{enumerate}
 GitLab e Bitbucket sono invece orientati al settore business offrendo numerosi servizi extra on cloud ed apprezzati dalle imprese. Inoltre sia GitLab che Bitbucket permettono l'installazione in maniera on premise. Tutti e tre permettono la creazione di repository privati gratuiti.
 
@@ -973,7 +1061,7 @@ $ git clone https://gitlab.com/test/test.git
 
 \begin{frame}[fragile]
 \frametitle{Utilizzo di GitLab}
-Creiamo un nuovo progetto su GitLab, dopo esserci registrati su GitLab (https://gitlab.com/), ricordo di usare una e-mail "decente" che possa identificate il programmatore e non furbissimo@gmail.com. Non stiamo scrivendo un software che hackera i server della NASA!
+Creiamo un nuovo progetto su GitLab, dopo esserci registrati su GitLab (\url{https://gitlab.com/}), ricordo di usare una e-mail "decente" che possa identificate il programmatore e non furbissimo@gmail.com. Non stiamo scrivendo un software che hackera i server della NASA!
 
 Premiamo il puslante "New Project" in alto a destra e creiamo il nostro progetto. Diamoli un nome, per esempio "test-GitLab" dopo averlo creato ci appaiono delle semplici "Command line instructions". Le eseguiamo per esercitarci su Git. Una volta finito creiamo un file dot gitgnore e "puliamo" con i comandi il repository da eventuali file non ammessi!
 
@@ -1061,14 +1149,10 @@ Nella finestra precedente possiamo dire di caricare immediatamente le modifiche 
 \begin{frame}
 \frametitle{Altre informazioni utili}
 
-Tutorial completo su come utilizzare Git su IntelliJ:
-
-https://courses.cs.washington.edu/courses/cse373/19wi/resources/intellij/git/
+Tutorial completo su come utilizzare Git su IntelliJ: \url{https://courses.cs.washington.edu/courses/cse373/19wi/resources/intellij/git/}
 
 
-Tutorial completo su come utilizzare Git su Visual Studio:
-
-https://docs.microsoft.com/en-us/azure/devops/repos/git/gitquickstart
+Tutorial completo su come utilizzare Git su Visual Studio: \url{https://docs.microsoft.com/en-us/azure/devops/repos/git/gitquickstart}
 
 \end{frame}
 \section{Cosa non fa GIT}
@@ -1139,16 +1223,16 @@ La funzionalità Issues permette la creazione di una baceca condivisa da tutti g
 \begin{frame}
 \frametitle{Fonti}
 \begin{itemize}
-\item https://rogerdudler.github.io/git-guide/index.it.html
-\item https://www.atlassian.com/git/tutorials/setting-up-a-repository
-\item https://git-scm.com/book/it/v1/Per-Iniziare-Basi-di-Git
-\item https://git-scm.com/book/it/v1/Per-Iniziare-Il-Controllo-di-Versione
-\item https://git-scm.com/book/it/v1/Per-Iniziare-Una-Breve-Storia-di-Git
-\item https://www.1and1.it/digitalguide/siti-web/programmazione-del-sito-web/git-vs-svn-controllo-di-versione-a-confronto/
-\item https://svnvsgit.com/
-\item https://medium.com/@prasoon2211/mercurial-vs-git-scaling-and-architecture-94f70bb206ef
-\item https://www.mercurial-scm.org/wiki/Revlog
-\item https://gvfs.io/
+\item \url{https://rogerdudler.github.io/git-guide/index.it.html}
+\item \url{https://www.atlassian.com/git/tutorials/setting-up-a-repository}
+\item \url{https://git-scm.com/book/it/v1/Per-Iniziare-Basi-di-Git}
+\item \url{https://git-scm.com/book/it/v1/Per-Iniziare-Il-Controllo-di-Versione}
+\item \url{https://git-scm.com/book/it/v1/Per-Iniziare-Una-Breve-Storia-di-Git}
+\item \url{https://www.1and1.it/digitalguide/siti-web/programmazione-del-sito-web/git-vs-svn-controllo-di-versione-a-confronto/}
+\item \url{https://svnvsgit.com/}
+\item \url{https://medium.com/@prasoon2211/mercurial-vs-git-scaling-and-architecture-94f70bb206ef}
+\item \url{https://www.mercurial-scm.org/wiki/Revlog}
+\item \url{https://gvfs.io/}
 \end{itemize}
 
 \end{frame}
