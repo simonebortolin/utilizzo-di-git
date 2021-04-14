@@ -550,7 +550,12 @@ Enter same passphrase again:
 
     Per maggiori informazioni: \url{https://docs.gitlab.com/ee/ssh/README.html}
 
-    Per condividere la chiave all'interno di Windows e WSL è necessario che la chiave sia presente sia su \lstinline{/mnt/c/Users/[username]/.ssh} che su \lstinline{~/.ssh}, per maggiori informazioni: \url{https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/}
+    Per condividere la chiave all'interno di Windows e WSL è necessario che la chiave sia presente sia su \lstinline{/mnt/c/Users/[username]/.ssh} che su \lstinline{~/.ssh}.
+    Se si crea prima la chiave su WSL basta:
+    \begin{lstlisting}
+cp -r ~/.ssh /mnt/c/Users/[username]
+\end{lstlisting}
+    per maggiori informazioni e problemi: \url{https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/}
 \end{frame}
 \begin{frame}[fragile]{Salvataggio delle credenziali offline}{chiave SSH}
 
