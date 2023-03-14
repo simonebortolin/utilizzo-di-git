@@ -1,0 +1,25 @@
+\begin{center}
+    \begin{tikzpicture}[node distance=2cm]
+    \node (central) [rectangle, draw] {Repository Centrale};
+    \node (local1) [below left of=central, rectangle, draw] {Repository Locale 1};
+    \node (local2) [below right of=central, rectangle, draw] {Repository Locale 2};
+    \node (vdb1) [below left of=local1, rectangle, draw, yshift=-1cm] {Version Database};
+    \node (vdb2) [below right of=local1, rectangle, draw, yshift=-1cm] {Version Database};
+    \node (vdb3) [below of=local1, rectangle, draw, yshift=-1cm] {Version Database};
+    \node (vdb4) [below left of=local2, rectangle, draw, yshift=-1cm] {Version Database};
+    \node (vdb5) [below right of=local2, rectangle, draw, yshift=-1cm] {Version Database};
+    \node (vdb6) [below of=local2, rectangle, draw, yshift=-1cm] {Version Database};
+    \draw [->] (central) -- (local1);
+    \draw [->] (central) -- (local2);
+    \draw [->] (local1) -- (vdb1);
+    \draw [->] (local1) -- (vdb2);
+    \draw [->] (local1) -- (vdb3);
+    \draw [->] (local2) -- (vdb4);
+    \draw [->] (local2) -- (vdb5);
+    \draw [->] (local2) -- (vdb6);
+    \draw [->, bend right] (local1) to node [left] {Push} (central);
+    \draw [->, bend left] (central) to node [right] {Pull} (local1);
+    \draw [->, bend left] (local2) to node [right] {Push} (central);
+    \draw [->, bend right] (central) to node [left] {Pull} (local2);
+    \end{tikzpicture}
+\end{center}

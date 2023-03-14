@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,handout,8pt]{beamer}
 \usepackage[italian]{babel}
 \usepackage{animate}
 \usepackage{amsmath,color}
@@ -10,11 +10,19 @@
 \usepackage{float}
 \usepackage{color}
 \usepackage{multicol}
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usepackage{forest}
+\useforestlibrary{edges}
+
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
 
 \newcommand{\quotebox}[1]{\begin{center}\fcolorbox{white}{blue!15!gray!15}{\begin{minipage}{0.9\linewidth}\vspace{10pt}\center\begin{minipage}{0.8\linewidth}{\space\Huge``}{#1}{\hspace{1.5em}\break\null\Huge\hfill''}\end{minipage}\smallbreak\end{minipage}}\end{center}}
 
-\usetheme{Madrid}
-
+\usetheme{Rochester}
 
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -22,14 +30,18 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
  
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
- \lstset{backgroundcolor=\color{backcolour},   
+\newfontfamily\Lato[Ligatures=TeX]{Lato}
+
+\usefonttheme{professionalfonts}
+
+\setsansfont{Lato}[
+  UprightFont=*-Light,
+  ItalicFont=*-LightItalic,
+  BoldFont=*-Regular,
+  BoldItalicFont=*-Italic
+]
+
+\lstset{backgroundcolor=\color{backcolour},   
     commentstyle=\color{codegreen},
     keywordstyle=\color{blue},
     numberstyle=\tiny\color{codegray},
@@ -37,14 +49,13 @@
     keepspaces=true,                 
     numbersep=5pt,                  
     showspaces=false,                
-    showstringspaces=false,breaklines=true,
+    showstringspaces=false,
+    breaklines=true,
     showtabs=false,                  
     tabsize=2,basicstyle=\ttfamily}
 
-\renewcommand{\CancelColor}{\color{red}}
 
-\uselanguage{Italian}
-\languagepath{Italian}
+\renewcommand{\CancelColor}{\color{red}}
 
 
 
@@ -141,8 +152,8 @@ Sebbene sia possibile sviluppare software senza utilizzare alcun controllo di ve
 \frametitle{L'utilità di un VCS}
 
 \begin{minipage}{0.47\textwidth}\begin{figure}
-
-            \includegraphics[width=0.75\textwidth]{def_def_def.png} \end{figure}
+    \includegraphics[width=0.75\textwidth]{def_def_def.tikz}
+\end{figure}
 \end{minipage}
 \begin{minipage}{0.47\textwidth}
              Ecco un motivo per cui è meglio un repository GIT.
@@ -761,7 +772,7 @@ $ git commit -am "Remove ignored files"
 \frametitle{Procedure di sicurezza}
 \begin{figure}
 
-\includegraphics[width=0.5\textwidth]{in_case_of_fire.pdf}
+\includegraphics[width=0.5\textwidth]{media/in_case_of_fire.pdf}
 \end{figure}
 
 \end{frame}
