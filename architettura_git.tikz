@@ -1,0 +1,101 @@
+\begin{tikzpicture}[
+    mmat/.style={matrix of nodes,inner sep=-0.4pt,
+        nodes={anchor=center,draw,text height=1.1em,text depth=0.35ex,inner sep=2pt},
+        row sep=-\pgflinewidth,column sep=-\pgflinewidth,
+        ampersand replacement=\&},
+    pics/commit/.style n args={3}{code={
+        \matrix (-mat)[mmat,fill=green!20,
+            column 1/.style={nodes={text width=5em-4pt,font=\small\sffamily,align=center}},
+            column 2/.style={nodes={text width=5em-4pt,font=\small\ttfamily,align=center}}]{#1};
+        \node[font=\tiny\ttfamily,opacity=0,text width=10em-10pt,anchor=north](tmp) at (-mat.south){#2};
+        \draw[fill=green!20,very thick,rounded corners=2pt]  (-mat.north west)|- ([yshift=2em]-mat.north east)  [sharp corners]-- (-mat.north east) -- cycle [rounded corners=2pt] (-mat.south west) |- (tmp.south-|-mat.south east) [sharp corners]-- (-mat.south east) -- cycle;
+        \draw[very thick]  (-mat.north west) -- (-mat.south west) (-mat.north east) -- (-mat.south east) ([xshift=-3em]-mat.north east) -- ++ (0,2em);
+        \path (-mat.north west)  node[anchor=south west,font=\small\sffamily\bfseries,inner sep=6pt]{commit} (-mat.north east)  node[anchor=south east,font=\small\sffamily,inner sep=6pt,text=gray]{size}; 
+        \node[font=\tiny\ttfamily,text width=10em-10pt,anchor=north,text=gray](-message) at (-mat.south){#2};
+        \node[anchor=south,font=\small\ttfamily] (-label) at ([yshift=2em]-mat.north){#3};
+    }},
+    pics/tree/.style n args={2}{code={
+        \matrix (-mat)[mmat,fill=blue!20,
+            column 1/.style={nodes={text width=2.5em-4pt,font=\small\sffamily,align=center}},
+            column 2/.style={nodes={text width=3.5em-4pt,font=\small\ttfamily,align=center}}, 
+            column 3/.style={nodes={text width=6em-4pt,font=\small\ttfamily,align=center}},]{#1};
+        \draw[fill=blue!20,very thick,rounded corners=2pt]  (-mat.north west)|- ([yshift=2em]-mat.north east)  [sharp corners]-- (-mat.north east) -- cycle;
+        \draw[very thick,rounded corners=2pt]  (-mat.north west) |- (-mat.south) -|(-mat.north east) ([xshift=-3em]-mat.north east) -- ++ (0,2em);
+        \path (-mat.north west)  node[anchor=south west,font=\small\sffamily\bfseries,inner sep=6pt]{tree} (-mat.north east) node[anchor=south east,font=\small\sffamily,inner sep=6pt,text=gray]{size}; 
+        \node[anchor=south,font=\small\ttfamily] (-label) at ([yshift=2em]-mat.north){#2};
+    }},
+    pics/blob/.style n args={2}{code={
+        \node[font=\tiny\ttfamily,opacity=0,text width=10em-10pt,anchor=north](tmp) at (0,0){\makecell[l]{#1}};
+        \draw[fill=red!20,very thick,rounded corners=2pt]  ([yshift=2em]tmp.north west) rectangle (tmp.south east);
+        \node[font=\tiny\ttfamily,text width=10em-10pt,anchor=north](-message) at (0,0){\makecell[l]{#1}};
+        \draw[very thick]  (tmp.north west) --  (tmp.north east)  ([xshift=-3em]tmp.north east) -- ++ (0,2em);
+        \path (tmp.north west)  node[anchor=south west,font=\small\sffamily\bfseries,inner sep=6pt]{blob} (tmp.north east)  node[anchor=south east,font=\sffamily,inner sep=6pt,text=gray]{size}; 
+        \node[anchor=south,font=\small\ttfamily] (-label) at ([yshift=2em]tmp.north){#2};
+    }},
+    pics/tag/.style n args={3}{code={
+        \matrix (-mat)[mmat,fill=orange!20,
+            column 1/.style={nodes={text width=5em-4pt,font=\small\sffamily,align=center}},
+            column 2/.style={nodes={text width=5em-4pt,font=\small\ttfamily,align=center}}]{#1};
+        \node[font=\tiny\ttfamily,opacity=0,text width=10em-10pt,anchor=north](tmp) at (-mat.south){#2};
+        \draw[fill=orange!20,very thick,rounded corners=2pt]  (-mat.north west)|- ([yshift=2em]-mat.north east)  [sharp corners]-- (-mat.north east) -- cycle [rounded corners=2pt] (-mat.south west) |- (tmp.south-|-mat.south east) [sharp corners]-- (-mat.south east) -- cycle;
+        \draw[very thick]  (-mat.north west) -- (-mat.south west) (-mat.north east) -- (-mat.south east) ([xshift=-3em]-mat.north east) -- ++ (0,2em);
+        \path (-mat.north west)  node[anchor=south west,font=\small\sffamily\bfseries,inner sep=6pt]{commit} (-mat.north east)  node[anchor=south east,font=\small\sffamily,inner sep=6pt,text=gray]{size}; 
+        \node[font=\tiny\ttfamily,text width=10em-10pt,anchor=north,text=gray](-message) at (-mat.south){#2};
+        \node[anchor=south,font=\small\ttfamily] (-label) at ([yshift=2em]-mat.north){#3};
+    }},
+]
+
+    \pic (commit1) at (0,0) {commit={%
+       tree \& |[alias=-p12]|0de24\\
+       parent \& nil\\
+       author \& Scott\\
+       commiter \& Scott\\
+    }{my commit message goes here and is really really cool}{98ca9..}};
+    \pic (tree1) at (5,-1) {tree={%
+        blob \& e8455 \& |[alias=-p13]| LICENSE.md\\
+        tree \& |[alias=-p22]| 10af9 \& lib\\
+    }{0de24..}};
+    \pic (blob1) at (10,-1.5) {blob={%
+        == LICENSE:\\
+        \\
+        (The MIT License)\\
+        \\
+        Copyright (C) 2007 Tom Preston\\
+        \\
+        Permission is hereby granted, f\\
+        ree of charge, to any person obt
+    }{e8455..}};
+    \pic (tree2) at (5,-5) {tree={%
+        blob \& bc52a \& |[alias=-p13]| mylib.rb\\
+        tree \& |[alias=-p22]| b70f8 \& inc\\
+    }{10af9..}};
+    \pic (blob2) at (10,-5.5) {blob={%
+        require 'grit/index'\\
+        require 'grit/status'\\
+        \\
+        \\
+        module Grit
+    }{bc52a..}};
+    \pic (tree3) at (5,-8.5) {tree={%
+        blob \& 0ad1a \& |[alias=-p13]| triks.rb\\
+    }{10af9..}};
+    \pic (blob3) at (10,-9) {blob={%
+        require 'grit/git-ruby/reposi'\\
+        require 'grit/git-ruby/file\_i'\\
+        \\
+        module Grit
+    }{0ad1a..}};
+    \pic (commit2) at (-6,0) {commit={%
+       tree \& |[alias=-p12]|b7ad9\\
+       parent \& |[alias=-p22]|98ca9\\
+       author \& Scott\\
+       commiter \& Scott\\
+    }{another commit message}{2c3b9..}};
+    \draw[very thick,-stealth] (commit1-p12.east) to[bend left] (tree1-label);
+    \draw[very thick,-stealth] (tree1-p13.east) to[bend left] (blob1-label.west);
+    \draw[very thick,-stealth] (tree1-p22.south) to[bend left] (tree2-label);
+    \draw[very thick,-stealth] (tree2-p13.east) to[bend left] (blob2-label.west);
+    \draw[very thick,-stealth] (tree2-p22.south) to[bend left] (tree3-label);
+    \draw[very thick,-stealth] (tree3-p13.east) to[bend left] (blob3-label.west);
+    \draw[very thick,-stealth] (commit2-p22.east) to[bend left] (commit1-label.west);
+\end{tikzpicture}

@@ -1,25 +1,32 @@
-\begin{center}
-    \begin{tikzpicture}[node distance=2cm]
-    \node (central) [rectangle, draw] {Repository Centrale};
-    \node (local1) [below left of=central, rectangle, draw] {Repository Locale 1};
-    \node (local2) [below right of=central, rectangle, draw] {Repository Locale 2};
-    \node (vdb1) [below left of=local1, rectangle, draw, yshift=-1cm] {Version Database};
-    \node (vdb2) [below right of=local1, rectangle, draw, yshift=-1cm] {Version Database};
-    \node (vdb3) [below of=local1, rectangle, draw, yshift=-1cm] {Version Database};
-    \node (vdb4) [below left of=local2, rectangle, draw, yshift=-1cm] {Version Database};
-    \node (vdb5) [below right of=local2, rectangle, draw, yshift=-1cm] {Version Database};
-    \node (vdb6) [below of=local2, rectangle, draw, yshift=-1cm] {Version Database};
-    \draw [->] (central) -- (local1);
-    \draw [->] (central) -- (local2);
-    \draw [->] (local1) -- (vdb1);
-    \draw [->] (local1) -- (vdb2);
-    \draw [->] (local1) -- (vdb3);
-    \draw [->] (local2) -- (vdb4);
-    \draw [->] (local2) -- (vdb5);
-    \draw [->] (local2) -- (vdb6);
-    \draw [->, bend right] (local1) to node [left] {Push} (central);
-    \draw [->, bend left] (central) to node [right] {Pull} (local1);
-    \draw [->, bend left] (local2) to node [right] {Push} (central);
-    \draw [->, bend right] (central) to node [left] {Pull} (local2);
-    \end{tikzpicture}
-\end{center}
+\begin{tikzpicture}[scale=.5,node distance=0.5cm,
+    versiondatabase/.pic={
+        \node (-vd) {Version database};
+        \node (-v3) [draw, rectangle, rounded corners, below of=-vd] {Version 3};
+        \node (-v2) [draw, rectangle, rounded corners, below of=-v3] {Version 2};
+        \node (-v1) [draw, rectangle, rounded corners, below of=-v2] {Version 1};
+        \draw (-v1) -- (-v2);
+        \draw (-v2) -- (-v3);
+        \node ()[fit=(-vd)(-v3)(-v2)(-v1), draw, rectangle] {};
+    },
+    versiondatabasefile/.pic={
+        \node (-computer) {Computer #1};
+        \node [below of=-computer] (-file) [draw, rectangle, rounded corners] {File};
+        \pic [below= 0.5cm of -file](-db){versiondatabase};
+        \node ()[fit=(-computer)(-file)(-db), draw, rectangle] {};
+        \draw[->] (-db) -- (-file);
+    },
+    versiondatabaseserver/.pic={
+        \node (-computer) {Computer #1};
+        \pic [below= 0.5cm of -computer](-db){versiondatabase};
+        \node ()[fit=(-computer)(-db), draw, rectangle] {};
+    },
+    font=\tiny,
+    ]
+    \pic (central) [draw, rectangle]{versiondatabaseserver};
+    \pic (local1) [below left=-0.5cm and 1.5cm of central] {versiondatabasefile={A}};
+    \pic (local2) [below right=-0.5cm and 1.5cm of central] {versiondatabasefile={B}};
+    \draw [->, bend right] (local1) to node [fill=white] {Push} (central);
+    \draw [->, bend right] (central) to node [fill=white] {Pull} (local1);
+    \draw [->, bend right] (local2) to node [fill=white] {Push} (central);
+    \draw [->, bend right] (central) to node [fill=white] {Pull} (local2);
+\end{tikzpicture}
