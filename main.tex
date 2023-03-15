@@ -551,7 +551,7 @@ Enter same passphrase again:\end{lstlisting}
     \end{minipage}%
     \hspace{0.09\textwidth}%
     \begin{minipage}{0.3\textwidth}
-        Esempio di randomart:
+        Esempio di randomart \footnote{\url{https://blog.benjojo.co.uk/post/ssh-randomart-how-does-it-work-art}}:
         \begin{lstlisting}
 +---[RSA 2048]----+
 |E   ..o=*o.+o    |
@@ -585,18 +585,17 @@ $ cp -r /mnt/c/Users/[username] ~/.ssh\end{lstlisting}
 
     \begin{frame}[fragile]{Creazione e clonazione di un nuovo repository}
         \begin{description}
-            \item[Creazione di un repository vuoto]
-            crea una nuova directory, entraci ed esegui
-            \begin{lstlisting}[language=bash]
-$ git init\end{lstlisting}
-            \item[Clonazione di un repository da un remote url]
-            \begin{lstlisting}[language=bash]
-            Per clonare da un link HTTPS
-$ git clone https://github.com/WordPress/WordPress.git\end{lstlisting}
+            \item[Creazione di un repository vuoto] crea una nuova directory, entraci ed esegui
+            \lstinline{git init}
+            \item[Clonazione di un repository da un remote url] Per clonare da un link HTTPS:
+            \lstinline{git clone https://github.com/WordPress/WordPress.git}
             Per scaricare con un link SSH:
-            \begin{lstlisting}[language=bash]
-$ git clone git@github.com:WordPress/WordPress.git\end{lstlisting}
+            \lstinline{git clone git@github.com:WordPress/WordPress.git}
         \end{description}
+
+        \begin{alertblock}{Remote URL HTTPS e portale web}
+            Attenzione che non sempre l'url del portale web di Git corrisponde al remote URL.
+        \end{alertblock}
     \end{frame}
     
     \begin{frame}{Ambiente di lavoro}
