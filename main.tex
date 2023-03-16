@@ -599,31 +599,39 @@ $ cp -r /mnt/c/Users/[username] ~/.ssh\end{lstlisting}
     \end{frame}
     
     \begin{frame}{Ambiente di lavoro}
-        la tua copia locale del repository è composta da tre "alberi" mantenuti da Git. Il primo è la tua Directory di lavoro che contiene i files attuali. Il secondo è l'Index che fa da spazio di transito per i files e per finire l'HEAD che punta all'ultimo commit fatto.
-        
-        \begin{figure}\includegraphics[width=0.75\textwidth]{trees.png} \end{figure}
-        
+        \begin{minipage}{0.5\textwidth}
+            La tua copia locale del repository è composta da tre alberi gestiti da Git. 
+            \begin{description}
+                \item[Working directory] è un albero che continene i file attuali.
+                \item[Index] è l'albero che contiene la lista dei file modificati in attesa di un \textbf{commit}, detta area di stage 
+                \item[Head] è l'albero che punta all'ultimo commit effettuato
+            \end{description}
+        \end{minipage}%
+        \begin{minipage}{0.5\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{trees.png}
+            \end{figure}
+        \end{minipage}       
     \end{frame}
     
-    \begin{frame}{Stati}
-        
-        Analizziamo gli stati in cui si può trovare un file controllato da Git:
-        \begin{enumerate}
-            \item Modified: il file è stato modificato rispetto al blob presente sul
-                    database, ma non è stato ancora salvato su quest'ultimo.
-            \item Staged: la versione 'modified' del file è stato selezionata
-                    dall'utente per essere presente nella prossima commit.
-            \item Commmited: la versione 'staged' del file è stata correttamente
-                    salvata nel database.
-            \item Untracked: il file non è presente nel database e non è stato aggiunto ai file in stage
-        \end{enumerate}
-        
-    \end{frame}
-    
-    \begin{frame}
-        \frametitle{Stati}
-        \begin{figure}\includegraphics[width=0.75\textwidth]{lifecycle.png} \end{figure}
-        
+    \begin{frame}{Stati di un file}
+        \begin{minipage}{0.5\textwidth}
+            Un file all'interno della working direcotry si può trovare in uno dei seguenti 4 stati:
+            \begin{description}
+                \item[Modified] il file è stato modificato rispetto al blob presente sul
+                        database, ma non è stato ancora salvato su quest'ultimo.
+                \item[Staged] la versione 'modified' del file è stato selezionata
+                        dall'utente per essere presente nella prossima commit.
+                \item[Unmodified] il file non è stato modificato rispetto al blob presente sul database e/o la versione 'staged' del file è stata correttamente
+                        committata e quindi salvata nel database.
+                \item[Untracked] il file non è presente nel database e non è stato aggiunto ai file in stage
+            \end{description}
+        \end{minipage}%
+        \begin{minipage}{0.5\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{lifecycle.png}
+            \end{figure}
+        \end{minipage}     
     \end{frame}
     
     \begin{frame}

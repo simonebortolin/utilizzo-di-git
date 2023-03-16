@@ -1,0 +1,17 @@
+\begin{tikzpicture}[head/.style={line width=2pt,draw=gray,rounded corners,text width=2cm,align=center}]
+    \node[head,fill=white!60!black!50] (unt) {untracked};
+    \node[head,fill=green!40,right=of unt] (unm) {unmodified};
+    \node[head,fill=yellow!40,right=of unm] (mod) {modified};
+    \node[head,fill=red!40,right= of mod] (sta) {staged};
+    \begin{scope}[line width=2pt,gray]
+    \foreach \x in {unt,unm,mod,sta}
+      \draw ([yshift=-5pt]\x.south) -- +(0,-6cm);
+    \end{scope}
+    \begin{scope}[every node/.style={single arrow, draw=none,fill=red!50,anchor=west,align=center}]
+    \node [anchor=west,text width=9.4cm] at ([yshift=-1cm]unt.south) {Add the file};
+    \node [anchor=west,text width=2.8cm] at ([yshift=-2cm]unm.south) {Edit the file};
+    \node [anchor=west,text width=2.8cm] at ([yshift=-3cm]mod.south) {Stage the file};
+    \node [anchor=east,text width=2.8cm,shape border rotate=180] at ([yshift=-4cm]unm.south) {Remove the file};
+    \node [anchor=east,text width=6.10cm,shape border rotate=180] at ([yshift=-5cm]sta.south) {Commit};
+    \end{scope}
+\end{tikzpicture}
