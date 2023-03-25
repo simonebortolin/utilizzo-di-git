@@ -1,0 +1,35 @@
+\begin{tikzpicture}
+
+    \draw[->] (0,1) -- (12,1) node[pos=.5, fill=white] {Checkins over time};
+
+    \node[DAGcommit, fill=solarized-red!20, draw] (v1) at (0,0) {Version 1};
+    \node[DAGcommit, draw] (v1-A) at (0,-2) {A};
+    \node[DAGcommit, draw] (v1-B) at (0,-4) {B};
+    \node[DAGcommit, draw] (v1-C) at (0,-6) {C};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v2) at (3,0) {Version 2};
+    \node[DAGcommit, draw] (v2-A) at (3,-2) {A1};
+    \node[DAGcommit, fill=solarized-green!10, dotted, draw] (v2-B) at (3,-4) {B};
+    \node[DAGcommit, draw] (v2-C) at (3,-6) {C1};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v3) at (6,0) {Version 3};
+    \node[DAGcommit, fill=solarized-green!10, dotted, draw] (v3-A) at (6,-2) {A1};
+    \node[DAGcommit, fill=solarized-green!10, dotted, draw] (v3-B) at (6,-4) {B};
+    \node[DAGcommit, draw] (v3-C) at (6,-6) {C2};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v4) at (9,0) {Version 4};
+    \node[DAGcommit, draw] (v4-A) at (9,-2) {A2};
+    \node[DAGcommit, draw] (v4-B) at (9,-4) {B1};
+    \node[DAGcommit, fill=solarized-green!10, dotted, draw] (v4-C) at (9,-6) {C2};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v5) at (12,0) {Version 5};
+    \node[DAGcommit, fill=solarized-green!10, dotted, draw] (v5-A) at (12,-2) {A2};
+    \node[DAGcommit, draw] (v5-B) at (12,-4) {B2};
+    \node[DAGcommit, draw] (v5-C) at (12,-6) {C3};
+
+    \draw (v1) -- (v1-A) -- (v1-B) -- (v1-C);
+    \draw (v2) -- (v2-A) -- (v2-B) -- (v2-C);
+    \draw (v3) -- (v3-A) -- (v3-B) -- (v3-C);
+    \draw (v4) -- (v4-A) -- (v4-B) -- (v4-C);
+    \draw (v5) -- (v5-A) -- (v5-B) -- (v5-C);   
+\end{tikzpicture}

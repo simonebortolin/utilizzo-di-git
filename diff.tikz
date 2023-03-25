@@ -1,0 +1,33 @@
+\begin{tikzpicture}[snapline/.style={thick, gray, dashed}]
+
+    \draw[->] (0,1) -- (12,1) node[pos=.5, fill=white] {Checkins over time};
+
+    \node[DAGcommit, fill=solarized-red!20, draw] (v1) at (0,0) {Version 1};
+    \node[DAGcommit, draw] (v1-A) at (0,-2) {file A};
+    \node[DAGcommit, draw] (v1-B) at (0,-4) {file B};
+    \node[DAGcommit, draw] (v1-C) at (0,-6) {file C};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v2) at (3,0) {Version 2};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (v2-A) at (3,-2) {\(\Delta\)1};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (v2-C) at (3,-6) {\(\Delta\)1};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v3) at (6,0) {Version 3};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (v3-C) at (6,-6) {\(\Delta\)2};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v4) at (9,0) {Version 4};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (v4-A) at (9,-2) {\(\Delta\)2};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (v4-B) at (9,-4) {\(\Delta\)1};
+    
+    \node[DAGcommit, fill=solarized-red!20, draw] (v5) at (12,0) {Version 5};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (v5-B) at (12,-4) {\(\Delta\)2};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (v5-C) at (12,-6) {\(\Delta\)3};
+
+    \draw[->] (v1-A) -- (v2-A);
+    \draw[->] (v2-A) -- (v4-A);
+    \draw[->] (v1-B) -- (v4-B);
+    \draw[->] (v4-B) -- (v5-B);
+    \draw[->] (v1-C) -- (v2-C);
+    \draw[->] (v2-C) -- (v3-C);
+    \draw[->] (v3-C) -- (v5-C);
+
+\end{tikzpicture}

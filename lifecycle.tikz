@@ -8,10 +8,10 @@
       \draw ([yshift=-5pt]\x.south) -- +(0,-6cm);
     \end{scope}
     \begin{scope}[every node/.style={single arrow, draw=none,fill=red!50,anchor=west,align=center}]
-    \node [anchor=west,text width=9.4cm] at ([yshift=-1cm]unt.south) {Add the file};
+    \node [anchor=west,text width=9.4cm] at ([yshift=-1cm]unt.south) {Add the file \texttt{git add}};
     \node [anchor=west,text width=2.8cm] at ([yshift=-2cm]unm.south) {Edit the file};
-    \node [anchor=west,text width=2.8cm] at ([yshift=-3cm]mod.south) {Stage the file};
+    \node [anchor=west,text width=2.8cm] at ([yshift=-3cm]mod.south) {Stage the file \texttt{git add}};
     \node [anchor=east,text width=2.8cm,shape border rotate=180] at ([yshift=-4cm]unm.south) {Remove the file};
-    \node [anchor=east,text width=6.10cm,shape border rotate=180] at ([yshift=-5cm]sta.south) {Commit};
+    \node [anchor=east,text width=6.10cm,shape border rotate=180] at ([yshift=-5cm]sta.south) {Commit \texttt{git commit}};
     \end{scope}
 \end{tikzpicture}
