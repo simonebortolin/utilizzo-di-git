@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 
-    \draw[->] (0,1) -- (12,1) node[pos=.5, fill=white] {Checkins over time};
+    \draw[very thick,-stealth] (0,1) -- (12,1) node[pos=.5, fill=white] {Checkins over time};
 
     \node[DAGcommit, fill=solarized-red!20, draw] (v1) at (0,0) {Version 1};
     \node[DAGcommit, draw] (v1-A) at (0,-2) {A};

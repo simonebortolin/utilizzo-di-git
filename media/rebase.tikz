@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+    % Commit DAG
+    \gitDAG[grow right sep = 2em]{
+        a47c3 -- { b325c --  
+            c10b9 -- da985 -- ed489 -- a234a -- 435af -- c3aa4,
+            169a6 -- 2c33a -- 3ba22,
+        }
+    };
+    \gitbranchold[main-old]    % node name
+		{main} % node text
+		{above=of ed489}    % node placement
+		{ed489}             % target        % target
+		% HEAD reference
+	\gitHEADold
+		{left=of main-old} % node placement
+		{main-old}          % target
+    % Remote branch
+    \gitbranch    % node name
+    {main} % node text
+    {above=of c3aa4}    % node placement
+    {c3aa4}             % target
+    % Branch
+    \gitbranch
+    {new-feature}     % node name and text 
+    {below=of 3ba22} % node placement
+    {3ba22}          % target
+    % HEAD reference
+    \gitHEAD
+    {right=of main} % node placement
+    {main}          % target
+    \draw [DAGrefedge] (a234a.south west) -- (169a6.north east);
+    \draw [DAGrefedge] (435af.south west) -- (2c33a.north east);
+    \draw [DAGrefedge] (c3aa4.south west) -- (3ba22.north east);
+    \node () [below of=a234a] {\small\texttt{git rebase main}};
+\end{tikzpicture}
+

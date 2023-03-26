@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+    \pic (blob1) at (0,0) {blob={%
+        == LICENSE:\\
+        \\
+        (The MIT License)\\
+        \\
+        Copyright (C) 2007 Tom Preston\\
+        \\
+        Permission is hereby granted, f\\
+        ree of charge, to any person obt
+    }{e8455..}};
+\end{tikzpicture}

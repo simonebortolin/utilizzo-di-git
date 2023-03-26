@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+    % Commit DAG
+    \gitDAG[grow right sep = 2em]{
+        a47c3 -- b325c -- { 
+            c10b9 -- da985 --ed489,
+            2eecb -- 33a04,
+        } -- f8bc5
+    };
+    \gitbranchold[main-old]    % node name
+		{main} % node text
+		{above=of ed489}    % node placement
+		{ed489}             % target        % target
+		% HEAD reference
+	\gitHEADold
+		{left=of main-old} % node placement
+		{main-old}          % target
+    % Remote branch
+    \gitbranch    % node name
+    {main} % node text
+    {above=of f8bc5}    % node placement
+    {f8bc5}             % target
+    % Branch
+    \gitbranch
+    {new-feature}     % node name and text 
+    {below=of 33a04} % node placement
+    {33a04}          % target
+    % HEAD reference
+    \gitHEAD
+    {right=of main} % node placement
+    {main}          % target
+    \node (merge-a) [below of=ed489] {};
+    \node (merge-b) [below of=f8bc5] {};
+    \node (merge) at ($(merge-a)!0.5!(merge-b)$) {\small\texttt{git merge new-feature}};
+    \draw [DAGrefedge, bend right] ($(merge.north west)!0.95!(merge.north)$) to (main-old);
+    \draw [DAGrefedge, bend left] (merge.south) to (new-feature.east);
+    \draw [DAGrefedge, bend right] (main) to ($(merge.north)!0.05!(merge.north east)$);
+\end{tikzpicture}
+

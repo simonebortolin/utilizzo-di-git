@@ -1,0 +1,35 @@
+\begin{tikzpicture}
+    % Commit DAG
+    \gitDAG[grow right sep = 2em]{
+        a47c3 -- { b325c --  
+            c10b9 -- da985 -- ed489 -- f412b,
+            169a6 -- 2c33a -- 3ba22,
+        }
+    };
+    \gitbranchold[main-old]    % node name
+		{main} % node text
+		{above=of ed489}    % node placement
+		{ed489}             % target        % target
+		% HEAD reference
+	\gitHEADold
+		{left=of main-old} % node placement
+		{main-old}          % target
+    % Remote branch
+    \gitbranch    % node name
+    {main} % node text
+    {above=of f412b}    % node placement
+    {f412b}             % target
+    % Branch
+    \gitbranch
+    {new-feature}     % node name and text 
+    {below=of 3ba22} % node placement
+    {3ba22}          % target
+    % HEAD reference
+    \gitHEAD
+    {right=of main} % node placement
+    {main}          % target
+    \node (cherry) at ($(ed489)!0.6!(f412b)$) {};
+    \node () [below of=cherry] {\small\texttt{git cherry-pick 2c33a}};
+    \draw [DAGrefedge, bend left] (cherry) to (2c33a);
+\end{tikzpicture}
+

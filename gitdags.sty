@@ -205,6 +205,19 @@
   \draw[DAGrefedge] (#4) -- (\nodename@gitdags);
 }
 
+% local-branch reference
+\newcommand\gitbranchold[4][]{%
+  \renewcommand\nodename@gitdags{#1}%
+  \if\relax\detokenize{#1}\relax% check for empty optional argument
+    \renewcommand\nodename@gitdags{#2}%
+  \fi
+  \node[
+    DAGref, problematic commits,
+    fill = yellow!10, 
+  ] (\nodename@gitdags) [#3] {#2};
+  \draw[DAGrefedge, problematic commits] (#4) -- (\nodename@gitdags);
+}
+
 % remote-branch reference
 \newcommand\gitremotebranch[4][]{%
   \renewcommand\nodename@gitdags{#1}%
@@ -216,6 +229,20 @@
     fill = solarized-blue!20,
   ] (\nodename@gitdags) [#3] {#2};
   \draw[DAGrefedge] (#4) -- (\nodename@gitdags);
+}
+
+
+% remote-branch reference
+\newcommand\gitremotebranchold[4][]{%
+  \renewcommand\nodename@gitdags{#1}%
+  \if\relax\detokenize{#1}\relax% check for empty optional argument
+    \renewcommand\nodename@gitdags{#2}%
+  \fi
+  \node[
+    DAGref, problematic commits,
+    fill = solarized-blue!10,
+  ] (\nodename@gitdags) [#3] {#2};
+  \draw[DAGrefedge, problematic commits] (#4) -- (\nodename@gitdags);
 }
 
 % tag reference
@@ -239,6 +266,16 @@
     node distance = 1em,
   ] (gitHEAD) [#1] {HEAD};
   \draw[DAGrefedge] (#2) -- (gitHEAD);
+}
+
+% HEAD symbolic reference
+\newcommand\gitHEADold[2]{%
+  \node[
+    DAGref, problematic commits,
+    fill          = solarized-red!10,
+    node distance = 1em,
+  ] (gitHEAD) [#1] {HEAD};
+  \draw[DAGrefedge, problematic commits] (#2) -- (gitHEAD);
 }
 
 % the following macro is useful for explaining how merge conflicts arise

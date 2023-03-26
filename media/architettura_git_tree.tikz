@@ -1,0 +1,50 @@
+\begin{tikzpicture}
+    \pic (tree1) at (0,-1) {tree={%
+        blob \& e8455 \& |[alias=-p13]| LICENSE\\
+        blob \& 36e8d \& |[alias=-p23]| README.md\\
+        tree \& |[alias=-p32]| 10af9 \& lib\\
+    }{0de24..}};
+    \pic (blob1) at (5,0) {blob={%
+        == LICENSE:\\
+        \\
+        (The MIT License)\\
+        \\
+        Copyright (C) 2007 Tom Preston\\
+        \\
+        Permission is hereby granted, f\\
+        ree of charge, to any person obt
+    }{e8455..}};
+    \pic (blob1b) at (5,-3) {blob={%
+        Grit\\
+        ====\\
+        \\
+        Grit gives you object oriented r\\
+        ead/write access to Git reposito
+    }{e8455..}};
+    \pic (tree2) at (0,-6.5) {tree={%
+        blob \& bc52a \& |[alias=-p13]| mylib.rb\\
+        tree \& |[alias=-p22]| b70f8 \& inc\\
+    }{10af9..}};
+    \pic (blob2) at (5,-6) {blob={%
+        require 'grit/index'\\
+        require 'grit/status'\\
+        \\
+        \\
+        module Grit
+    }{bc52a..}};
+    \pic (tree3) at (0,-9) {tree={%
+        blob \& 0ad1a \& |[alias=-p13]| triks.rb\\
+    }{10af9..}};
+    \pic (blob3) at (5,-8.5) {blob={%
+        require 'grit/git-ruby/reposi'\\
+        require 'grit/git-ruby/file\_i'\\
+        \\
+        module Grit
+    }{0ad1a..}};
+    \draw[very thick,-stealth] (tree1-p13.east) to[bend left] (blob1-label.west);
+    \draw[very thick,-stealth] (tree1-p23.east) to[bend right] (blob1b-label.west);
+    \draw[very thick,-stealth] (tree1-p32.south) to[bend left] (tree2-label);
+    \draw[very thick,-stealth] (tree2-p13.east) to[bend left] (blob2-label.west);
+    \draw[very thick,-stealth] (tree2-p22.south) to[bend left] (tree3-label);
+    \draw[very thick,-stealth] (tree3-p13.east) to[bend left] (blob3-label.west);
+\end{tikzpicture}

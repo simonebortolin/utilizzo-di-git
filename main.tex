@@ -15,6 +15,7 @@
 \usepackage{makecell}
 \usepackage{keystroke}
 \usepackage{gitdags}
+\usepackage{gitobject}
 
 \usetikzlibrary{fadings}
 \usetikzlibrary{patterns}
@@ -23,6 +24,7 @@
 \usetikzlibrary{fit}
 \usetikzlibrary{positioning}
 \usetikzlibrary{matrix}
+\usetikzlibrary {shapes.symbols}
 
 \newcommand{\quotebox}[1]{\begin{center}\fcolorbox{white}{blue!15!gray!15}{\begin{minipage}{0.9\linewidth}\vspace{10pt}\center\begin{minipage}{0.8\linewidth}{\space\Huge``}{#1}{\hspace{1.5em}\break\null\Huge\hfill''}\end{minipage}\smallbreak\end{minipage}}\end{center}}
 
@@ -133,7 +135,7 @@
 \begin{frame}{Perché imparare Git quando posso giovare con i nomi dei file?}
     \begin{minipage}{0.7\textwidth}
         \begin{figure}
-            \includegraphics{def_def_def.tikz}
+            \includegraphics{media/def_def_def.tikz}
         \end{figure}
     \end{minipage}%
     \begin{minipage}{0.3\textwidth}
@@ -163,7 +165,7 @@
 \begin{frame}{DVCS}{Distributed Version Control Systems}
     \begin{minipage}{0.6\textwidth}
         \begin{figure}
-            \includegraphics{dvcs.tikz}
+            \includegraphics{media/dvcs.tikz}
         \end{figure}
     \end{minipage}%
     \begin{minipage}{0.4\textwidth}
@@ -173,7 +175,7 @@
 \begin{frame}{DVCS}{Distributed Version Control Systems}
     \begin{minipage}{0.6\textwidth}
         \begin{figure}
-            \includegraphics{dvcs.tikz}
+            \includegraphics{media/dvcs.tikz}
         \end{figure}
     \end{minipage}%
     \begin{minipage}{0.4\textwidth}
@@ -219,7 +221,7 @@
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \begin{figure}
-            \includegraphics{architettura_git_blob.tikz}
+            \includegraphics{media/architettura_git_blob.tikz}
         \end{figure}
     \end{minipage}
 \end{frame}
@@ -230,7 +232,7 @@
     \begin{minipage}{0.5\textwidth}
         \begin{figure}
             \scalebox{0.5}{
-                \includegraphics[width=1.3*\textwidth]{architettura_git_tree.tikz}
+                \includegraphics[width=1.3*\textwidth]{media/architettura_git_tree.tikz}
             }
         \end{figure}
     \end{minipage}
@@ -244,7 +246,7 @@
     \begin{minipage}{0.65\textwidth}
         \begin{figure}
             \scalebox{0.5}{
-                \includegraphics[width=2*\textwidth]{architettura_git.tikz}
+                \includegraphics[width=2*\textwidth]{media/architettura_git.tikz}
             }
         \end{figure}
     \end{minipage} 
@@ -256,7 +258,7 @@
     \begin{minipage}{0.6\textwidth}
         \begin{figure}
             \scalebox{0.75}{
-                \includegraphics[width=1.33*\textwidth]{architettura_git_tag.tikz}
+                \includegraphics[width=1.33*\textwidth]{media/architettura_git_tag.tikz}
             }
         \end{figure}
     \end{minipage} 
@@ -300,7 +302,7 @@
             \textbf{Snapshot} Ogni volta che si salva lo stato di un progetto vengono fatte delle istantanee di tutti i file e salvate nel sistema VCS
             
             \scalebox{0.66}{
-                \includegraphics[width=1.5*\textwidth]{snapshot.tikz}
+                \includegraphics[width=1.5*\textwidth]{media/snapshot.tikz}
             }
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -308,7 +310,7 @@
             \textbf{Differenze} Ogni volta che si salva lo stato di un progetto vengono salvati nel sistema VCS le differenze rispetto al file precedente
             
             \scalebox{0.66}{
-                \includegraphics[width=1.5*\textwidth]{diff.tikz}
+                \includegraphics[width=1.5*\textwidth]{media/diff.tikz}
             }
         \end{column}
     \end{columns}
@@ -453,7 +455,7 @@
 \end{frame}
 
 \begin{frame}{Git e Subversion}
-    \begin{figure}\includegraphics[width=0.5\textwidth]{git-svn-copy.jpeg}\end{figure}
+    \begin{figure}\includegraphics[width=0.5\textwidth]{media/git-svn-copy.jpeg}\end{figure}
 \end{frame}
 
 \section{Installazione di Git}
@@ -629,7 +631,7 @@ $ cp -r /mnt/c/Users/[username] ~/.ssh\end{lstlisting}
     \begin{minipage}{0.4\textwidth}
         \begin{figure}
             \scalebox{0.5}{
-                \includegraphics{lifecycle.tikz}
+                \includegraphics{media/lifecycle.tikz}
             }
         \end{figure}
     \end{minipage}     
@@ -645,7 +647,7 @@ $ cp -r /mnt/c/Users/[username] ~/.ssh\end{lstlisting}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \begin{figure}
-            \includegraphics[width=\textwidth]{trees.png}
+            \includegraphics[width=\textwidth]{media/trees.png}
         \end{figure}
     \end{minipage}       
 \end{frame}
@@ -669,7 +671,7 @@ $ git commit -m "Messaggio per il commit"\end{lstlisting}
 $ git status\end{lstlisting}
     
     \begin{figure}
-        \includegraphics[width=0.55\textwidth]{git-status.png}
+        \includegraphics[width=0.55\textwidth]{media/git-status.png}
         
     \end{figure}
 \end{frame}
@@ -679,7 +681,7 @@ $ git status\end{lstlisting}
 $ git log\end{lstlisting}
     L'opzione \lstinline{--graph} mostra anche l'albero cronologico dei commit, molto utile nel caso di un repo con molti branch.
     
-    \begin{figure}\includegraphics[width=0.55\textwidth]{git-log.png} \end{figure}
+    \begin{figure}\includegraphics[width=0.55\textwidth]{media/git-log.png} \end{figure}
 \end{frame}
 \begin{frame}{Repository remoto}
 
@@ -702,8 +704,7 @@ $ git remote add origin <server>\end{lstlisting}
 
     Di default, Git utilizza il branch \texttt{master}, dal 2020, i principali server remoti di Git, di default usano il branch \texttt{main}, si rende quindi necessario eseguire anche questo comando prima di \texttt{git push origin master}:
     \begin{lstlisting}[language=bash]
-$ git branch -M main
-    \end{lstlisting}
+$ git branch -M main\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]{Aggiorniamo il repo per vedere se ci sono modifiche e le scarichiamo}
     Per vedere se ci sono modifiche nel server remoto
@@ -712,7 +713,6 @@ $ git fetch\end{lstlisting}
     Per aggiornare il tuo repository locale al commit più recente, esegui
     \begin{lstlisting}[language=bash]
 $ git pull\end{lstlisting}
-%        nella tua directory corrente per fare una fetch (recuperare) ed incorporare (merge), se possibile, le modifiche fatte sul server remoto.
 \end{frame}
 \begin{frame}[fragile]{Chi ha fatto chi}
     Per sapere chi ha modificato, per l'ultima volta una riga di un file possiamo utilizzare il comando
@@ -723,16 +723,16 @@ $ git blame README.MD\end{lstlisting}
     
     Il nome dal suono negativo deriva dal fatto che questo comando viene spesso usato per incolpare le persone che hanno rotto un programma, anche se il suo utilizzo è molto più ampio
     
-    \begin{figure}\includegraphics[width=0.55\textwidth]{git-blame.png} \end{figure}
+    \begin{figure}\includegraphics[width=0.55\textwidth]{media/git-blame.png} \end{figure}
     
 \end{frame}
 \begin{frame}{}\begin{figure}
-    \includegraphics[height=0.95\textheight]{rid_of_all_the_sw.png} \end{figure}
+    \includegraphics[height=0.95\textheight]{media/rid_of_all_the_sw.png} \end{figure}
 \end{frame}
 \begin{frame}{Sembra molto complicato rispetto a caricare i file su Dropbox}
     \begin{minipage}{0.47\textwidth}\begin{figure}
         
-        \includegraphics[width=1.0\textwidth]{meme-git.jpg} \end{figure}
+        \includegraphics[width=1.0\textwidth]{media/meme-git.jpg} \end{figure}
     \end{minipage}
     \begin{minipage}{0.47\textwidth}
         Ecco se usiamo servizi come Dropbox, Google Drive, Onedrive, Box, ... se troviamo un codice con tanti bug ci viene in mente di eliminarlo e non di correggerlo!
@@ -764,32 +764,6 @@ $ git rm -r --cached .
 $ git add .
 $ git commit -am "Remove ignored files"\end{lstlisting}
 \end{frame}
-%\begin{frame}[fragile]{Scaricare da un server remoto un repository vuoto}
-%    \begin{lstlisting}[language=bash]
-%$ git clone git@github.com:user/test.git
-%$ cd test
-%$ touch README.md
-%$ git add README.md
-%$ git commit -m "add README"
-%$ git push -u origin master\end{lstlisting}
-%\end{frame}
-%\begin{frame}[fragile]{Caricare su un server remoto una cartella esistenze}
-%    \begin{lstlisting}[language=bash]
-%$ cd existing_folder
-%$ git init
-%$ git remote add origin git@github.com:user/test.git
-%$ git add .
-%$ git commit -m "Initial commit"
-%$ git push -u origin master\end{lstlisting}
-%\end{frame}
-%\begin{frame}[fragile]{Caricare su un server remoto un repo Git esistente}
-%    \begin{lstlisting}[language=bash]
-%$ cd existing_repo
-% git remote rename origin old-origin
-%$ git remote add origin git@github.com:user/test.git
-%$ git push -u origin --all
-%$ git push -u origin --tags\end{lstlisting}
-%\end{frame}
 \begin{frame}{Workflow collaborativo}
     \begin{minipage}{0.5\textwidth}
         Quando si sviluppa in più persone si potrebbe pensare di tenere tutti i file su un server NAS e di modificarli lì, nessuna scelta è peggiore di questa: in quanto se uno sta facendo una modifica l'altro non può compilare, inoltre il NAS non è detto che gestisca bene modifiche multiple e tutto, ci sono altre soluzioni intermedie, sempre inadeugate. La soluzione è l'uso di un repository Git con più branch:
@@ -803,31 +777,36 @@ $ git commit -am "Remove ignored files"\end{lstlisting}
     \begin{minipage}{0.45\textwidth}
         Esempio di workflow collaborativo:
         \begin{figure}
-            \includegraphics[width=0.6\textwidth]{workflow-5.png}
+            \includegraphics[width=0.6\textwidth]{media/workflow-5.png}
         \end{figure}
         Altri tip per ottimizzare il workflow: \url{https://get-git.readthedocs.io/it/latest/obiettivo_7.html}
     \end{minipage}
 \end{frame} 
+\begin{frame}{Fork}
+    Con \textbf{Fork} si intende una determinata copia locale o remota di un repository ad uso e servizio di uno sviluppatore o di alcuni sviluppatori, e le modifiche vengono inviate alla copia principale attraverso logiche come la pull request. Attività molto diffusa sopratutto nell'ambito dei progetti open source.
+    \begin{figure}
+        \scalebox{0.6}{
+            \includegraphics[width=1.5\textwidth]{media/fork.tikz}
+        }
+    \end{figure}
+\end{frame} 
 \begin{frame}{Branching}
-    Con operazione di branching, in quasi tutti i VCS, si intende l'operazione tramite il quale l'utente "si stacca" dal principale ramo di sviluppo e continua a lavorare senza intaccare il ramo principale.
+    Con \textbf{operazione di branching}, in quasi tutti i VCS, si intende l'operazione tramite il quale l'utente "si stacca" dal principale ramo di sviluppo e continua a lavorare senza intaccare il ramo principale.
     In molti VCS viene vista come operazione dispendiosa di risorse e tempo, e raramente fa parte di workflow.
     
     In Git invece il branching è diventata una parte vitale del workflow di lavoro di molti utenti grazie alla semplicità nel creare nuovi branch e spostarsi tra di essi.
     
     \begin{figure}
-        
-        \includegraphics[width=0.5\textwidth]{git_branch.png}%
-        \includegraphics[width=0.5\textwidth]{workflow-collaborativo.png}
+        \includegraphics[width=0.5\textwidth]{media/git_branch.png}%
     \end{figure}
 \end{frame}
-
 \begin{frame}[fragile]{Branching}
     Crea un nuovo branch chiamato \texttt{feature\_x} e passa al nuovo branch usando
     \begin{lstlisting}[language=bash]
 $ git switch -c feature_x\end{lstlisting}
-    Ritorna di nuovo su master
+    Ritorna di nuovo su \texttt{main}
     \begin{lstlisting}[language=bash]
-$ git switch master\end{lstlisting}
+$ git switch main\end{lstlisting}
     E, solamente dopo un merge, cancella il branch creato in precedenza
     \begin{lstlisting}[language=bash]
 $ git branch -d feature_x\end{lstlisting}
@@ -835,52 +814,71 @@ $ git branch -d feature_x\end{lstlisting}
     Il branch non sarà disponibile agli altri fino a quando non verrà inviato al repository remoto
     \begin{lstlisting}[language=bash]
 $ git push origin <branch>\end{lstlisting}
+    Possiamo usare il comando \lstinline{git push -u origin <branch>} per dire a Git: salvami \texttt{origin <branch>}, così la prossima volta posso scrivere:
+\begin{lstlisting}[language=bash]
+$ git push\end{lstlisting}
 \end{frame}
-\begin{frame}{Merge}
+\begin{frame}{Operazione di merge}
     Con operazione di merge, in tutti i VCS,  si intende
     l'operazione opposta del branching tramite il quale si
     consolidano uno o più branch in un unico ramo di lavoro.
     
     \begin{figure}
         \scalebox{0.7}{
-            \includegraphics{git-branch.tikz}
+            \includegraphics{media/git-branch.tikz}
         }
     \end{figure}
 \end{frame}
-\begin{frame}[fragile]{Scaricare ed unire le modifiche}
-    Per aggiornare il tuo repository locale alla commit più recente, esegui
+\begin{frame}[fragile]{Operazione di merge}{Scaricare ed unire le modifiche}
+    Abbiamo visto che per aggiornare il tuo repository locale alla commit più recente si esegue
     \begin{lstlisting}[language=bash]
 $ git pull\end{lstlisting}
-    Nella tua directory corrente per fare una fetch (recuperare) ed incorporare (merge) le modifiche fatte sul server remoto.
-    Il comando pull cerca di auto-incorporare le modifiche locali con la copia nel server, ma questo non sempre è possibile.
-    
-    Per incorporare un altro branch nel tuo branch attivo (ad esempio master), utilizza
+    Nella tua directory corrente per aggiornare il repository locale alla versione remota, in background il \texttt{git pull} effettua un \texttt{git fetch} e per incorporare le modifiche fatte sul server remoto effettua un \texttt{git merge}.
+    Il comando pull cerca di auto-incorporare le modifiche locali con la copia nel server, ma questo non sempre è possibile. 
+\end{frame}
+\begin{frame}{Operazione di merge}{Scaricare ed unire le modifiche}    
+    Il caso appena descritto è il caso banale di merge: cioè quello in cui il commit presente nella working directory e nell'index è un antenato del commit con cui effettuaimo il merge, in questo caso si fa merge fast-forward. La referenza viene semplicemente spostata e viene eseguito il checkout sul nuovo commit. 
+
+    \begin{figure}
+        \includegraphics{media/merge-ff.tikz}
+    \end{figure}
+
+    Un altro caso banale è quello in cui commit con cui effettuaimo il merge è un antenato del commit nella working direcotry e nell'index. In questo caso non  serve fare niente.
+\end{frame}
+\begin{frame}[fragile]{Operazione di Merge}{Effettuare il merge}
+    Quando si devono unire invece le modifiche di un branch in un altro branch è necessario effettuare un merge a 3 vie e non il fast-forward. Per incorporare nel branch della working directory un altro branch (ad esempio \texttt{new-feature}):
     \begin{lstlisting}[language=bash]
 $ git merge <branch>\end{lstlisting}
-    Il comando di \lstinline{git merge} combina le sequenze multiple di commit in un'unica storia unificata. Normalmente usato per due commit. L'algoritmo di Git riesce ad effettuare senza problemi il merge di due rami e se solo se in solo uno dei due c'è una modifica alla nella stessa parte del file.
-    In entrambi i casi Git prova ad auto-incorporare le modifiche. Sfortunatamente, a volte questa procedura automatizzata non è possibile, ed in questo caso ci saranno dei conflitti. 
+
+    Ci sono varie strategie ma di default è Git usa il "merge ricorsivo" che prende il commit corrente (\texttt{ed489}), il commit del branch da unire (\texttt{33a04}), il loro antenato comune (\texttt{b325c}) ed esegue un merge a tre vie. Il risultato viene memorizzato nella working directory e nello stage, è verra fatto un commit con due genitori (\texttt{f8bc5}).
+    \vspace{-1em}
+    \begin{figure}
+        \includegraphics{media/merge.tikz}
+    \end{figure}
 \end{frame}
-\begin{frame}[fragile]{Conflitti nel merge}
-    
+\begin{frame}[fragile]{Operazione di Merge}{Conflitti}
+    L'algoritmo di Git riesce ad effettuare senza problemi il merge di due rami e se solo se in solo uno dei due c'è una modifica alla nella stessa parte del file.
+
+    In entrambi i casi Git prova ad auto-incorporare le modifiche. Sfortunatamente, a volte questa procedura automatizzata non è possibile, ed in questo caso ci saranno dei conflitti. 
+
     \begin{columns}
-        \begin{column}{0.7\textwidth}
-            Se due file hanno modficato la stessa parte del file il merge di Git fallisce e viene modificato il file in questo modo:
+        \begin{column}{0.6\textwidth}
+            Se invece, in un file c'è la stessa paste modificato, il merge fallisce e si richiede un intervento manuale, l'intervento manuale è riconoscibile in quanto viene annotato in questo modo:
             \begin{lstlisting}
 here is some content not affected by the conflict
-<<<<<<< master
-this is conflicted text from master
+<<<<<<< main
+this is conflicted text from main
 =======
-this is conflicted text from feature branch
-            \end{lstlisting}
+this is conflicted text from feature branch\end{lstlisting}
         \end{column}
-        \begin{column}{0.3\textwidth}
-            \includegraphics[width=\textwidth]{git-merge.jpeg}
+        \begin{column}{0.33\textwidth}
+            \includegraphics[width=\textwidth]{media/git-merge.jpeg}
         \end{column}
     \end{columns}
 \end{frame}
-\begin{frame}[fragile]{Effettuare il merge}
-    Dato che sei tu il responsabile del merge Git mette in automatico i file nello stato "untracked".
-    Una volta risolti i conflitti, si pososno mettere i suddetti file nello stato staged con:
+\begin{frame}[fragile]{Operazione di Merge}{Conflitti}
+    In caso di file con conflitti Git mette in automatico i file nello stato "untracked".
+    Una volta risolti i conflitti, si possono mettere i suddetti file nello stato staged con:
     \begin{lstlisting}[language=bash]
 $ git add <nomedelfile>\end{lstlisting}
     prima di immettere le modifiche, potrai anche visualizzarne un'anteprima eseguendo
@@ -890,23 +888,11 @@ $ git diff <branch_sorgente> <branch_target>\end{lstlisting}
     \begin{lstlisting}[language=bash]
 $ git commit\end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Effettuare il merge}
-    Il caso banale è quello in cui l'altro commit è un antenato del commit corrente, non serve fare niente. Un altro caso semplice è quello in cui il commit corrente è un antenato dell'altro commit. Avremo quindi un merge fast-forward. La referenza viene semplicemente spostata e viene eseguito il checkout sul nuovo commit.
-    \begin{figure}
-        \includegraphics[width=0.6\textwidth]{merge-ff.png}
-    \end{figure}
-\end{frame}
-\begin{frame}[fragile]{Effettuare il merge}
-    Negli altri casi avremo un merge "reale". Si possono scegliere altre strategie ma quella di default è rappresentata dal merge "ricorsivo" che semplicemente prende il commit corrente (ed489 below), l'altro commit (33104), il loro antenato comune (b325c) ed esegue un merge a tre vie. Il risultato viene memorizzato nella working directory e nello stage, seguirà un commit con un genitore extra (33104).
-    \begin{figure}
-        \includegraphics[width=0.6\textwidth]{merge.png}
-    \end{figure}
-\end{frame}
 \begin{frame}[fragile]{Tags}
     È raccomandato creare dei tags nel caso in cui il software venga rilasciato. Questo è un concept già conosciuto, che esiste anche in SVN. Puoi creare un tag chiamato 1.0.0 eseguendo
     \begin{lstlisting}[language=bash]
 $ git tag 1.0.0 1b2e1d63ff\end{lstlisting}
-    la sequenza 1b2e1d63ff sta per i primi 10 caratteri del commit che si vuol referenziare tramite questo tag. Puoi ottenere l'id della commit tramite
+    la sequenza \texttt{1b2e1d63ff} rappresenta i primi 10 caratteri del commit che si vuol referenziale tramite questo tag. Puoi ottenere l'id della commit tramite.
     
     \begin{lstlisting}[language=bash]
 $ git log\end{lstlisting}
@@ -915,64 +901,52 @@ $ git log\end{lstlisting}
 \begin{frame}[fragile]{Differenze apportate ai commit}
     Per Git, calcolare le modifiche apportate ai file da un commit all'altro non è poi difficile. Per esempio, puoi ricavarle con
     \begin{lstlisting}[language=bash]
-$ git diff dev master\end{lstlisting}
-    Con \lstinline{git diff from to} chiedi a Git «qual è l'elenco delle modifiche ai file che devo applicare a ``from`` perché il progetto diventi identico a quello fotografato in ``to``»?
+$ git diff dev main\end{lstlisting}
+    Con \lstinline{git diff from to} chiedi a Git «qual è l'elenco delle modifiche ai file che devo applicare a \texttt{from} perché il progetto diventi identico a quello fotografato in \texttt{to}»?
 \end{frame}
 \begin{frame}[fragile]{Cherry Pick}
-    Con il comando cherry-pick puoi chiedere a Git di calcolare le modifiche introdotte dal tuo commit e riapplicarle da qualche altra parte, per esempio, proprio su master,  il nuovo commit ha lo stesso messaggio ma le modifiche sono applicate da un parent diverso.
+    Con il comando \texttt{git cherry-pick} puoi chiedere a Git di calcolare le modifiche introdotte dal tuo commit e riapplicarle da qualche altra parte, per esempio, proprio su \texttt{main},  il nuovo commit ha lo stesso messaggio ma le modifiche sono applicate da un parent diverso.
     \begin{figure}
-        \includegraphics[width=0.6\textwidth]{cherry-pick.png}
+        \includegraphics{media/cherry-pick.tikz}
     \end{figure}
 \end{frame}
-
-\begin{frame}{Git è una blockchain}
-    Git è una blockchain, nonostante ciò è possibile modificare e rimuovere i commit oltre che modificare la cronologia (con un po' di difficoltà ed ovviamente con nuovi hash, esiste anche BFG Repo-Cleaner e Git filter repo per operazioni più complesse)
-\end{frame}
-\begin{frame}[fragile]{Rebase}
-    \begin{columns}
-        \begin{column}{0.6\textwidth}
-            Abbiamo visto come usare il comando \lstinline{git merge} per fondere due branch. Git mette a disposizione un altro comando che si comporta in maniera simile, ovvero il comando \lstinline{git rebase} che consente di integrare i commit di un branch nell'altro. Le funzionalità offerte da \lstinline{git rebase} differiscono da \lstinline{git merge} in alcuni aspetti chiave.
-            L'operazione di rebasing (rifondazione) consiste nello spostare una serie di commit in modo tale che il primo di questi sia preceduto da un diverso commit.
-            In sostanza è un modo automatizzato per eseguire diversi cherry-pickin sequenza.
-            
-        \end{column}
-        \begin{column}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{git-rebase.jpeg}
-        \end{column}
-    \end{columns}
-\end{frame}
-\begin{frame}[fragile]{Rebase}
-    N.B. in realtà i commit non vengono "spostati", in quanto  ogni commit è un oggetto unico e immutabile identificato in maniera univoca da un valore di hash generato usando l'algoritmo SHA-1, ma viene creata un nuovo commit  sulla base delle informazioni contenute nei vecchi oggetti (quindi rimangono le stesse informazioni, se non quella dei commit genitori e l'hash).
-    \begin{figure}
-        \includegraphics[width=0.6\textwidth]{rebase.png}
-    \end{figure}
-\end{frame}
-\begin{frame}[fragile]{Rebase}
-    Il comando precedente prende tutti i commit esistenti in topic ma non in main (precisamente 169a6 e 2c33a), li riporta sul main e poi sposta l'head del branch sulla nuova estremità.
-    
-    Per limitare quanto andare all'indietro utilizzare l'opzione \lstinline{--onto}. Il comando seguente riporta sul main i commit più recenti del branch corrente da 169a6 (escluso), precisamente 2c33a.
-    \begin{figure}
-        \includegraphics[width=0.6\textwidth]{rebase-onto.png}
-    \end{figure}
-\end{frame}
-\begin{frame}[fragile]{Rebase}
-    Esiste anche \lstinline{git rebase --interactive}, che permette di fare cose più complicate rispetto a riportare semplicemente commit, più precisamente eliminare, riordinare, modificare i commit.
-    
-\end{frame}
-
 \begin{frame}[fragile]{Merge con squash}
-    Il comando \lstinline{git merge --squash}  raggruppa tutte le commit in una sola. Al termine del merge è possibile cancellare il branch di lavoro senza alcun problema.
+    Il comando \lstinline{git merge --squash} raggruppa tutti i commit in un un unico commit con un unico genitore, lo si può vedere come un cherry-pick applicato al branch. Al termine del merge con squash è possibile cancellare il branch di lavoro senza alcun problema.
     
-    Supponiamo di avere un ramo bugfix e desideriamo applicare tutti questi commit al master:
+    Supponiamo di avere un ramo \texttt{new-feature} e desideriamo unire i vari commit in uno solo e aggiungerlo al ramo \texttt{main}:
     \begin{lstlisting}[language=bash]
-$ git checkout master
-$ git merge --squash bugfix
+$ git merge --squash new-feature
 $ git commit\end{lstlisting}
-    Questo vi porterà tutti i commit dal ramo bugfix, inglobandoli in 1 commit, e si fondono con il vostro ramo master.
-    
-    Questo comando insieme al comando cherry-pick è particolarmente utile quando si hanno più release attualmente supportate (una LTS ed una "liscia") e dobbiamo realizzare bug-fix per entrambe le release.    
+    \begin{figure}
+        \includegraphics{media/merge-squash.tikz}
+    \end{figure}
 \end{frame}
+\begin{frame}[fragile]{Rebase}
+    Il comando \texttt{git rebase} permette di \textit{spostare} uno o più commit da genitore all'altro, eseguendo un cherry-pick per tutti i commit presenti su un branch in un altro branch.
+        
+    A differenza di \texttt{git merge}, in cui si fa il merge nel branch principale, il rebase si fa sul branch secondario.
 
+    In realtà i commit non vengono \textit{spostati}, in quanto  ogni commit è un oggetto unico e immutabile identificato in maniera univoca da un valore di hash generato usando l'algoritmo SHA-1, ma viene creata un nuovo commit  sulla base delle informazioni contenute nei vecchi oggetti (quindi rimangono le stesse informazioni, se non quella dei commit genitori e l'hash).
+
+    \begin{figure}
+        \scalebox{0.75}{
+            \includegraphics{media/rebase.tikz}
+        }
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Rebase}
+    Il comando precedente prende tutti i commit esistenti in topic ma non in main (precisamente \texttt{169a6}, \texttt{2c33a} e \texttt{3ba22}), li riporta sul main e poi sposta l'head del branch sulla nuova estremità.
+    
+    Per limitare quanto andare all'indietro utilizzare l'opzione \lstinline{--onto}. Il comando seguente riporta sul main i commit più recenti del branch corrente da \texttt{169a6} (escluso), precisamente \texttt{2c33a} e \texttt{3ba22}.
+    \begin{figure}
+        \includegraphics{media/rebase-onto.tikz}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Rebase}{Git è una blockchain}
+    Esiste anche \lstinline{git rebase --interactive}, che permette di fare cose più complicate rispetto a riportare semplicemente commit, più precisamente eliminare, riordinare, modificare i commit.
+
+    Git è una blockchain, nonostante ciò è possibile modificare e rimuovere i commit oltre che modificare la cronologia (con un po' di difficoltà ed ovviamente con nuovi hash, esiste anche BFG Repo-Cleaner e Git filter repo per operazioni più complesse).
+\end{frame}
 \begin{frame}{Git \& DevOps}
     Attraverso un potente modello di branching e vari workflow
     di collaborazione, negli anni l'uso e l'adozione di Git è
@@ -996,7 +970,7 @@ $ git commit\end{lstlisting}
 
 \begin{frame}[fragile]{Scarichiamo un repository da GitHub}
     Su GitHub troviamo il link (HTTPS o SSH) per scaricare il repository. Si noti che questo URL NON è l'URL della pagina web che si visita, ma l'url che si trova con il pulsante "Clone".
-    \begin{figure} \includegraphics[width=0.6\textwidth]{github.PNG} \end{figure}
+    \begin{figure} \includegraphics[width=0.6\textwidth]{media/github.PNG} \end{figure}
     
     \begin{lstlisting}[language=bash]
 $ git clone git@github.com:user/test.git\end{lstlisting}
@@ -1028,10 +1002,10 @@ $ git clone git@bitbucket.org/chromiumembedded/cef.git\end{lstlisting}
     
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{welcome.png}
+            \includegraphics[width=\textwidth]{media/welcome.png}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{clone-menu.png}
+            \includegraphics[width=\textwidth]{media/clone-menu.png}
             
         \end{column}
     \end{columns}
@@ -1041,25 +1015,25 @@ $ git clone git@bitbucket.org/chromiumembedded/cef.git\end{lstlisting}
 \begin{frame}{Git e Jetbrains - Apertura di una repo}
     In seguito, si aprirà una finestra in cui si dovrebbe inserire l'URL del repository che abbiamo precedente copiato (per esempio di GitLab, GitHub, ...) e una directory in cui salvare il repo clonato.
     
-    \begin{figure} \includegraphics[width=0.3\textwidth]{clone-window.png} \end{figure}
+    \begin{figure} \includegraphics[width=0.3\textwidth]{media/clone-window.png} \end{figure}
     
     Se hai clonato correttamente uno dei nostri repository dei compiti a casa, IntelliJ dovrebbe apparire con un'altra finestra che ti chiede se vuoi aprire il progetto che hai appena clonato.
     
-    \begin{figure} \includegraphics[width=0.3\textwidth]{clone-open.png} \end{figure}
+    \begin{figure} \includegraphics[width=0.3\textwidth]{media/clone-open.png} \end{figure}
     
     In linea generale bisogna premere Yes, ma ci sono alcuni casi in cui è meglio premere No.
     
 \end{frame}
 
 \begin{frame}{Git e Jetbrains - Scaricare le modifiche}
-    Prima di effettuare modifiche ad un repo con del codice è bene scaricare le modifiche effettuare nel frattempo per ridurre al minimo le possibilità di fusione dei conflitti. La funzionalità di pull in IntelliJ è in qualche modo nascosta nei menu e/o nel tasto destro. Clicca "VCS" \(\rightarrow\)"Git" \(\rightarrow\)"Pull..." nella finestra che si apre premere "Pull".
+    Prima di effettuare modifiche ad un repo con del codice è bene scaricare le modifiche effettuare nel frattempo per ridurre al minimo le possibilità di fusione dei conflitti. La funzionalità di pull in IntelliJ è in qualche modo nascosta nei menu e/o nel tasto destro. Clicca "VCS" \(\rightarrow\)"Git" \(\rightarrow\) "Pull..." nella finestra che si apre premere "Pull".
     
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{pull-menu.png}
+            \includegraphics[width=\textwidth]{media/pull-menu.png}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{pull-window.png}
+            \includegraphics[width=\textwidth]{media/pull-window.png}
         \end{column}
     \end{columns}
     
@@ -1068,14 +1042,14 @@ $ git clone git@bitbucket.org/chromiumembedded/cef.git\end{lstlisting}
 
 \begin{frame}{Git e Jetbrains - Committare le modifiche}
     Una volta di finito di fare le modifiche aprire il menu per il commit dal VCS o dal tasto destro. Apparirà una finestra. Selezionare quindi i file da committare e aggiungere un messaggio per il commit
-    \begin{figure} \includegraphics[width=0.35\textwidth]{commit.png} \end{figure}
+    \begin{figure} \includegraphics[width=0.35\textwidth]{media/commit.png} \end{figure}
     
 \end{frame}
 
 
 \begin{frame}{Git e Jetbrains - Caricare le modifiche}
     Nella finestra precedente possiamo dire di caricare immediatamente le modifiche dal pulsante accanto a Commit, ma non sempre è la cosa ideale (tipo se siamo offline) o in altre situazioni. Quindi apriamo la finestra "Push" accessibile dal menu VCS o dal tasto destro.
-    \begin{figure} \includegraphics[width=0.35\textwidth]{push-window.png} \end{figure}
+    \begin{figure} \includegraphics[width=0.35\textwidth]{media/push-window.png} \end{figure}
     
 \end{frame}
 
@@ -1111,17 +1085,19 @@ $ git push\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Fork}
-    Se volete contribuire direttamente a un progetto, dovete possederlo o esservi aggiunti come collaboratori. Se vuoi contribuire ad un progetto che non possiedi e su cui non sei un collaboratore, dovrai farne una copia su GitHub sotto il tuo account utente. Questo processo si chiama biforcazione. Una volta che hai biforcato un progetto, sarai in grado di fare tutte le modifiche che vuoi al tuo fork (copia) e potrai richiedere che le tue modifiche vengano incorporate nel progetto originale usando una richiesta di pull. 
+    Se vuoi contribuire direttamente a un progetto, devi possederlo o essere un collaboratori. Se vuoi contribuire ad un progetto open source che non possiedi e su cui non sei un collaboratore, dovrai farne una copia su GitHub/GitLab/bitbucket con il tuo account utente. Questo processo si chiama \textbf{fork}. Una volta che hai biforcato un progetto, sarai in grado di fare tutte le modifiche che vuoi al tuo fork (copia) e potrai richiedere che le tue modifiche vengano incorporate nel progetto originale usando una \textbf{pull request}. 
         
-    Anche se i fork sono un buon modo per accettare i contributi di persone con cui non si lavora regolarmente, sono un po' troppo ingombranti per l'uso quotidiano in un team che lavora a stretto contatto. Per questo motivo, probabilmente vorrete collaborare direttamente su un unico repository. Tuttavia, è comunque importante utilizzare le filiali e le richieste di pull per mantenere il vostro lavoro separato.
+    Anche se i fork sono un buon modo per accettare i contributi di persone con cui non si lavora regolarmente, troppo ingombranti per l'uso quotidiano in un team che lavora a stretto contatto. Per questo motivo, probabilmente vorrete collaborare direttamente su un unico repository. 
     
+    Tuttavia, è comunque importante utilizzare i branch e le richieste di pull per mantenere il vostro lavoro separato.
 \end{frame}
 
 \begin{frame}{Pull request}
-    Spesso comunque nei repo si cerca di tenere il ramo master protetto, cioè modificabile solamente da chi gestisce il progetto e fare merge request dai rami di sviluppo. Per creare una pull request andrò nella pagina web del repo, farò clic sulla tab "Pull request" sul lato destro della pagina del progetto, quindi fare clic sul pulsante "Create pull request" per creare una Pull request.
+    Spesso comunque nei repo si cerca di tenere il ramo \texttt{main} protetto, cioè modificabile solamente da chi gestisce il progetto e fare merge request dai rami di sviluppo. Per creare una pull request andrò nella pagina web del repo, farò clic sulla tab "Pull request" sul lato destro della pagina del progetto, quindi fare clic sul pulsante "Create pull request" per creare una Pull request.
+
     A sinistra c'è il ramo base e a destra il ramo dove sono state fatte le modifiche.  Dopo aver selezionato un ramo fare clic sul pulsante "Create pull request" per creare una Pull request. Se non ci sono conflitti è possibile accettare la pull request senza problemi, altrimenti è necessario effettuare il merge.
         
-    \begin{figure} \includegraphics[width=0.5\textwidth]{pull-request.png} \end{figure}
+    \begin{figure} \includegraphics[width=0.5\textwidth]{media/pull-request.png} \end{figure}
     
         
     
@@ -1134,17 +1110,17 @@ $ git push\end{lstlisting}
     La funzionalità Issues permette la creazione di una baceca condivisa da tutti gli sviluppatori dove vengono inseriti i Bug e le funzionalità mancanti, con relativa descrizione, titolo e immagini. Permette di assegnare ad ogni sviluppatore dei determinati Issues da risolvere, e infine, segnali come risolti. 
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{Issues.png}
+            \includegraphics[width=\textwidth]{media/Issues.png}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{IssuesA.png}
+            \includegraphics[width=\textwidth]{media/IssuesA.png}
             
         \end{column}
     \end{columns}
 \end{frame}
 
 \begin{frame}{Come non usare gli Issues}
-    \centering \includegraphics[width=0.8\textwidth]{issues.jpg}
+    \centering \includegraphics[width=0.8\textwidth]{media/issues.jpg}
     
     
 \end{frame}

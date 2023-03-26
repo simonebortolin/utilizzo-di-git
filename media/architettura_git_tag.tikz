@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+    \pic (commit1) at (0,0) {commit={%
+       tree \& |[alias=-p12]|0de24\\
+       parent \& nil\\
+       author \& Scott\\
+       commiter \& Scott\\
+    }{my commit message goes here and is really really cool}{98ca9..}};
+    \pic (commit2) at (-4,0) {commit={%
+       tree \& |[alias=-p12]|b7ad9\\
+       parent \& |[alias=-p22]|98ca9\\
+       author \& Scott\\
+       commiter \& Scott\\
+    }{another commit message}{2c3b9..}};
+    \pic (tag1) at (-5,3) {tag={%
+        object \& |[alias=-p12]|2c3b9 \\
+        type \& commit \\
+        tagger \& Scott \\
+    }{my tag message that explains this tag}{49e11..}};
+    \draw[very thick,-stealth] (commit2-p22.east) to[bend left] (commit1-label.west);
+    \draw[very thick,-stealth] (tag1-p12.east) to[bend left] (commit2-label.north);
+\end{tikzpicture}

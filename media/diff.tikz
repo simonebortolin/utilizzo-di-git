@@ -1,6 +1,6 @@
 \begin{tikzpicture}[snapline/.style={thick, gray, dashed}]
 
-    \draw[->] (0,1) -- (12,1) node[pos=.5, fill=white] {Checkins over time};
+    \draw[very thick,-stealth] (0,1) -- (12,1) node[pos=.5, fill=white] {Checkins over time};
 
     \node[DAGcommit, fill=solarized-red!20, draw] (v1) at (0,0) {Version 1};
     \node[DAGcommit, draw] (v1-A) at (0,-2) {file A};
@@ -22,12 +22,12 @@
     \node[DAGcommit, fill=solarized-blue!20, draw] (v5-B) at (12,-4) {\(\Delta\)2};
     \node[DAGcommit, fill=solarized-blue!20, draw] (v5-C) at (12,-6) {\(\Delta\)3};
 
-    \draw[->] (v1-A) -- (v2-A);
-    \draw[->] (v2-A) -- (v4-A);
-    \draw[->] (v1-B) -- (v4-B);
-    \draw[->] (v4-B) -- (v5-B);
-    \draw[->] (v1-C) -- (v2-C);
-    \draw[->] (v2-C) -- (v3-C);
-    \draw[->] (v3-C) -- (v5-C);
+    \draw[very thick,-stealth] (v1-A) -- (v2-A);
+    \draw[very thick,-stealth] (v2-A) -- (v4-A);
+    \draw[very thick,-stealth] (v1-B) -- (v4-B);
+    \draw[very thick,-stealth] (v4-B) -- (v5-B);
+    \draw[very thick,-stealth] (v1-C) -- (v2-C);
+    \draw[very thick,-stealth] (v2-C) -- (v3-C);
+    \draw[very thick,-stealth] (v3-C) -- (v5-C);
 
 \end{tikzpicture}

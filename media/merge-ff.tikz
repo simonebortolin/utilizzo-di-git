@@ -1,0 +1,28 @@
+\begin{tikzpicture}
+    % Commit DAG
+    \gitDAG[grow right sep = 2em]{
+        a57c3 -- b325c --  c10b9 -- da985 -- ed489
+    };
+    % Remote branch
+    \gitbranch[stable]    % node name
+    {main} % node text
+    {below=of ed489}    % node placement
+    {ed489}             % target
+    \gitbranchold[stable-old]
+    {stable}     % node name and text 
+    {above=of a57c3} % node placement
+    {a57c3}          % target
+    \gitHEADold
+    {above=of stable-old} % node placement
+    {stable-old}          % target
+    % Branch
+    \gitbranch
+    {stable}     % node name and text 
+    {above=of ed489} % node placement
+    {ed489}          % target
+    % HEAD reference
+    \gitHEAD
+    {above=of stable} % node placement
+    {stable}          % target
+    \draw [DAGrefedge, bend right] (stable) to node [fill=white] {\small\texttt{git merge main}} (stable-old);
+\end{tikzpicture}

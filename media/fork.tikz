@@ -1,0 +1,72 @@
+\begin{tikzpicture}
+    \node[DAGcommit, fill=solarized-cyan!20, draw] (c0) at (0,0) {};
+    \node[DAGcommit, fill=solarized-cyan!20, draw] (c1) at (0,1) {};
+    \node[DAGcommit, fill=solarized-cyan!20, draw] (c2) at (0,2) {};
+    \node[DAGcommit, fill=solarized-cyan!20, draw] (c3) at (0,3) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (c4) at (0,4) {};
+    \node[DAGcommit, fill=solarized-red!20, draw] (c5) at (0,5) {};
+    \node[DAGcommit, fill=solarized-yellow!20, draw] (c6) at (0,6) {};
+    \foreach \x [evaluate=\x as \y using int(\x+1)] in {0,...,5} 
+        \draw[very thick,stealth-] (c\x) -- (c\y);
+    \node (cr) at (0,7) {Central repo};
+    \node (cb) [DAGref, fill=solarized-base1!20, rotate=90] at (0,-1) {main};
+    \node ()[fit=(cb)(c0)(c1)(c2)(c3)(c4)(c5)(c6)(cr), draw, rectangle] {};
+    \node (pr) [DAGref, fill=solarized-green, signal, signal to=west] at (2,3) {Pull Request};
+    \node[DAGcommit, fill=solarized-yellow!20, draw] (jt1) at (5,1) {};
+    \node[DAGcommit, fill=solarized-yellow!20, draw] (jt2) at (5,2) {};
+    \node[DAGcommit, fill=solarized-yellow!20, draw] (jt3) at (5,3) {};
+    \foreach \x [evaluate=\x as \y using int(\x+1)] in {1,...,2} 
+        \draw[very thick,stealth-] (jt\x) -- (jt\y);
+    \node[DAGcommit, fill=solarized-blue!20, draw] (jm0) at (6.5,0) {};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (jm1) at (6.5,1) {};
+    \node[DAGcommit, fill=solarized-blue!20, draw] (jm2) at (6.5,2) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (jm3) at (6.5,3) {};
+    \node[DAGcommit, fill=solarized-red!20, draw] (jm4) at (6.5,4) {};
+    \node[DAGcommit, fill=solarized-yellow!20, draw] (jm5) at (6.5,5) {};
+    \foreach \x [evaluate=\x as \y using int(\x+1)] in {0,...,4} 
+        \draw[very thick,stealth-] (jm\x) -- (jm\y);
+    \node[DAGcommit, fill=solarized-orange!20, draw] (js1) at (9.5,1) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (js2) at (9.5,2) {};
+    \node[DAGcommit, fill=solarized-red!20, draw] (js3) at (9.5,3) {};
+    \node[DAGcommit, fill=solarized-red!20, draw] (js4) at (9.5,4) {};
+    \node[DAGcommit, fill=solarized-yellow!20, draw] (js5) at (9.5,5) {};
+    \node[DAGcommit, fill=solarized-yellow!20, draw] (js6) at (9.5,6) {};
+    \foreach \x [evaluate=\x as \y using int(\x+1)] in {1,...,5} 
+        \draw[very thick,stealth-] (js\x) -- (js\y);
+    \node (jr) at (8.5,7) {John's fork};
+    \node (jm) [DAGref, fill=solarized-base1!20, rotate=90] at (6.5,-1) {main};
+    \node (jt) [DAGref, fill=solarized-base1!20, rotate=90] at (5,0) {task 3};
+    \node (js) [DAGref, fill=solarized-base1!20, rotate=90] at (9.5,0) {shared};
+    \node (l0) at (11.5,1) {Dean's changes};
+    \node[DAGref, fill=solarized-green, signal, signal to=west] (l1) at (11.5,2) {Pull Request};
+    \node (l2) at (11.5,3) {Mike's changes};
+    \node[DAGref, fill=solarized-green, signal, signal to=west] (l3) at (11.5,4) {Pull Request};
+    \node (l4) at (11.5,5) {John's changes};
+    \node[DAGref, fill=solarized-green, signal, signal to=east] (l5) at (7.5,6) {Pull Request};
+    \node ()[fit=(jt1)(jt2)(jt3)(jm0)(jm1)(jm2)(jm3)(jm4)(jm5)(js1)(js2)(js3)(js4)(js5)(js6)(jm)(jt)(js)(jr)(l1)(l2)(l3)(l4), draw, rectangle] {};
+    \draw[very thick,stealth-,dotted] (pr) to[in=180,out=0] (jm5);
+    \draw[very thick,stealth-,dotted] (jt3) to[in=180,out=90] (l5);
+    \draw[very thick,stealth-,dotted] (jm2) to[in=180,out=0]  node[pos=0.5, sloped, above] {\texttt{git rebase -i}} (js6);
+    \node[DAGcommit, fill=solarized-cyan!20, draw] (d0) at (15,1) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (d1) at (15,2) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (d2) at (15,3) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (d3) at (15,4) {};
+    \node (dr) at (15.75,5) {Dean's fork};
+    \node (db) [DAGref, fill=solarized-base1!20, rotate=90] at (15,0) {task 1};
+    \draw[very thick,stealth-,dotted] (d0) to[in=0,out=0]  node[pos=0.5, sloped, below] (dg) {\texttt{git rebase -i}} (d3);
+    \node ()[fit=(db)(d0)(d1)(d2)(d3)(dr)(dg), draw, rectangle] {};
+    \node[DAGcommit, fill=solarized-cyan!20, draw] (m0) at (19,2) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (m1) at (19,3) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (m2) at (19,4) {};
+    \node[DAGcommit, fill=solarized-orange!20, draw] (m3) at (19,5) {};
+    \node (mr) at (19.75,6) {Dean's fork};
+    \node (mb) [DAGref, fill=solarized-base1!20, rotate=90] at (19,1) {task 2};
+    \draw[very thick,stealth-,dotted] (m0) to[in=0,out=0]  node[pos=0.5, sloped, below] (mg) {\texttt{git rebase -i}} (m3);
+    \node ()[fit=(mb)(m0)(m1)(m2)(m3)(mr)(mg), draw, rectangle] {};
+    \draw[very thick,stealth-,dotted] (l3) to[in=180,out=0] (m3);
+    \draw[very thick,stealth-,dotted] (l1) to[in=180,out=0] (d3);
+    \foreach \x [evaluate=\x as \y using int(\x+1)] in {0,...,2} {
+        \draw[very thick,stealth-] (d\x) -- (d\y);
+        \draw[very thick,stealth-] (m\x) -- (m\y);
+    }
+\end{tikzpicture}
