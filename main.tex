@@ -110,7 +110,7 @@
 \end{frame}
 \begin{frame}{Quando si usa Git}
     \begin{itemize}
-        \item Git si utilizza su un \textbf{progetto}, cioè il codice per una app o un software o un suo componente, possiamo individuare un progetto come una struttura di cartelle o "file tree".
+        \item Git si utilizza su un \textbf{progetto}, cioè il codice per una app o un software o un suo componente, possiamo individuare un progetto come una struttura di cartelle o ``file tree''.
         \item Uno sviluppatore del team potrebbe lavorare su una nuova funzionalità del progetto mentre un altro sviluppatore corregge un bug non correlato modificando il codice, ogni sviluppatore può apportare le proprie modifiche in diverse parti del file tree.
         \item Il controllo della versione aiuta i team a risolvere questo tipo di problemi, aumentando le capacità di sviluppo contemporaneo e simultaneo, riducendo i conflitti e avendo uno storico delle modifiche.
     \end{itemize}
@@ -156,7 +156,7 @@
     \begin{description}
         \item[Usa i branch] Il branch è un potente meccanismo del VCS che consente agli sviluppatori di creare una linea di sviluppo separata. I branch dovrebbero essere usati frequentemente in quanto sono rapidi ed economici.
         \item[Concorda un workflow unico] Si decidono delle linee guida per i merge, per la creazione e il naming dei branch, per le pull request e così via!
-        \item[Un commit, una modifica logica] I commit rappresentano l'unità minima logica di un cambiamento: frequenti sì, ma ognuno deve avere senso da solo (niente "fix", "fix 2", "ora va").
+        \item[Un commit, una modifica logica] I commit rappresentano l'unità minima logica di un cambiamento: frequenti sì, ma ognuno deve avere senso da solo (niente ``fix'', ``fix 2'', ``ora va'').
     \end{description}
 \end{frame}
 
@@ -287,7 +287,7 @@
 \begin{frame}{Come scegliere un VCS}
     Cosa deve avere un VCS perché sia valido?
     \begin{enumerate}
-        \item \textbf{Una cronologia completa delle modifiche a lungo termine di ogni file.} Deve poter memorizzare tutti i cambiamenti apportati da molte persone nel corso degli anni. Le modifiche includono la creazione e la cancellazione di file, nonché modifiche al loro contenuto. Questa cronologia dovrebbe includere anche l'autore, la data e le note scritte sullo scopo di ogni modifica. Avere la cronologia completa consente di tornare alle versioni precedenti per aiutare nell'analisi della causa principale dei bug ed è fondamentale quando è necessario risolvere i problemi nelle versioni precedenti del software. Se il software viene lavorato attivamente, quasi tutto può essere considerato una "versione precedente" del software.
+        \item \textbf{Una cronologia completa delle modifiche a lungo termine di ogni file.} Deve poter memorizzare tutti i cambiamenti apportati da molte persone nel corso degli anni. Le modifiche includono la creazione e la cancellazione di file, nonché modifiche al loro contenuto. Questa cronologia dovrebbe includere anche l'autore, la data e le note scritte sullo scopo di ogni modifica. Avere la cronologia completa consente di tornare alle versioni precedenti per aiutare nell'analisi della causa principale dei bug ed è fondamentale quando è necessario risolvere i problemi nelle versioni precedenti del software. Se il software viene lavorato attivamente, quasi tutto può essere considerato una ``versione precedente'' del software.
         \item \textbf{Branching e merging.} La creazione di branch permette ai membri del team di lavorare contemporaneamente senza intralciarsi a vicenda; ogni volta che un pezzo di codice è completato si fa il merge, e chi lo fa deve gestire solamente i veri conflitti, senza dover controllare tutti i file anche per minuscole differenze.
     \end{enumerate}
 \end{frame}
@@ -613,6 +613,43 @@ $ chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_*\end{lstlisting}
     \end{description}
     In tutti i casi si incolla il contenuto del file \lstinline{.pub} e si inserisce un titolo che identifica il device. Per verificare: \lstinline{ssh -T git@github.com}.
 \end{frame}
+\begin{frame}[fragile]{Firmare i commit}{Perché}
+    Nome ed email del commit (\lstinline{user.name}, \lstinline{user.email}) sono semplici impostazioni locali: chiunque può fare un commit a nome di un altro. Firmando i commit con una chiave si dimostra che il commit è stato fatto davvero da noi, e GitHub e GitLab lo mostrano come \textbf{Verified}.
+
+    Git supporta tre tipi di firma:
+    \begin{description}
+        \item[SSH] (da Git 2.34) il modo più semplice: si può riusare la chiave SSH che abbiamo già creato.
+        \item[GPG] (OpenPGP) il metodo storico, più complesso da gestire.
+        \item[X.509] certificati S/MIME, usati in ambito aziendale.
+    \end{description}
+    Si possono firmare sia i commit (\lstinline{git commit -S}) sia i tag (\lstinline{git tag -s}).
+\end{frame}
+\begin{frame}[fragile]{Firmare i commit}{Con una chiave SSH}
+    Configuriamo Git per firmare tutti i commit e i tag con la chiave SSH:
+    \begin{lstlisting}[language=bash]
+$ git config --global gpg.format ssh
+$ git config --global user.signingkey ~/.ssh/id_ed25519.pub
+$ git config --global commit.gpgsign true
+$ git config --global tag.gpgsign true\end{lstlisting}
+    Poi carichiamo la chiave pubblica sul server Git anche come chiave di firma:
+    \begin{description}
+        \item[GitHub] Settings \(\rightarrow\) SSH and GPG keys \(\rightarrow\) New SSH key, con Key type: \textbf{Signing Key}
+        \item[GitLab] Edit profile \(\rightarrow\) SSH Keys, con Usage type: \textbf{Authentication \& Signing}
+    \end{description}
+    Per vedere le firme in locale con \lstinline{git log --show-signature} serve anche un file di firmatari fidati (\lstinline{gpg.ssh.allowedSignersFile}).
+\end{frame}
+\begin{frame}[fragile]{Firmare i commit}{Con una chiave GPG}
+    In alternativa si può usare una chiave GPG:
+    \begin{lstlisting}[language=bash]
+$ gpg --full-generate-key
+$ gpg --list-secret-keys --keyid-format=long
+$ git config --global user.signingkey <ID della chiave>
+$ git config --global commit.gpgsign true
+$ gpg --armor --export <ID della chiave>\end{lstlisting}
+    L'ultimo comando stampa la chiave pubblica, da caricare su GitHub (Settings \(\rightarrow\) SSH and GPG keys \(\rightarrow\) New GPG key) o GitLab (Edit profile \(\rightarrow\) GPG Keys).
+
+    L'email della chiave deve corrispondere a quella usata nei commit e verificata sull'account, altrimenti il commit non risulta \textbf{Verified}.
+\end{frame}
 
 \section{Primi comandi con Git}
 
@@ -776,7 +813,7 @@ $ git blame README.MD\end{lstlisting}
     
     In linea generale, consiglio di unire in un solo file i template di JetBrains, Visual Studio, VS Code, Eclipse e quello del linguaggio di programmazione del repository (per esempio C++).
     
-    Dopo aver modificato il file \texttt{.gitignore}, nel caso in cui nel nostro repository ci siano file la cui presenza non è gradita, possiamo usare questo comando per "pulire" il repository:
+    Dopo aver modificato il file \texttt{.gitignore}, nel caso in cui nel nostro repository ci siano file la cui presenza non è gradita, possiamo usare questo comando per ``pulire'' il repository:
     \begin{lstlisting}[language=bash]
 $ git rm -r --cached . 
 $ git add .
@@ -809,7 +846,7 @@ $ git commit -am "Remove ignored files"\end{lstlisting}
     \end{figure}
 \end{frame} 
 \begin{frame}{Branching}
-    Con \textbf{operazione di branching}, in quasi tutti i VCS, si intende l'operazione tramite la quale l'utente "si stacca" dal branch principale di sviluppo e continua a lavorare senza intaccarlo.
+    Con \textbf{operazione di branching}, in quasi tutti i VCS, si intende l'operazione tramite la quale l'utente ``si stacca'' dal branch principale di sviluppo e continua a lavorare senza intaccarlo.
     In molti VCS è un'operazione dispendiosa in termini di risorse e tempo, e raramente fa parte del workflow.
     
     In Git invece il branching è diventato una parte vitale del workflow di lavoro di molti utenti grazie alla semplicità nel creare nuovi branch e spostarsi tra di essi.
@@ -896,7 +933,7 @@ this is conflicted text from feature branch
     \end{columns}
 \end{frame}
 \begin{frame}[fragile]{Operazione di Merge}{Conflitti}
-    In caso di conflitti Git segna i file come "unmerged" (\lstinline{git status} li mostra come \texttt{both modified}).
+    In caso di conflitti Git segna i file come ``unmerged'' (\lstinline{git status} li mostra come \texttt{both modified}).
     Una volta risolti i conflitti, si mettono i file in stage con:
     \begin{lstlisting}[language=bash]
 $ git add <nomedelfile>\end{lstlisting}
@@ -989,7 +1026,7 @@ $ git commit\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Scarichiamo un repository da GitHub}
-    Su GitHub troviamo il link (HTTPS o SSH) per scaricare il repository. Si noti che questo URL NON è l'URL della pagina web che si visita, ma l'URL che si trova con il pulsante "Code".
+    Su GitHub troviamo il link (HTTPS o SSH) per scaricare il repository. Si noti che questo URL NON è l'URL della pagina web che si visita, ma l'URL che si trova con il pulsante ``Code''.
     \begin{figure} \includegraphics[width=0.6\textwidth]{media/github.PNG} \end{figure}
     
     \begin{lstlisting}[language=bash]
@@ -997,11 +1034,11 @@ $ git clone git@github.com:user/test.git\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Utilizzo di GitLab}
-    Creiamo un nuovo progetto su GitLab, dopo esserci registrati su GitLab (\url{https://gitlab.com/}), ricordo di usare una e-mail "decente" che possa identificare il programmatore e non furbissimo@gmail.com. Non stiamo scrivendo un software che hackera i server della NASA!
+    Creiamo un nuovo progetto su GitLab, dopo esserci registrati su GitLab (\url{https://gitlab.com/}), ricordo di usare una e-mail ``decente'' che possa identificare il programmatore e non furbissimo@gmail.com. Non stiamo scrivendo un software che hackera i server della NASA!
     
-    Premiamo il pulsante "New project" e creiamo il nostro progetto. Diamogli un nome, per esempio "test-GitLab": dopo averlo creato ci appaiono delle semplici "Command line instructions". Le eseguiamo per esercitarci su Git. Una volta finito creiamo un file \texttt{.gitignore} e "puliamo" con i comandi il repository da eventuali file non ammessi!
+    Premiamo il pulsante ``New project'' e creiamo il nostro progetto. Diamogli un nome, per esempio ``test-GitLab'': dopo averlo creato ci appaiono delle semplici ``Command line instructions''. Le eseguiamo per esercitarci su Git. Una volta finito creiamo un file \texttt{.gitignore} e ``puliamo'' con i comandi il repository da eventuali file non ammessi!
     
-    In maniera simile anche da GitLab un repo si scarica con \lstinline{git clone}. Si noti che questo URL NON è l'URL della pagina web che si visita, ma l'URL che si trova con il pulsante "Code".
+    In maniera simile anche da GitLab un repo si scarica con \lstinline{git clone}. Si noti che questo URL NON è l'URL della pagina web che si visita, ma l'URL che si trova con il pulsante ``Code''.
     \begin{lstlisting}[language=bash]
 $ git clone git@gitlab.com:gitlab-org/gitlab.git\end{lstlisting}
 \end{frame}
@@ -1017,7 +1054,7 @@ $ git clone git@bitbucket.org:chromiumembedded/cef.git\end{lstlisting}
 
 \begin{frame}{Git e JetBrains - Apertura di una repo}
     
-    Una volta copiato il link al repo Git, se IntelliJ è aperto nella schermata di benvenuto è sufficiente cliccare su "Clone Repository" (nelle versioni precedenti "Get from VCS"). Altrimenti, se un progetto è già aperto, si usa il menu "Git" \(\rightarrow\) "Clone...". Gli screenshot sono di una versione precedente dell'IDE, ma il flusso è lo stesso.
+    Una volta copiato il link al repo Git, se IntelliJ è aperto nella schermata di benvenuto è sufficiente cliccare su ``Clone Repository'' (nelle versioni precedenti ``Get from VCS''). Altrimenti, se un progetto è già aperto, si usa il menu ``Git'' \(\rightarrow\) ``Clone...''. Gli screenshot sono di una versione precedente dell'IDE, ma il flusso è lo stesso.
     
     
     \begin{columns}
@@ -1046,7 +1083,7 @@ $ git clone git@bitbucket.org:chromiumembedded/cef.git\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Git e JetBrains - Scaricare le modifiche}
-    Prima di modificare un repo è bene scaricare le modifiche fatte nel frattempo dagli altri, per ridurre al minimo la possibilità di conflitti. Clicca "Git" \(\rightarrow\) "Pull..." e nella finestra che si apre premi "Pull" (oppure "Update Project", \keystroke{Ctrl}+\keystroke{T}).
+    Prima di modificare un repo è bene scaricare le modifiche fatte nel frattempo dagli altri, per ridurre al minimo la possibilità di conflitti. Clicca ``Git'' \(\rightarrow\) ``Pull...'' e nella finestra che si apre premi ``Pull'' (oppure ``Update Project'', \keystroke{Ctrl}+\keystroke{T}).
     
     \begin{columns}
         \begin{column}{0.5\textwidth}
@@ -1061,14 +1098,14 @@ $ git clone git@bitbucket.org:chromiumembedded/cef.git\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Git e JetBrains - Committare le modifiche}
-    Una volta finite le modifiche apri la finestra di commit ("Git" \(\rightarrow\) "Commit...", \keystroke{Ctrl}+\keystroke{K}). Seleziona i file da committare e aggiungi un commit message.
+    Una volta finite le modifiche apri la finestra di commit (``Git'' \(\rightarrow\) ``Commit...'', \keystroke{Ctrl}+\keystroke{K}). Seleziona i file da committare e aggiungi un commit message.
     \begin{figure} \includegraphics[width=0.35\textwidth]{media/commit.png} \end{figure}
     
 \end{frame}
 
 
 \begin{frame}{Git e JetBrains - Caricare le modifiche}
-    Nella finestra precedente possiamo caricare subito le modifiche con "Commit and Push", ma non sempre è la cosa ideale (per esempio se siamo offline). Altrimenti apriamo la finestra "Push" dal menu "Git" \(\rightarrow\) "Push..." (\keystroke{Ctrl}+\keystroke{Shift}+\keystroke{K}).
+    Nella finestra precedente possiamo caricare subito le modifiche con ``Commit and Push'', ma non sempre è la cosa ideale (per esempio se siamo offline). Altrimenti apriamo la finestra ``Push'' dal menu ``Git'' \(\rightarrow\) ``Push...'' (\keystroke{Ctrl}+\keystroke{Shift}+\keystroke{K}).
     \begin{figure} \includegraphics[width=0.35\textwidth]{media/push-window.png} \end{figure}
     
 \end{frame}
@@ -1114,7 +1151,7 @@ $ git push\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Pull request}
-    Spesso nei repo si tiene il branch \texttt{main} protetto (branch protection), cioè modificabile solo tramite pull request, magari con review obbligatoria e CI verde. Su GitLab si chiamano \textbf{merge request}. Per crearne una si va nel tab "Pull requests" del repo e si clicca su "New pull request": a sinistra il branch base, a destra quello con le modifiche, poi "Create pull request". Se non ci sono conflitti si può fare il merge della pull request direttamente dal sito (merge commit, squash o rebase), altrimenti bisogna prima risolvere i conflitti.
+    Spesso nei repo si tiene il branch \texttt{main} protetto (branch protection), cioè modificabile solo tramite pull request, magari con review obbligatoria e CI verde. Su GitLab si chiamano \textbf{merge request}. Per crearne una si va nel tab ``Pull requests'' del repo e si clicca su ``New pull request'': a sinistra il branch base, a destra quello con le modifiche, poi ``Create pull request''. Se non ci sono conflitti si può fare il merge della pull request direttamente dal sito (merge commit, squash o rebase), altrimenti bisogna prima risolvere i conflitti.
         
     \begin{figure} \includegraphics[width=0.5\textwidth,height=0.35\textheight,keepaspectratio]{media/pull-request.png} \end{figure}
     
@@ -1126,7 +1163,7 @@ $ git push\end{lstlisting}
     {Issues}
     Un'ultima funzionalità degna di nota di GitHub, GitLab ecc. sono le Issues.
     
-    Le Issues sono una bacheca condivisa da tutti gli sviluppatori dove vengono inseriti i bug e le feature mancanti, con titolo, descrizione e immagini. Permettono di assegnare ad ogni sviluppatore delle issue da risolvere e infine di chiuderle, anche in automatico da una pull request ("Fixes \#42").
+    Le Issues sono una bacheca condivisa da tutti gli sviluppatori dove vengono inseriti i bug e le feature mancanti, con titolo, descrizione e immagini. Permettono di assegnare ad ogni sviluppatore delle issue da risolvere e infine di chiuderle, anche in automatico da una pull request (``Fixes \#42'').
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \includegraphics[width=\textwidth]{media/issues.png}
@@ -1165,6 +1202,8 @@ $ git push\end{lstlisting}
         \item \url{https://medium.com/@prasoon2211/mercurial-vs-git-scaling-and-architecture-94f70bb206ef}
         \item \url{https://www.mercurial-scm.org/wiki/Revlog}
         \item \url{https://github.com/microsoft/VFSForGit}
+        \item Firma dei commit: \url{https://docs.github.com/en/authentication/managing-commit-signature-verification}
+        \item \url{https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work}
     \end{itemize}
 \end{frame}
 \end{document}
