@@ -698,7 +698,7 @@ $ git status\end{lstlisting}
 $ git log\end{lstlisting}
     L'opzione \lstinline{--graph} mostra anche l'albero cronologico dei commit, molto utile nel caso di un repo con molti branch (\lstinline{git log --oneline --graph --all}).
     
-    \begin{figure}\includegraphics[width=0.55\textwidth]{media/git-log.png} \end{figure}
+    \begin{figure}\includegraphics[width=0.55\textwidth,height=0.45\textheight,keepaspectratio]{media/git-log.png} \end{figure}
 \end{frame}
 \begin{frame}{Repository remoto}
 
@@ -741,7 +741,7 @@ $ git blame README.MD\end{lstlisting}
     
     Il nome dal suono negativo deriva dal fatto che questo comando viene spesso usato per incolpare chi ha rotto un programma, anche se il suo utilizzo è molto più ampio.
     
-    \begin{figure}\includegraphics[width=0.55\textwidth]{media/git-blame.png} \end{figure}
+    \begin{figure}\includegraphics[width=0.55\textwidth,height=0.35\textheight,keepaspectratio]{media/git-blame.png} \end{figure}
     
 \end{frame}
 \begin{frame}{}\begin{figure}
@@ -868,7 +868,7 @@ $ git pull\end{lstlisting}
     \begin{lstlisting}[language=bash]
 $ git merge <branch>\end{lstlisting}
 
-    Ci sono varie strategie: di default Git usa \texttt{ort} (dalla versione 2.34, prima era \texttt{recursive}), che prende il commit corrente (\texttt{ed489}), il commit del branch da unire (\texttt{33a04}), il loro antenato comune (\texttt{b325c}) ed esegue un merge a tre vie. Il risultato viene memorizzato nella working directory e nella staging area, e viene fatto un merge commit con due genitori (\texttt{f8bc5}).
+    La strategia di default, \texttt{ort} (da Git 2.34, prima \texttt{recursive}), prende il commit corrente (\texttt{ed489}), quello del branch da unire (\texttt{33a04}) e il loro antenato comune (\texttt{b325c}), ed esegue un merge a tre vie, creando un merge commit con due genitori (\texttt{f8bc5}).
     \vspace{-1em}
     \begin{figure}
         \includegraphics{media/merge.tikz}
@@ -930,7 +930,7 @@ $ git diff dev main\end{lstlisting}
     \end{figure}
 \end{frame}
 \begin{frame}[fragile]{Merge con squash}
-    Il comando \lstinline{git merge --squash} raggruppa tutti i commit in un unico commit con un unico genitore, lo si può vedere come un cherry-pick applicato al branch. Al termine del merge con squash è possibile cancellare il branch di lavoro senza alcun problema.
+    Il comando \lstinline{git merge --squash} raggruppa tutti i commit in un unico commit con un unico genitore, come un cherry-pick dell'intero branch. Al termine il branch di lavoro si può cancellare.
     
     Supponiamo di avere un branch \texttt{new-feature} e di voler unire i vari commit in uno solo da aggiungere al branch \texttt{main}:
     \begin{lstlisting}[language=bash]
@@ -1114,11 +1114,9 @@ $ git push\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Pull request}
-    Spesso nei repo si tiene il branch \texttt{main} protetto (branch protection), cioè modificabile solo tramite pull request, magari con review obbligatoria e CI verde. Su GitLab si chiamano \textbf{merge request}. Per creare una pull request si va nella pagina web del repo, nel tab "Pull requests", e si clicca su "New pull request".
-
-    A sinistra c'è il branch base e a destra il branch con le modifiche. Dopo averli selezionati si clicca su "Create pull request". Se non ci sono conflitti si può fare il merge della pull request direttamente dal sito (merge commit, squash o rebase), altrimenti bisogna prima risolvere i conflitti.
+    Spesso nei repo si tiene il branch \texttt{main} protetto (branch protection), cioè modificabile solo tramite pull request, magari con review obbligatoria e CI verde. Su GitLab si chiamano \textbf{merge request}. Per crearne una si va nel tab "Pull requests" del repo e si clicca su "New pull request": a sinistra il branch base, a destra quello con le modifiche, poi "Create pull request". Se non ci sono conflitti si può fare il merge della pull request direttamente dal sito (merge commit, squash o rebase), altrimenti bisogna prima risolvere i conflitti.
         
-    \begin{figure} \includegraphics[width=0.5\textwidth]{media/pull-request.png} \end{figure}
+    \begin{figure} \includegraphics[width=0.5\textwidth,height=0.35\textheight,keepaspectratio]{media/pull-request.png} \end{figure}
     
         
     
