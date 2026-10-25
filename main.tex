@@ -75,6 +75,7 @@
 \AtBeginSection[]
 {
     \begin{frame}
+        \footnotesize
         \begin{multicols}{2}
             \tableofcontents[currentsection,hideothersubsections]
         \end{multicols}
@@ -805,6 +806,84 @@ $ git blame README.MD\end{lstlisting}
     
 \end{frame}
 
+\section{Annullare e mettere da parte le modifiche}
+
+\begin{frame}[fragile]{Annullare le modifiche}{Quale comando usare}
+    La domanda più frequente su Git è ``come torno indietro?''. Dipende da dove si trova la modifica:
+    \begin{table}
+        \small
+        \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+            \hline \textbf{Situazione} & \textbf{Comando} \\
+            \hline Modifiche non ancora in stage & \lstinline{git restore <file>} \\
+            \hline File in stage da togliere & \lstinline{git restore --staged <file>} \\
+            \hline Correggere l'ultimo commit (non ancora pushato) & \lstinline{git commit --amend} \\
+            \hline Togliere commit locali non ancora pushati & \lstinline{git reset} \\
+            \hline Annullare un commit già pushato & \lstinline{git revert <commit>} \\
+            \hline ``Ho perso un commit!'' & \lstinline{git reflog} \\
+            \hline
+        \end{tabular}
+    \end{table}
+    Regola d'oro: la history già condivisa con gli altri non si riscrive, si aggiungono nuovi commit.
+\end{frame}
+\begin{frame}[fragile]{Annullare le modifiche}{git commit -{}-amend}
+    Ci siamo dimenticati un file o abbiamo sbagliato il commit message? \lstinline{--amend} sostituisce l'ultimo commit con uno nuovo:
+    \begin{lstlisting}[language=bash]
+$ git add file-dimenticato.txt
+$ git commit --amend --no-edit
+$ git commit --amend -m "Messaggio corretto"\end{lstlisting}
+    \lstinline{--no-edit} mantiene il messaggio precedente.
+
+    \begin{alertblock}{Attenzione}
+        Il commit ``corretto'' ha un nuovo hash: se il commit originale era già stato pushato, servirà un force push (vedi più avanti). Meglio usare \lstinline{--amend} solo sui commit ancora locali.
+    \end{alertblock}
+\end{frame}
+\begin{frame}[fragile]{Annullare le modifiche}{git reset}
+    \lstinline{git reset <commit>} sposta il branch corrente (e \texttt{HEAD}) su un altro commit. Le tre modalità decidono cosa succede a index e working directory:
+    \begin{description}
+        \item[\texttt{-{}-soft}] sposta solo il branch: le modifiche dei commit tolti restano in stage, pronte per un nuovo commit (utile per unire gli ultimi commit in uno).
+        \item[\texttt{-{}-mixed}] (default) sposta il branch e svuota l'index: le modifiche restano nella working directory, fuori dallo stage.
+        \item[\texttt{-{}-hard}] sposta il branch e riporta index e working directory al commit indicato: \textbf{le modifiche non committate vanno perse}.
+    \end{description}
+    \begin{lstlisting}[language=bash]
+$ git reset --soft HEAD~3     # unisce gli ultimi 3 commit
+$ git reset HEAD~1            # annulla l'ultimo commit, tiene le modifiche
+$ git reset --hard origin/main # butta via tutto e torna al remote\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Annullare le modifiche}{git revert}
+    \lstinline{git revert} non cancella nulla: crea un \textbf{nuovo commit} che applica le modifiche inverse di quello indicato. È il modo sicuro per annullare un commit già pushato, perché non riscrive la history.
+    \begin{lstlisting}[language=bash]
+$ git revert 1b2e1d63ff
+$ git revert -m 1 <merge-commit>\end{lstlisting}
+    Per annullare un merge commit bisogna indicare con \lstinline{-m 1} quale genitore considerare come linea principale.
+
+    \begin{block}{reset o revert?}
+        \lstinline{reset} riscrive la history ed è adatto ai commit locali; \lstinline{revert} aggiunge un commit ed è adatto ai branch condivisi.
+    \end{block}
+\end{frame}
+\begin{frame}[fragile]{Annullare le modifiche}{git reflog, il salvagente}
+    Git registra in locale ogni spostamento di \texttt{HEAD} (commit, checkout, reset, rebase, merge...) nel \textbf{reflog}. Anche dopo un \lstinline{reset --hard} o un rebase andato male, i vecchi commit sono ancora lì:
+    \begin{lstlisting}[language=bash]
+$ git reflog
+3ba22f1 HEAD@{0}: reset: moving to HEAD~2
+8c1d0e4 HEAD@{1}: commit: Aggiunge la pagina di login
+2c33a9b HEAD@{2}: commit: Crea il form
+$ git reset --hard HEAD@{1}
+$ git branch recuperato 8c1d0e4\end{lstlisting}
+    Il reflog è solo locale (non viene pushato) e le voci scadono dopo un po' (di default 90 giorni, 30 per i commit non più raggiungibili): conviene recuperare subito.
+\end{frame}
+\begin{frame}[fragile]{Mettere da parte le modifiche}{git stash}
+    Stiamo lavorando su una feature e dobbiamo passare a un altro branch per un bug urgente, ma le modifiche non sono pronte per un commit? \lstinline{git stash} le mette da parte e pulisce la working directory:
+    \begin{lstlisting}[language=bash]
+$ git stash push -m "login a metà"
+$ git switch hotfix
+...
+$ git switch feature_x
+$ git stash list
+stash@{0}: On feature_x: login a metà
+$ git stash pop\end{lstlisting}
+    \lstinline{pop} riapplica le modifiche e rimuove lo stash, \lstinline{apply} le riapplica e lo tiene, \lstinline{drop} lo cancella. Con \lstinline{-u} vengono salvati anche i file untracked.
+\end{frame}
+
 \section{Comandi di Git per il lavoro in gruppo}
 
 \begin{frame}[fragile]{IDE \& .gitignore}
@@ -1003,6 +1082,73 @@ $ git commit\end{lstlisting}
 
     Ogni commit contiene l'hash dei genitori, quindi la history è una catena di hash (un Merkle DAG) come una blockchain. Nonostante ciò è possibile modificare e rimuovere i commit e riscrivere la history (ovviamente con nuovi hash, e poi serve un \lstinline{git push --force-with-lease}); per operazioni più complesse esistono \texttt{git filter-repo} e BFG Repo-Cleaner.
 \end{frame}
+\begin{frame}[fragile]{Force push}
+    Dopo un \lstinline{--amend}, un reset o un rebase di commit già pushati, il push normale viene rifiutato perché la history locale e quella remota sono divergenti. Si può forzare:
+    \begin{lstlisting}[language=bash]
+$ git push --force-with-lease
+$ git push --force  # da evitare\end{lstlisting}
+    \begin{description}
+        \item[\texttt{-{}-force}] sovrascrive il branch remoto, anche se nel frattempo un collega ha pushato dei commit, che vengono persi.
+        \item[\texttt{-{}-force-with-lease}] sovrascrive solo se il branch remoto è ancora dove l'abbiamo visto l'ultima volta (con \lstinline{--force-if-includes} è ancora più sicuro).
+    \end{description}
+    \begin{alertblock}{Regola}
+        Mai fare force push su branch condivisi come \texttt{main}: di solito sono protetti e il server lo rifiuta. Sul proprio branch di una pull request invece è normale.
+    \end{alertblock}
+\end{frame}
+\begin{frame}[fragile]{Co-author}
+    Un commit ha un solo autore, ma si possono indicare altri coautori aggiungendo dei \textbf{trailer} in fondo al commit message, dopo una riga vuota:
+    \begin{lstlisting}
+Aggiunge la pagina di login
+
+Co-authored-by: Mario Rossi <mario.rossi@example.com>
+Co-authored-by: Claude <noreply@anthropic.com>\end{lstlisting}
+    Oppure da riga di comando:
+    \begin{lstlisting}[language=bash]
+$ git commit -m "Aggiunge la pagina di login" --trailer "Co-authored-by: Mario Rossi <mario.rossi@example.com>"\end{lstlisting}
+    GitHub e GitLab mostrano tutti i coautori nel commit. È utile per il pair programming e per i \textbf{commit fatti con l'aiuto di un'AI}: si dichiara in modo trasparente che il codice è stato scritto insieme a un assistente (Claude Code, per esempio, aggiunge il trailer da solo).
+\end{frame}
+\begin{frame}[fragile]{Conventional Commits}
+    Una convenzione molto diffusa per i commit message è \textbf{Conventional Commits}: \lstinline{<tipo>(<scope>): <descrizione>}
+    \begin{lstlisting}
+feat(login): aggiunge il login con GitHub
+fix: corregge il crash con password vuota
+docs: aggiorna il README
+refactor(api)!: rinomina l'endpoint /users\end{lstlisting}
+    \begin{description}
+        \item[feat] nuova funzionalità
+        \item[fix] correzione di un bug
+        \item[docs, style, refactor, test, ci, chore] tutto il resto
+        \item[! o BREAKING CHANGE:] modifica non retrocompatibile
+    \end{description}
+    Il vantaggio è che la history diventa leggibile anche dalle macchine: strumenti come commitlint controllano il formato e release-please o semantic-release generano changelog e numero di versione in automatico.
+\end{frame}
+\begin{frame}[fragile]{Versioni semantiche}
+    Il \textbf{Semantic Versioning} (SemVer) dà un significato preciso al numero di versione \texttt{MAJOR.MINOR.PATCH}:
+    \begin{description}
+        \item[MAJOR] modifiche non retrocompatibili (\texttt{1.4.2} \(\rightarrow\) \texttt{2.0.0})
+        \item[MINOR] nuove funzionalità retrocompatibili (\texttt{1.4.2} \(\rightarrow\) \texttt{1.5.0})
+        \item[PATCH] correzioni di bug retrocompatibili (\texttt{1.4.2} \(\rightarrow\) \texttt{1.4.3})
+    \end{description}
+    Le pre-release si indicano con un suffisso, per esempio \texttt{2.0.0-rc.1}. Con i Conventional Commits il collegamento è diretto: \texttt{fix} \(\rightarrow\) PATCH, \texttt{feat} \(\rightarrow\) MINOR, breaking change \(\rightarrow\) MAJOR.
+
+    Ogni release si marca con un tag annotato:
+    \begin{lstlisting}[language=bash]
+$ git tag -a v1.5.0 -m "Release 1.5.0"
+$ git push origin v1.5.0\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{.gitattributes e fine riga}
+    Windows termina le righe con \texttt{CRLF}, Linux e macOS con \texttt{LF}. Se ognuno committa con il proprio formato, ogni file sembra modificato in tutte le righe: i classici diff ``fantasma''.
+
+    La soluzione è un file \texttt{.gitattributes} versionato nel repository, che vale per tutti:
+    \begin{lstlisting}
+* text=auto eol=lf
+*.bat text eol=crlf
+*.png binary
+*.psd filter=lfs diff=lfs merge=lfs -text\end{lstlisting}
+    In alternativa (o in aggiunta) ogni utente può impostare \lstinline{core.autocrlf}: \texttt{true} su Windows, \texttt{input} su Linux e macOS. Il \texttt{.gitattributes} ha la precedenza ed è più affidabile, perché non dipende dalla configurazione di ognuno.
+
+    Dopo averlo aggiunto a un repository esistente: \lstinline{git add --renormalize .}
+\end{frame}
 \begin{frame}{Git \& DevOps}
     Attraverso un potente modello di branching e vari workflow
     di collaborazione, negli anni l'uso e l'adozione di Git è
@@ -1011,6 +1157,116 @@ $ git commit\end{lstlisting}
     alla base di un processo DevOps: ogni push o pull request
     può avviare una pipeline di CI/CD (GitHub Actions, GitLab CI/CD,
     Bitbucket Pipelines) che compila, testa e rilascia il software.
+\end{frame}
+
+\begin{frame}[fragile]{CI/CD con GitHub Actions}
+    Una pipeline di CI è un file versionato nel repository che descrive cosa fare a ogni push o pull request. Esempio reale: questa presentazione viene compilata in PDF a ogni push, prima con GitLab CI e ora con GitHub Actions.
+    \begin{columns}[T]
+        \begin{column}{0.4\textwidth}
+            \texttt{.gitlab-ci.yml}
+            \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+compile_pdf:
+  image: aergus/latex
+  script:
+    - latexmk -xelatex main.tex
+  artifacts:
+    paths:
+      - main.pdf\end{lstlisting}
+        \end{column}
+        \begin{column}{0.55\textwidth}
+            \texttt{.github/workflows/ci.yml}
+            \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+on:
+  push:
+    branches: [master]
+  pull_request:
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    container:
+      image: aergus/latex
+    steps:
+      - uses: actions/checkout@v7
+      - run: latexmk -xelatex main.tex
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pdf
+          path: main.pdf\end{lstlisting}
+        \end{column}
+    \end{columns}
+\end{frame}
+\begin{frame}{CI/CD con GitHub Actions}{Cosa fa la CI di questo repository}
+    \begin{itemize}
+        \item Compila il PDF dentro il container Docker \texttt{aergus/latex}, così non serve installare LaTeX sul runner.
+        \item Su ogni pull request pubblica il PDF come \textbf{pre-release} e lascia un commento con il link, per rivedere le slide prima del merge; la pre-release viene cancellata quando la pull request si chiude.
+        \item Su \texttt{master} crea un tag e una \textbf{release} con il PDF allegato e pubblica l'ultima versione su \textbf{GitHub Pages}.
+        \item \textbf{Dependabot} apre ogni settimana una pull request per aggiornare le versioni delle Actions usate.
+    \end{itemize}
+    Se la compilazione fallisce la pull request diventa rossa e, con la branch protection, non si può fare il merge: è il principio della \textbf{Continuous Integration}. La pubblicazione automatica è il \textbf{Continuous Delivery}.
+\end{frame}
+\begin{frame}[fragile]{Hook e pre-commit}
+    Gli \textbf{hook} sono script che Git esegue in automatico in certi momenti: \texttt{pre-commit} (prima del commit), \texttt{commit-msg} (per controllare il messaggio), \texttt{pre-push}, ... Stanno in \texttt{.git/hooks/}, quindi non sono versionati: per condividerli si usa \lstinline{core.hooksPath} oppure un framework come \textbf{pre-commit}:
+    \begin{lstlisting}
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: detect-private-key\end{lstlisting}
+    Dopo \lstinline{pre-commit install} i controlli (lint, formattazione, ricerca di segreti) girano a ogni commit. Si possono saltare con \lstinline{git commit --no-verify}, quindi gli stessi controlli vanno ripetuti in CI.
+\end{frame}
+\begin{frame}{Segreti nel repository}
+    Password, token e chiavi committati per sbaglio sono uno degli incidenti più comuni. Servizi come GitGuardian e il secret scanning di GitHub analizzano continuamente i repository pubblici, \textbf{anche tutta la history}:
+    \begin{figure}
+        \includegraphics[width=\textwidth]{media/gitguardian.png}
+    \end{figure}
+    In questo esempio reale, un segreto committato nel 2018 viene trovato anni dopo da una scansione storica, ed è ancora esposto pubblicamente.
+\end{frame}
+\begin{frame}[fragile]{Segreti nel repository}{Cosa fare}
+    \begin{enumerate}
+        \item \textbf{Revocare e cambiare subito il segreto.} Una volta pushato va considerato compromesso: i bot che cercano credenziali nei repository pubblici le trovano in pochi minuti.
+        \item Solo dopo, se serve, ripulire la history con \texttt{git filter-repo} o BFG Repo-Cleaner e fare un force push. \textbf{Riscrivere la history non basta}: il segreto resta nei clone e nei fork degli altri, nelle cache e nelle pull request.
+        \item Prevenire: segreti in variabili d'ambiente o nei secret della CI, file come \texttt{.env} nel \texttt{.gitignore}, un hook pre-commit che cerca segreti e la \textbf{push protection} di GitHub, che blocca il push se riconosce un token.
+    \end{enumerate}
+\end{frame}
+
+\section{Strumenti avanzati}
+
+\begin{frame}[fragile]{git bisect}
+    Un bug c'è nella versione attuale ma non c'era nella \texttt{v1.0.0}: quale commit l'ha introdotto? \lstinline{git bisect} fa una ricerca binaria tra i commit, quindi anche con 1000 commit bastano circa 10 prove:
+    \begin{lstlisting}[language=bash]
+$ git bisect start
+$ git bisect bad              # la versione attuale ha il bug
+$ git bisect good v1.0.0      # questa no
+# Git fa il checkout di un commit a metà: si prova e si risponde
+$ git bisect good             # oppure: git bisect bad
+...
+8c1d0e4 is the first bad commit
+$ git bisect reset\end{lstlisting}
+    Se c'è uno script che fallisce in presenza del bug, la ricerca si automatizza: \lstinline{git bisect run ./test.sh}
+\end{frame}
+\begin{frame}[fragile]{git worktree}
+    Un repository può avere più working directory, ognuna su un branch diverso, che condividono lo stesso database degli oggetti:
+    \begin{lstlisting}[language=bash]
+$ git worktree add ../progetto-hotfix hotfix
+$ git worktree list
+/home/user/progetto          3ba22f1 [feature_x]
+/home/user/progetto-hotfix   8c1d0e4 [hotfix]
+$ git worktree remove ../progetto-hotfix\end{lstlisting}
+    È un'alternativa a \lstinline{git stash} quando si deve lavorare su due branch contemporaneamente: per esempio compilare o testare un branch mentre si lavora su un altro, o far lavorare più agenti AI in parallelo, ognuno nella sua cartella.
+\end{frame}
+\begin{frame}[fragile]{Submodule}
+    Un \textbf{submodule} è un repository Git dentro un altro repository, bloccato su un commit preciso. Si usa per includere una libreria esterna di cui servono i sorgenti:
+    \begin{lstlisting}[language=bash]
+$ git submodule add https://github.com/MediaArea/MediaInfoLib.git extern/MediaInfoLib
+$ git clone --recurse-submodules <url>
+$ git submodule update --init --recursive\end{lstlisting}
+    Il repository principale salva solo l'URL (nel file \texttt{.gitmodules}) e l'hash del commit del submodule: per aggiornarlo si fa checkout di un altro commit nel submodule e si committa il nuovo riferimento.
+
+    I submodule sono potenti ma scomodi (chi clona deve ricordarsi \lstinline{--recurse-submodules}): quando possibile è meglio usare il package manager del linguaggio.
 \end{frame}
 
 \section{Utilizzo di GitHub, GitLab e Bitbucket}
@@ -1120,6 +1376,38 @@ $ git clone git@bitbucket.org:chromiumembedded/cef.git\end{lstlisting}
     Guida su come utilizzare Git su Visual Studio Code: \url{https://code.visualstudio.com/docs/sourcecontrol/overview}
     
 \end{frame}
+\section{Client grafici e AI}
+
+\begin{frame}{Client grafici}
+    Oltre alla riga di comando ci sono molti client grafici, utili soprattutto per vedere la history, i diff e risolvere i conflitti:
+    \begin{description}
+        \item[GitHub Desktop] semplice, pensato per GitHub, per Windows e macOS.
+        \item[Visual Studio Code] pannello Source Control integrato, con l'estensione GitLens per blame e history.
+        \item[Visual Studio] finestre Git Changes e Git Repository, integrate con GitHub e Azure DevOps.
+        \item[IDE JetBrains] IntelliJ, PyCharm, Rider, ... hanno lo stesso client Git integrato, visto nelle slide precedenti.
+        \item[SourceGit] client open source e multipiattaforma (Windows, macOS, Linux), scritto in C\# con Avalonia.
+        \item[lazygit] interfaccia testuale nel terminale, velocissima da tastiera.
+        \item[Altri] Fork, GitKraken, Sublime Merge, TortoiseGit, ...
+    \end{description}
+    Conoscere i comandi resta importante: tutti i client usano Git sotto il cofano e, quando qualcosa va storto, la riga di comando dice esattamente cosa è successo.
+\end{frame}
+\begin{frame}{Git e AI}
+    Gli assistenti AI (GitHub Copilot, Claude Code, JetBrains AI Assistant, ...) sono ormai integrati nel lavoro con Git:
+    \begin{itemize}
+        \item generano commit message e descrizioni delle pull request a partire dal diff;
+        \item fanno code review automatiche sulle pull request;
+        \item gli agenti possono creare branch, fare commit, aprire pull request e correggere la CI quando fallisce.
+    \end{itemize}
+    Qualche regola di buon senso:
+    \begin{itemize}
+        \item \textbf{rileggi sempre il diff}: il commit porta il tuo nome e la responsabilità è tua;
+        \item commit piccoli e mirati, così è facile capire (e annullare) cosa ha fatto l'AI;
+        \item dichiara il contributo con un trailer \texttt{Co-authored-by};
+        \item non incollare segreti nei prompt e non dare all'agente più permessi del necessario;
+        \item la review dell'AI affianca quella di un collega, non la sostituisce.
+    \end{itemize}
+\end{frame}
+
 \section{Cosa non fa Git}
 
 \begin{frame}[fragile]{Millennium Bug + 20}
@@ -1157,6 +1445,20 @@ $ git push\end{lstlisting}
     
         
     
+\end{frame}
+
+\begin{frame}[fragile]{Code review e CODEOWNERS}
+    La pull request è il momento della \textbf{code review}: i colleghi commentano le singole righe, propongono modifiche (\emph{suggestion}) e alla fine approvano o chiedono cambiamenti. Qualche buona pratica:
+    \begin{itemize}
+        \item pull request piccole e con una descrizione chiara del perché;
+        \item la CI deve essere verde prima della review;
+        \item si commenta il codice, non la persona.
+    \end{itemize}
+    Con il file \texttt{CODEOWNERS} (nella root, in \texttt{.github/} o in \texttt{docs/}) si indica chi è responsabile di quali file: viene aggiunto in automatico come reviewer e, con la branch protection, la sua approvazione diventa obbligatoria.
+    \begin{lstlisting}
+*.tex          @simonebortolin
+/media/        @simonebortolin
+/.github/      @org/devops-team\end{lstlisting}
 \end{frame}
 
 \begin{frame}
@@ -1204,6 +1506,21 @@ $ git push\end{lstlisting}
         \item \url{https://github.com/microsoft/VFSForGit}
         \item Firma dei commit: \url{https://docs.github.com/en/authentication/managing-commit-signature-verification}
         \item \url{https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work}
+    \end{itemize}
+\end{frame}
+\begin{frame}{Fonti}
+    \footnotesize
+    \begin{itemize}
+        \item Annullare le modifiche: \url{https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things}
+        \item \url{https://git-scm.com/docs/git-reset}, \url{https://git-scm.com/docs/git-reflog}, \url{https://git-scm.com/docs/git-stash}
+        \item \url{https://git-scm.com/docs/git-bisect}, \url{https://git-scm.com/docs/git-worktree}, \url{https://git-scm.com/book/en/v2/Git-Tools-Submodules}
+        \item \url{https://git-scm.com/docs/gitattributes}, \url{https://git-scm.com/docs/githooks}
+        \item Co-author: \url{https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors}
+        \item \url{https://www.conventionalcommits.org/}, \url{https://semver.org/}
+        \item \url{https://pre-commit.com/}, \url{https://docs.github.com/en/actions}
+        \item \url{https://docs.github.com/en/code-security/secret-scanning}
+        \item \url{https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners}
+        \item \url{https://github.com/sourcegit-scm/sourcegit}, \url{https://github.com/jesseduffield/lazygit}
     \end{itemize}
 \end{frame}
 \end{document}
